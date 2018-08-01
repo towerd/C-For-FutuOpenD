@@ -23,6 +23,7 @@ namespace ftq
 		PROTO_HANDLER_MEMBER(Qot_Sub);
 		PROTO_HANDLER_MEMBER(Qot_RegQotPush);
 		PROTO_HANDLER_MEMBER(Qot_UpdateTicker);
+		PROTO_HANDLER_MEMBER(Qot_UpdateBroker);
 	};
 #undef PROTO_HANDLER_MEMBER
 

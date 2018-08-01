@@ -8,6 +8,7 @@
 #include "pb/Qot_RegQotPush.pb.h"
 #include "pb/Qot_UpdateTicker.pb.h"
 #include "pb/GetGlobalState.pb.h"
+#include "pb/Qot_UpdateBroker.pb.h"
 #include "NetCenter.h"
 
 using namespace std;
@@ -55,7 +56,7 @@ namespace ftq
 		stocks.push_back(stock);
 
 		vector<Qot_Common::SubType> subTypes;
-		subTypes.push_back(Qot_Common::SubType_Ticker);
+		subTypes.push_back(Qot_Common::SubType_Broker);
 
 		vector<Qot_Common::RehabType> rehabTypes;
 		rehabTypes.push_back(Qot_Common::RehabType_None);
@@ -134,6 +135,30 @@ namespace ftq
 			cout << "Ticker: Code=" << rsp.s2c().security().code() <<
 				"; Time=" << data.time() <<
 				"; Price=" << data.price() <<
+				";" << endl;
+		}
+	}
+
+	void QuoteHandler::OnRsp_Qot_UpdateBroker(const APIProtoHeader &header, const i8_t *pData, i32_t nLen)
+	{
+		cout << "OnRsp_Qot_UpdateBroker:" << endl;
+
+		Qot_UpdateBroker::Response rsp;
+		if (!ParsePb(&rsp, header.nProtoID, pData, nLen))
+		{
+			return;
+		}
+
+		cout << "Ret=" << rsp.rettype() << "; Msg=" << rsp.retmsg() << endl;
+		if (rsp.rettype() != 0)
+		{
+			return;
+		}
+
+		for (int i = 0; i < rsp.s2c().brokerasklist_size(); ++i)
+		{
+			const Qot_Common::Broker &data = rsp.s2c().brokerasklist(i);
+			cout << "Broker: ID=" << data.id() <<
 				";" << endl;
 		}
 	}

@@ -133,7 +133,7 @@ namespace ftq {
             return;
         }
         
-        pSelf->m_readStore.SetDataLen((int)nread);
+        pSelf->m_readStore.SetDataLen((int)nread + pSelf->m_readStore.GetDataLen());
         pSelf->m_pHandler->OnRecv(pSelf, &pSelf->m_readStore);
 //        string str;
 //        str.insert(str.end(),

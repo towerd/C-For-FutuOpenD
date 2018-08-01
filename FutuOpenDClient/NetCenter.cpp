@@ -81,6 +81,7 @@ namespace ftq
 		if (memcmp(sha1, header.arrBodySHA1, 20) != 0)
 		{
 			//error
+			cerr << "sha check fail" << endl;
 			pBuf->RemoveFront((i32_t)sizeof(header) + header.nBodyLen);
 			return;
 		}
@@ -104,6 +105,9 @@ namespace ftq
 			break;
 		case API_ProtoID_KeepAlive:
 			m_pProtoHandler->OnRsp_KeepAlive(header, (const i8_t*)pBody, header.nBodyLen);
+			break;
+		case API_ProtoID_Qot_UpdateBroker:
+			m_pProtoHandler->OnRsp_Qot_UpdateBroker(header, (const i8_t*)pBody, header.nBodyLen);
 			break;
 		default:
 			break;

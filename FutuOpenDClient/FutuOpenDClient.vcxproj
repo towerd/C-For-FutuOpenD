@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{AF37B5D5-589D-4F19-B3C7-A32C455986DC}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>FutuOpenDClient</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rd\Include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)3rd\Lib\Windows\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>uv_a.lib;ws2_32.lib;Iphlpapi.lib;Psapi.lib;Userenv.lib;libprotobuf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rd\Include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SolutionDir)3rd\Lib\Windows\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>uv_a.lib;ws2_32.lib;Iphlpapi.lib;Psapi.lib;Userenv.lib;libprotobuf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Common.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="NetCenter.cpp" />
+    <ClCompile Include="pb\Common.pb.cc" />
+    <ClCompile Include="pb\GetGlobalState.pb.cc" />
+    <ClCompile Include="pb\HeartBeat.pb.cc" />
+    <ClCompile Include="pb\InitConnect.pb.cc" />
+    <ClCompile Include="pb\KeepAlive.pb.cc" />
+    <ClCompile Include="pb\Notify.pb.cc" />
+    <ClCompile Include="pb\Qot_Common.pb.cc" />
+    <ClCompile Include="pb\Qot_GetBasicQot.pb.cc" />
+    <ClCompile Include="pb\Qot_GetBroker.pb.cc" />
+    <ClCompile Include="pb\Qot_GetHistoryKL.pb.cc" />
+    <ClCompile Include="pb\Qot_GetHistoryKLPoints.pb.cc" />
+    <ClCompile Include="pb\Qot_GetKL.pb.cc" />
+    <ClCompile Include="pb\Qot_GetOrderBook.pb.cc" />
+    <ClCompile Include="pb\Qot_GetPlateSecurity.pb.cc" />
+    <ClCompile Include="pb\Qot_GetPlateSet.pb.cc" />
+    <ClCompile Include="pb\Qot_GetReference.pb.cc" />
+    <ClCompile Include="pb\Qot_GetRehab.pb.cc" />
+    <ClCompile Include="pb\Qot_GetRT.pb.cc" />
+    <ClCompile Include="pb\Qot_GetSecuritySnapshot.pb.cc" />
+    <ClCompile Include="pb\Qot_GetStaticInfo.pb.cc" />
+    <ClCompile Include="pb\Qot_GetSubInfo.pb.cc" />
+    <ClCompile Include="pb\Qot_GetSuspend.pb.cc" />
+    <ClCompile Include="pb\Qot_GetTicker.pb.cc" />
+    <ClCompile Include="pb\Qot_GetTradeDate.pb.cc" />
+    <ClCompile Include="pb\Qot_RegQotPush.pb.cc" />
+    <ClCompile Include="pb\Qot_Sub.pb.cc" />
+    <ClCompile Include="pb\Qot_UpdateBasicQot.pb.cc" />
+    <ClCompile Include="pb\Qot_UpdateBroker.pb.cc" />
+    <ClCompile Include="pb\Qot_UpdateKL.pb.cc" />
+    <ClCompile Include="pb\Qot_UpdateOrderBook.pb.cc" />
+    <ClCompile Include="pb\Qot_UpdateRT.pb.cc" />
+    <ClCompile Include="pb\Qot_UpdateTicker.pb.cc" />
+    <ClCompile Include="pb\Trd_Common.pb.cc" />
+    <ClCompile Include="pb\Trd_GetAccList.pb.cc" />
+    <ClCompile Include="pb\Trd_GetFunds.pb.cc" />
+    <ClCompile Include="pb\Trd_GetHistoryOrderFillList.pb.cc" />
+    <ClCompile Include="pb\Trd_GetHistoryOrderList.pb.cc" />
+    <ClCompile Include="pb\Trd_GetMaxTrdQtys.pb.cc" />
+    <ClCompile Include="pb\Trd_GetOrderFillList.pb.cc" />
+    <ClCompile Include="pb\Trd_GetOrderList.pb.cc" />
+    <ClCompile Include="pb\Trd_GetPositionList.pb.cc" />
+    <ClCompile Include="pb\Trd_ModifyOrder.pb.cc" />
+    <ClCompile Include="pb\Trd_Notify.pb.cc" />
+    <ClCompile Include="pb\Trd_PlaceOrder.pb.cc" />
+    <ClCompile Include="pb\Trd_ReconfirmOrder.pb.cc" />
+    <ClCompile Include="pb\Trd_SubAccPush.pb.cc" />
+    <ClCompile Include="pb\Trd_UnlockTrade.pb.cc" />
+    <ClCompile Include="pb\Trd_UpdateOrder.pb.cc" />
+    <ClCompile Include="pb\Trd_UpdateOrderFill.pb.cc" />
+    <ClCompile Include="QuoteHandler.cpp" />
+    <ClCompile Include="SHA1.cpp" />
+    <ClCompile Include="TcpConnect.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Common.h" />
+    <ClInclude Include="NetCenter.h" />
+    <ClInclude Include="pb\Common.pb.h" />
+    <ClInclude Include="pb\GetGlobalState.pb.h" />
+    <ClInclude Include="pb\HeartBeat.pb.h" />
+    <ClInclude Include="pb\InitConnect.pb.h" />
+    <ClInclude Include="pb\KeepAlive.pb.h" />
+    <ClInclude Include="pb\Notify.pb.h" />
+    <ClInclude Include="pb\Qot_Common.pb.h" />
+    <ClInclude Include="pb\Qot_GetBasicQot.pb.h" />
+    <ClInclude Include="pb\Qot_GetBroker.pb.h" />
+    <ClInclude Include="pb\Qot_GetHistoryKL.pb.h" />
+    <ClInclude Include="pb\Qot_GetHistoryKLPoints.pb.h" />
+    <ClInclude Include="pb\Qot_GetKL.pb.h" />
+    <ClInclude Include="pb\Qot_GetOrderBook.pb.h" />
+    <ClInclude Include="pb\Qot_GetPlateSecurity.pb.h" />
+    <ClInclude Include="pb\Qot_GetPlateSet.pb.h" />
+    <ClInclude Include="pb\Qot_GetReference.pb.h" />
+    <ClInclude Include="pb\Qot_GetRehab.pb.h" />
+    <ClInclude Include="pb\Qot_GetRT.pb.h" />
+    <ClInclude Include="pb\Qot_GetSecuritySnapshot.pb.h" />
+    <ClInclude Include="pb\Qot_GetStaticInfo.pb.h" />
+    <ClInclude Include="pb\Qot_GetSubInfo.pb.h" />
+    <ClInclude Include="pb\Qot_GetSuspend.pb.h" />
+    <ClInclude Include="pb\Qot_GetTicker.pb.h" />
+    <ClInclude Include="pb\Qot_GetTradeDate.pb.h" />
+    <ClInclude Include="pb\Qot_RegQotPush.pb.h" />
+    <ClInclude Include="pb\Qot_Sub.pb.h" />
+    <ClInclude Include="pb\Qot_UpdateBasicQot.pb.h" />
+    <ClInclude Include="pb\Qot_UpdateBroker.pb.h" />
+    <ClInclude Include="pb\Qot_UpdateKL.pb.h" />
+    <ClInclude Include="pb\Qot_UpdateOrderBook.pb.h" />
+    <ClInclude Include="pb\Qot_UpdateRT.pb.h" />
+    <ClInclude Include="pb\Qot_UpdateTicker.pb.h" />
+    <ClInclude Include="pb\Trd_Common.pb.h" />
+    <ClInclude Include="pb\Trd_GetAccList.pb.h" />
+    <ClInclude Include="pb\Trd_GetFunds.pb.h" />
+    <ClInclude Include="pb\Trd_GetHistoryOrderFillList.pb.h" />
+    <ClInclude Include="pb\Trd_GetHistoryOrderList.pb.h" />
+    <ClInclude Include="pb\Trd_GetMaxTrdQtys.pb.h" />
+    <ClInclude Include="pb\Trd_GetOrderFillList.pb.h" />
+    <ClInclude Include="pb\Trd_GetOrderList.pb.h" />
+    <ClInclude Include="pb\Trd_GetPositionList.pb.h" />
+    <ClInclude Include="pb\Trd_ModifyOrder.pb.h" />
+    <ClInclude Include="pb\Trd_Notify.pb.h" />
+    <ClInclude Include="pb\Trd_PlaceOrder.pb.h" />
+    <ClInclude Include="pb\Trd_ReconfirmOrder.pb.h" />
+    <ClInclude Include="pb\Trd_SubAccPush.pb.h" />
+    <ClInclude Include="pb\Trd_UnlockTrade.pb.h" />
+    <ClInclude Include="pb\Trd_UpdateOrder.pb.h" />
+    <ClInclude Include="pb\Trd_UpdateOrderFill.pb.h" />
+    <ClInclude Include="QuoteHandler.h" />
+    <ClInclude Include="SHA1.h" />
+    <ClInclude Include="TcpConnect.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="pb\Common.proto" />
+    <None Include="pb\GetGlobalState.proto" />
+    <None Include="pb\InitConnect.proto" />
+    <None Include="pb\KeepAlive.proto" />
+    <None Include="pb\Notify.proto" />
+    <None Include="pb\Qot_Common.proto" />
+    <None Include="pb\Qot_GetBasicQot.proto" />
+    <None Include="pb\Qot_GetBroker.proto" />
+    <None Include="pb\Qot_GetHistoryKL.proto" />
+    <None Include="pb\Qot_GetHistoryKLPoints.proto" />
+    <None Include="pb\Qot_GetKL.proto" />
+    <None Include="pb\Qot_GetOrderBook.proto" />
+    <None Include="pb\Qot_GetPlateSecurity.proto" />
+    <None Include="pb\Qot_GetPlateSet.proto" />
+    <None Include="pb\Qot_GetReference.proto" />
+    <None Include="pb\Qot_GetRehab.proto" />
+    <None Include="pb\Qot_GetRT.proto" />
+    <None Include="pb\Qot_GetSecuritySnapshot.proto" />
+    <None Include="pb\Qot_GetStaticInfo.proto" />
+    <None Include="pb\Qot_GetSubInfo.proto" />
+    <None Include="pb\Qot_GetSuspend.proto" />
+    <None Include="pb\Qot_GetTicker.proto" />
+    <None Include="pb\Qot_GetTradeDate.proto" />
+    <None Include="pb\Qot_RegQotPush.proto" />
+    <None Include="pb\Qot_Sub.proto" />
+    <None Include="pb\Qot_UpdateBasicQot.proto" />
+    <None Include="pb\Qot_UpdateBroker.proto" />
+    <None Include="pb\Qot_UpdateKL.proto" />
+    <None Include="pb\Qot_UpdateOrderBook.proto" />
+    <None Include="pb\Qot_UpdateRT.proto" />
+    <None Include="pb\Qot_UpdateTicker.proto" />
+    <None Include="pb\Trd_Common.proto" />
+    <None Include="pb\Trd_GetAccList.proto" />
+    <None Include="pb\Trd_GetFunds.proto" />
+    <None Include="pb\Trd_GetHistoryOrderFillList.proto" />
+    <None Include="pb\Trd_GetHistoryOrderList.proto" />
+    <None Include="pb\Trd_GetMaxTrdQtys.proto" />
+    <None Include="pb\Trd_GetOrderFillList.proto" />
+    <None Include="pb\Trd_GetOrderList.proto" />
+    <None Include="pb\Trd_GetPositionList.proto" />
+    <None Include="pb\Trd_ModifyOrder.proto" />
+    <None Include="pb\Trd_Notify.proto" />
+    <None Include="pb\Trd_PlaceOrder.proto" />
+    <None Include="pb\Trd_ReconfirmOrder.proto" />
+    <None Include="pb\Trd_SubAccPush.proto" />
+    <None Include="pb\Trd_UnlockTrade.proto" />
+    <None Include="pb\Trd_UpdateOrder.proto" />
+    <None Include="pb\Trd_UpdateOrderFill.proto" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

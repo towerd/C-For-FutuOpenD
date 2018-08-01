@@ -1,0 +1,497 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="源文件\pb">
+      <UniqueIdentifier>{df1cef78-e6ea-475a-b6bc-58ae797064b9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TcpConnect.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Common.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Common.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\GetGlobalState.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\HeartBeat.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\InitConnect.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\KeepAlive.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Notify.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Qot_Common.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Qot_GetBasicQot.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Qot_GetBroker.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Qot_GetHistoryKL.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Qot_GetHistoryKLPoints.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Qot_GetKL.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Qot_GetOrderBook.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Qot_GetPlateSecurity.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Qot_GetPlateSet.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Qot_GetReference.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Qot_GetRehab.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Qot_GetRT.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Qot_GetSecuritySnapshot.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Qot_GetStaticInfo.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Qot_GetSubInfo.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Qot_GetSuspend.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Qot_GetTicker.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Qot_GetTradeDate.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Qot_RegQotPush.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Qot_Sub.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Qot_UpdateBasicQot.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Qot_UpdateBroker.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Qot_UpdateKL.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Qot_UpdateOrderBook.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Qot_UpdateRT.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Qot_UpdateTicker.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Trd_Common.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Trd_GetAccList.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Trd_GetFunds.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Trd_GetHistoryOrderFillList.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Trd_GetHistoryOrderList.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Trd_GetMaxTrdQtys.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Trd_GetOrderFillList.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Trd_GetOrderList.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Trd_GetPositionList.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Trd_ModifyOrder.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Trd_Notify.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Trd_PlaceOrder.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Trd_ReconfirmOrder.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Trd_SubAccPush.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Trd_UnlockTrade.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Trd_UpdateOrder.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Trd_UpdateOrderFill.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="SHA1.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="QuoteHandler.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="NetCenter.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TcpConnect.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Common.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\GetGlobalState.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\HeartBeat.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\InitConnect.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\KeepAlive.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Notify.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Qot_Common.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Qot_GetBasicQot.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Qot_GetBroker.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Qot_GetHistoryKL.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Qot_GetHistoryKLPoints.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Qot_GetKL.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Qot_GetOrderBook.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Qot_GetPlateSecurity.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Qot_GetPlateSet.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Qot_GetReference.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Qot_GetRehab.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Qot_GetRT.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Qot_GetSecuritySnapshot.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Qot_GetStaticInfo.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Qot_GetSubInfo.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Qot_GetSuspend.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Qot_GetTicker.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Qot_GetTradeDate.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Qot_RegQotPush.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Qot_Sub.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Qot_UpdateBasicQot.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Qot_UpdateBroker.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Qot_UpdateKL.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Qot_UpdateOrderBook.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Qot_UpdateRT.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Qot_UpdateTicker.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Trd_Common.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Trd_GetAccList.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Trd_GetFunds.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Trd_GetHistoryOrderFillList.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Trd_GetHistoryOrderList.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Trd_GetMaxTrdQtys.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Trd_GetOrderFillList.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Trd_GetOrderList.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Trd_GetPositionList.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Trd_ModifyOrder.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Trd_Notify.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Trd_PlaceOrder.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Trd_ReconfirmOrder.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Trd_SubAccPush.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Trd_UnlockTrade.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Trd_UpdateOrder.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Trd_UpdateOrderFill.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="SHA1.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="QuoteHandler.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="NetCenter.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="pb\Common.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\GetGlobalState.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\InitConnect.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\KeepAlive.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Notify.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Qot_Common.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Qot_GetBasicQot.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Qot_GetBroker.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Qot_GetHistoryKL.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Qot_GetHistoryKLPoints.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Qot_GetKL.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Qot_GetOrderBook.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Qot_GetPlateSecurity.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Qot_GetPlateSet.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Qot_GetReference.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Qot_GetRehab.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Qot_GetRT.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Qot_GetSecuritySnapshot.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Qot_GetStaticInfo.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Qot_GetSubInfo.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Qot_GetSuspend.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Qot_GetTicker.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Qot_GetTradeDate.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Qot_RegQotPush.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Qot_Sub.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Qot_UpdateBasicQot.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Qot_UpdateBroker.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Qot_UpdateKL.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Qot_UpdateOrderBook.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Qot_UpdateRT.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Qot_UpdateTicker.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Trd_Common.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Trd_GetAccList.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Trd_GetFunds.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Trd_GetHistoryOrderFillList.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Trd_GetHistoryOrderList.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Trd_GetMaxTrdQtys.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Trd_GetOrderFillList.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Trd_GetOrderList.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Trd_GetPositionList.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Trd_ModifyOrder.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Trd_Notify.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Trd_PlaceOrder.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Trd_ReconfirmOrder.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Trd_SubAccPush.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Trd_UnlockTrade.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Trd_UpdateOrder.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Trd_UpdateOrderFill.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+  </ItemGroup>
+</Project>

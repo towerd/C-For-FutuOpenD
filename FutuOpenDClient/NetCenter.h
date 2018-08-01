@@ -39,6 +39,9 @@ namespace ftq
 		virtual void OnError(TcpConnect *pConn, int nUvErr) override;
 		virtual void OnDisconnect(TcpConnect *pConn) override;
 	public:
+		/*
+		 *	心跳定时器回调
+		 */
 		static void OnKeepAliveTimer(uv_timer_t* handle);
 		/*
 		 *	开始心跳定时器

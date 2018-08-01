@@ -27,7 +27,7 @@ C++对接富途证券Open API，使用C++进行量化交易。
 2. 当前代码对应FutuOpenD的1.02版本
 3. 运行成功界面：
 
-  ![image](https://github.com/towerd/C-For-FutuOpenD/doc/static/run.png)
+  ![image](doc/static/run.png)
 
 ## 参考：
 

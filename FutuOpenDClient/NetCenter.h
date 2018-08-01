@@ -10,6 +10,9 @@
 
 namespace ftq
 {
+	/*
+	 *	处理OpenD发过来的数据包
+	 */
 #define PROTO_HANDLER_MEMBER(name)	virtual void OnRsp_ ## name(const APIProtoHeader &header, const i8_t *pData, i32_t nLen) = 0
 	class IProtoHandler
 	{

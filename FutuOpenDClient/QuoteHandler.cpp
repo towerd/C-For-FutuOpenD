@@ -42,7 +42,9 @@ namespace ftq
 
 		m_nKeepAliveInterval = rsp.s2c().keepaliveinterval();
 		m_nUserID = rsp.s2c().loginuserid();
+		//启动心跳定时器
 		NetCenter::Default()->StartKeepAliveTimer(m_nKeepAliveInterval * 4 / 5);
+		//获取市场全局状态
 		NetCenter::Default()->Req_GetGlobalState(m_nUserID);
 
 		//subscribe stock
@@ -58,9 +60,10 @@ namespace ftq
 		vector<Qot_Common::RehabType> rehabTypes;
 		rehabTypes.push_back(Qot_Common::RehabType_None);
 
+		//订阅00700的逐笔数据
 		NetCenter::Default()->Req_Subscribe(stocks, subTypes, true, true, rehabTypes, true);
 
-		//register push
+		//注册接收逐笔推送
 		NetCenter::Default()->Req_RegPush(stocks, subTypes, rehabTypes, true, true);
 	}
 

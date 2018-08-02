@@ -61,62 +61,37 @@ namespace ftq
 
 	void NetCenter::OnRecv(TcpConnect *pConn, Buffer *pBuf)
 	{
-		APIProtoHeader header;
-		const char *pData = pBuf->GetData();
-		i32_t nLen = pBuf->GetDataLen();
-		if (nLen < (i32_t)sizeof(header))
+		for (;;)
 		{
-			return;
-		}
+			APIProtoHeader header;
+			const char *pData = pBuf->GetData();
+			i32_t nLen = pBuf->GetDataLen();
+			if (nLen < (i32_t)sizeof(header))
+			{
+				return;
+			}
 
-		header = *(APIProtoHeader*)pData;
-		if (nLen < (i32_t)sizeof(header) + header.nBodyLen)
-		{
-			return;
-		}
+			header = *(APIProtoHeader*)pData;
+			if (nLen < (i32_t)sizeof(header) + header.nBodyLen)
+			{
+				return;
+			}
 
-		u8_t sha1[20] = { 0 };
-		const char *pBody = pData + sizeof(header);
-		SHA1((char*)sha1, pBody, header.nBodyLen);
-		if (memcmp(sha1, header.arrBodySHA1, 20) != 0)
-		{
-			//error
-			cerr << "sha check fail" << endl;
+			u8_t sha1[20] = { 0 };
+			const char *pBody = pData + sizeof(header);
+			SHA1((char*)sha1, pBody, header.nBodyLen);
+			if (memcmp(sha1, header.arrBodySHA1, 20) != 0)
+			{
+				//error
+				cerr << "sha check fail" << endl;
+				pBuf->RemoveFront((i32_t)sizeof(header) + header.nBodyLen);
+				return;
+			}
+
+			HandlePacket(header, (const i8_t*)pBody, header.nBodyLen);
+
 			pBuf->RemoveFront((i32_t)sizeof(header) + header.nBodyLen);
-			return;
 		}
-
-		switch (header.nProtoID)
-		{
-		case API_ProtoID_InitConnect:
-			m_pProtoHandler->OnRsp_InitConnect(header, (const i8_t*)pBody, header.nBodyLen);
-			break;
-		case API_ProtoID_GlobalState:
-			m_pProtoHandler->OnRsp_GetGlobalState(header, (const i8_t*)pBody, header.nBodyLen);
-			break;
-		case API_ProtoID_Qot_Sub:
-			m_pProtoHandler->OnRsp_Qot_Sub(header, (const i8_t*)pBody, header.nBodyLen);
-			break;
-		case API_ProtoID_Qot_UpdateTicker:
-			m_pProtoHandler->OnRsp_Qot_UpdateTicker(header, (const i8_t*)pBody, header.nBodyLen);
-			break;
-		case API_ProtoID_Qot_RegQotPush:
-			m_pProtoHandler->OnRsp_Qot_RegQotPush(header, (const i8_t*)pBody, header.nBodyLen);
-			break;
-		case API_ProtoID_KeepAlive:
-			m_pProtoHandler->OnRsp_KeepAlive(header, (const i8_t*)pBody, header.nBodyLen);
-			break;
-		case API_ProtoID_Qot_UpdateBroker:
-			m_pProtoHandler->OnRsp_Qot_UpdateBroker(header, (const i8_t*)pBody, header.nBodyLen);
-			break;
-		case API_ProtoID_Qot_UpdateOrderBook:
-			m_pProtoHandler->OnRsp_Qot_UpdateOrderBook(header, (const i8_t*)pBody, header.nBodyLen);
-			break;
-		default:
-			break;
-		}
-
-		pBuf->RemoveFront((i32_t)sizeof(header) + header.nBodyLen);
 	}
 
 	void NetCenter::OnError(TcpConnect *pConn, int nUvErr)
@@ -258,4 +233,38 @@ namespace ftq
 		}
 		return nPacketNo;
 	}
+
+	void NetCenter::HandlePacket(const APIProtoHeader &header, const i8_t *pData, i32_t nLen)
+	{
+		switch (header.nProtoID)
+		{
+		case API_ProtoID_InitConnect:
+			m_pProtoHandler->OnRsp_InitConnect(header, pData, nLen);
+			break;
+		case API_ProtoID_GlobalState:
+			m_pProtoHandler->OnRsp_GetGlobalState(header, pData, nLen);
+			break;
+		case API_ProtoID_Qot_Sub:
+			m_pProtoHandler->OnRsp_Qot_Sub(header, pData, nLen);
+			break;
+		case API_ProtoID_Qot_UpdateTicker:
+			m_pProtoHandler->OnRsp_Qot_UpdateTicker(header, pData, nLen);
+			break;
+		case API_ProtoID_Qot_RegQotPush:
+			m_pProtoHandler->OnRsp_Qot_RegQotPush(header, pData, nLen);
+			break;
+		case API_ProtoID_KeepAlive:
+			m_pProtoHandler->OnRsp_KeepAlive(header, pData, nLen);
+			break;
+		case API_ProtoID_Qot_UpdateBroker:
+			m_pProtoHandler->OnRsp_Qot_UpdateBroker(header, pData, nLen);
+			break;
+		case API_ProtoID_Qot_UpdateOrderBook:
+			m_pProtoHandler->OnRsp_Qot_UpdateOrderBook(header, pData, nLen);
+			break;
+		default:
+			break;
+		}
+	}
+
 }

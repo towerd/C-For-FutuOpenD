@@ -59,6 +59,7 @@ namespace ftq
 
 		vector<Qot_Common::SubType> subTypes;
 		subTypes.push_back(Qot_Common::SubType_OrderBook);
+		subTypes.push_back(Qot_Common::SubType_Broker);
 
 		vector<Qot_Common::RehabType> rehabTypes;
 		rehabTypes.push_back(Qot_Common::RehabType_None);

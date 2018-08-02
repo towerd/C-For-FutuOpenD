@@ -24,6 +24,7 @@ namespace ftq
 		PROTO_HANDLER_MEMBER(Qot_RegQotPush);
 		PROTO_HANDLER_MEMBER(Qot_UpdateTicker);
 		PROTO_HANDLER_MEMBER(Qot_UpdateBroker);
+		PROTO_HANDLER_MEMBER(Qot_UpdateOrderBook);
 	};
 #undef PROTO_HANDLER_MEMBER
 

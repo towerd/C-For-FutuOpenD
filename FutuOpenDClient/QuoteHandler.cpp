@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include "google/protobuf/message.h"
+#include "NetCenter.h"
 #include "pb/InitConnect.pb.h"
 #include "pb/Qot_Common.pb.h"
 #include "pb/Qot_Sub.pb.h"
@@ -9,7 +10,8 @@
 #include "pb/Qot_UpdateTicker.pb.h"
 #include "pb/GetGlobalState.pb.h"
 #include "pb/Qot_UpdateBroker.pb.h"
-#include "NetCenter.h"
+#include "pb/Qot_UpdateOrderBook.pb.h"
+
 
 using namespace std;
 
@@ -56,7 +58,7 @@ namespace ftq
 		stocks.push_back(stock);
 
 		vector<Qot_Common::SubType> subTypes;
-		subTypes.push_back(Qot_Common::SubType_Broker);
+		subTypes.push_back(Qot_Common::SubType_OrderBook);
 
 		vector<Qot_Common::RehabType> rehabTypes;
 		rehabTypes.push_back(Qot_Common::RehabType_None);
@@ -160,6 +162,29 @@ namespace ftq
 			const Qot_Common::Broker &data = rsp.s2c().brokerasklist(i);
 			cout << "Broker: ID=" << data.id() <<
 				";" << endl;
+		}
+	}
+
+	void QuoteHandler::OnRsp_Qot_UpdateOrderBook(const APIProtoHeader &header, const i8_t *pData, i32_t nLen)
+	{
+		cout << "OnRsp_Qot_UpdateOrderBook:" << endl;
+
+		Qot_UpdateOrderBook::Response rsp;
+		if (!ParsePb(&rsp, header.nProtoID, pData, nLen))
+		{
+			return;
+		}
+
+		cout << "Ret=" << rsp.rettype() << "; Msg=" << rsp.retmsg() << endl;
+		if (rsp.rettype() != 0)
+		{
+			return;
+		}
+
+		for (int i = 0; i < rsp.s2c().orderbookasklist_size(); ++i)
+		{
+			const Qot_Common::OrderBook &data = rsp.s2c().orderbookasklist(i);
+			cout << "Price: " << data.price() << endl;
 		}
 	}
 

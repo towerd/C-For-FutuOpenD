@@ -109,6 +109,9 @@ namespace ftq
 		case API_ProtoID_Qot_UpdateBroker:
 			m_pProtoHandler->OnRsp_Qot_UpdateBroker(header, (const i8_t*)pBody, header.nBodyLen);
 			break;
+		case API_ProtoID_Qot_UpdateOrderBook:
+			m_pProtoHandler->OnRsp_Qot_UpdateOrderBook(header, (const i8_t*)pBody, header.nBodyLen);
+			break;
 		default:
 			break;
 		}

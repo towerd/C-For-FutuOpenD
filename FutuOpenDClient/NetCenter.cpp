@@ -85,7 +85,7 @@ namespace ftq
 				//error
 				cerr << "sha check fail" << endl;
 				pBuf->RemoveFront((i32_t)sizeof(header) + header.nBodyLen);
-				return;
+				continue;
 			}
 
 			HandlePacket(header, (const i8_t*)pBody, header.nBodyLen);

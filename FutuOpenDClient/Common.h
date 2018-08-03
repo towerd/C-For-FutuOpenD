@@ -2,6 +2,7 @@
 
 #include "string.h"
 #include <uv.h>
+#include <F3CNN/Include_OMBase.h>
 
 #if defined(__linux__) || defined(__APPLE__)
 #	include <stdint.h>
@@ -9,29 +10,6 @@
 
 namespace ftq
 {
-	typedef signed char i8_t;
-	typedef short i16_t;
-	typedef int i32_t;
-#if defined(__linux__) || defined(__APPLE__)
-	typedef int64_t i64_t;
-#else
-	typedef long long i64_t;
-#endif
-	typedef long i3264_t;
-
-	typedef unsigned char u8_t;
-	typedef unsigned short u16_t;
-	typedef unsigned int u32_t;
-#if defined(__linux__) || defined(__APPLE__)
-	typedef uint64_t u64_t;
-#else
-	typedef unsigned long long u64_t;
-#endif
-	typedef unsigned long u3264_t;
-
-	typedef float f32_t;
-	typedef double f64_t;
-
 #pragma pack(push, APIProtoHeader, 1)
 	struct APIProtoHeader
 	{

@@ -12,5 +12,8 @@
 *.pch
 *.exe
 *.idb
+*.lib
+*.dll
 Debug/
 Release/
+3rd/Include/F3CNN/

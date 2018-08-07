@@ -88,9 +88,12 @@ namespace ftq
 				continue;
 			}
 
+			//测试暂时注释
+			/*
 			cout << "OnRecv: ProtoID=" << header.nProtoID <<
 				"; Len=" << header.nBodyLen <<
 				";" << endl;
+			*/
 			HandlePacket(header, (const i8_t*)pBody, header.nBodyLen);
 
 			pBuf->RemoveFront((i32_t)sizeof(header) + header.nBodyLen);

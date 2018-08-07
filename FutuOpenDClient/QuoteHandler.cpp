@@ -1,6 +1,8 @@
 ﻿#include "QuoteHandler.h"
 #include <iostream>
 #include <vector>
+#include <fstream>
+#include <string>
 #include "google/protobuf/message.h"
 #include "NetCenter.h"
 #include "pb/InitConnect.pb.h"
@@ -17,6 +19,10 @@ using namespace std;
 
 namespace ftq
 {
+	ofstream fout("D:\\delayCount.log");
+	//i64_t adjust = 0;
+	double adjust = 0;
+
 	bool ParsePb(google::protobuf::Message *pPbObj, u32_t nProtoID, const i8_t *pData, i32_t nLen)
 	{
 		if (!pPbObj->ParseFromArray(pData, nLen))
@@ -51,15 +57,35 @@ namespace ftq
 		NetCenter::Default()->Req_GetGlobalState(m_nUserID);
 
 		//subscribe stock
+		vector<Qot_Common::Security> stocks;
+		
+		/*
 		Qot_Common::Security stock;
 		stock.set_market(Qot_Common::QotMarket_HK_Security);
 		stock.set_code("00700");
-		vector<Qot_Common::Security> stocks;
 		stocks.push_back(stock);
+		*/
+
+		//myCode
+		
+		ifstream fin("../usStock.txt");
+		string code = "";
+
+		for (int i = 0; i < 1800; ++i){
+			//getline(fin, code);
+			fin >> code;
+			Qot_Common::Security stock;
+			stock.set_market(Qot_Common::QotMarket_US_Security);
+			stock.set_code(code);
+			stocks.push_back(stock);
+		}
 
 		vector<Qot_Common::SubType> subTypes;
-		subTypes.push_back(Qot_Common::SubType_OrderBook);
-		subTypes.push_back(Qot_Common::SubType_Broker);
+		//subTypes.push_back(Qot_Common::SubType_OrderBook);
+		//subTypes.push_back(Qot_Common::SubType_Broker);
+
+		//myCode
+		subTypes.push_back(Qot_Common::SubType_Ticker);
 
 		vector<Qot_Common::RehabType> rehabTypes;
 		rehabTypes.push_back(Qot_Common::RehabType_None);
@@ -88,6 +114,10 @@ namespace ftq
 		cout << "Ret=" << rsp.rettype() << "; Msg=" << rsp.retmsg() <<
 				"; ServerVer=" << rsp.s2c().serverver() <<
 				"; " << endl;
+
+		//myCode
+		//adjust = GetMicroTimeStamp() - static_cast<i64_t>(rsp.s2c().localtime() * 1000000);
+		adjust = GetFloatTimeStamp() - rsp.s2c().localtime();
 	}
 
 	void QuoteHandler::OnRsp_Qot_Sub(const APIProtoHeader &header, const i8_t *pData, i32_t nLen)
@@ -135,10 +165,23 @@ namespace ftq
 		for (int i = 0; i < rsp.s2c().tickerlist_size(); ++i)
 		{
 			const Qot_Common::Ticker &data = rsp.s2c().tickerlist(i);
+
+			//测试暂时注释
+			/*
 			cout << "Ticker: Code=" << rsp.s2c().security().code() <<
 				"; Time=" << data.time() <<
 				"; Price=" << data.price() <<
 				";" << endl;
+			*/
+
+			// myCode
+			//auto delay = GetMicroTimeStamp() - static_cast<i64_t>(data.recvtime() * 1000000) - adjust;
+			auto delay = GetFloatTimeStamp() - data.recvtime() - adjust;
+			
+			fout << data.time() << " | INFO | adjust:" <<
+				to_string(adjust) << " delay:" <<
+				to_string(delay) << endl;
+			
 		}
 	}
 

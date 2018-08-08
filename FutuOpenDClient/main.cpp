@@ -7,8 +7,7 @@ using namespace ftq;
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-	std::cout << fixed << GetFloatTimeStamp() << endl;
-	//std::cout << GetMicroTimeStamp() << endl;
+	std::cout << GetMicroTimeStamp() << endl;
 	QuoteHandler *pQuoteHandler = new QuoteHandler();
 	NetCenter::Default()->Init(uv_default_loop());
 	NetCenter::Default()->SetProtoHandler(pQuoteHandler);

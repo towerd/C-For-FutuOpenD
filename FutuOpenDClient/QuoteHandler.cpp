@@ -67,7 +67,6 @@ namespace ftq
 		*/
 
 		//myCode
-		
 		ifstream fin("../usStock.txt");
 		string code = "";
 
@@ -118,6 +117,7 @@ namespace ftq
 		//myCode
 		//adjust = GetMicroTimeStamp() - static_cast<i64_t>(rsp.s2c().localtime() * 1000000);
 		adjust = GetFloatTimeStamp() - rsp.s2c().localtime();
+		fout << TimeStampToTimeStrA(GetTimeStamp(), OMTimeFmtType_Full) << " | INFO | adjust:" << adjust << endl;
 	}
 
 	void QuoteHandler::OnRsp_Qot_Sub(const APIProtoHeader &header, const i8_t *pData, i32_t nLen)
@@ -148,7 +148,7 @@ namespace ftq
 
 	void QuoteHandler::OnRsp_Qot_UpdateTicker(const APIProtoHeader &header, const i8_t *pData, i32_t nLen)
 	{
-		cout << "OnRsp_Qot_UpdateTicker:" << endl;
+		//cout << "OnRsp_Qot_UpdateTicker:" << endl;
 
 		Qot_UpdateTicker::Response rsp;
 		if (!ParsePb(&rsp, header.nProtoID, pData, nLen))
@@ -156,7 +156,7 @@ namespace ftq
 			return;
 		}
 
-		cout << "Ret=" << rsp.rettype() << "; Msg=" << rsp.retmsg() << endl;
+		//cout << "Ret=" << rsp.rettype() << "; Msg=" << rsp.retmsg() << endl;
 		if (rsp.rettype() != 0)
 		{
 			return;
@@ -178,10 +178,18 @@ namespace ftq
 			//auto delay = GetMicroTimeStamp() - static_cast<i64_t>(data.recvtime() * 1000000) - adjust;
 			auto delay = GetFloatTimeStamp() - data.recvtime() - adjust;
 			
+			/*
 			fout << data.time() << " | INFO | adjust:" <<
 				to_string(adjust) << " delay:" <<
-				to_string(delay) << endl;
-			
+				to_string(delay) << '\n';
+			*/
+			fout << TimeStampToTimeStrA(GetTimeStamp(), OMTimeFmtType_Full) << " | INFO | recvtime:" <<
+				fixed << data.recvtime() << " delay:" << delay;
+
+			if (1 <= delay)
+				fout << " {time:" << data.time() << " sequence:" << data.sequence() << "}";
+
+			fout << '\n';
 		}
 	}
 

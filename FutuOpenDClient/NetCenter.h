@@ -48,6 +48,7 @@ namespace ftq
 		 *	心跳定时器回调
 		 */
 		static void OnKeepAliveTimer(uv_timer_t* handle);
+		static void OnConnectAgain(uv_timer_t* handle);
 		/*
 		 *	开始心跳定时器
 		 */
@@ -75,6 +76,7 @@ namespace ftq
 		 *	心跳，每隔一定时间需要向OpenD发送心跳包，间隔的时长见InitConnect协议的返回值
 		 */
 		u32_t Req_KeepAlive();
+		void Req_ConnectAgain();
 		/*
 		 *	注册推送，必须先注册推送，然后才能收到推送数据包，比如逐笔、报价
 		 */

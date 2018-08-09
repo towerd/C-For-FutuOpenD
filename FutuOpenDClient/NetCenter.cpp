@@ -56,6 +56,7 @@ namespace ftq
 	void NetCenter::OnConnect(TcpConnect *pConn)
 	{
 		//连接成功后需要调用InitConnect
+		uv_timer_stop(&m_keepAliveTimer);
 		Req_InitConnect(100, "demo", true);
 	}
 
@@ -108,8 +109,16 @@ namespace ftq
 	void NetCenter::OnDisconnect(TcpConnect *pConn)
 	{
 		cerr << "Disconnected" << endl;
+
+		uv_timer_stop(&m_keepAliveTimer);
+		uv_timer_init(m_pLoop, &m_keepAliveTimer);
+		uv_timer_start(&m_keepAliveTimer, OnConnectAgain, 4 * 1000, 4 * 1000);
 	}
 
+	void NetCenter::OnConnectAgain(uv_timer_t* handle){
+		NetCenter *pSelf = (NetCenter*)handle->data;
+		pSelf->Req_ConnectAgain();
+	}
 
 	void NetCenter::OnKeepAliveTimer(uv_timer_t* handle)
 	{
@@ -179,6 +188,13 @@ namespace ftq
 		return Send(API_ProtoID_KeepAlive, req);
 	}
 
+	void NetCenter::Req_ConnectAgain(){
+		cout << "Connect Again!" << endl;
+		delete m_pQuoteConn;
+		m_pQuoteConn = new TcpConnect();
+		m_pQuoteConn->Init(m_pLoop, this);
+		m_pQuoteConn->Connect("127.0.0.1", 11111);
+	}
 
 	u32_t NetCenter::Req_RegPush(const std::vector<Qot_Common::Security> &stocks, const std::vector<Qot_Common::SubType> &subTypes, const std::vector<Qot_Common::RehabType> &rehabTypes, bool isRegPush, bool bFirstPush)
 	{

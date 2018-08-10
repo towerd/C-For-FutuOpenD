@@ -11,7 +11,7 @@ int main(int argc, const char * argv[]) {
 	QuoteHandler *pQuoteHandler = new QuoteHandler();
 	NetCenter::Default()->Init(uv_default_loop());
 	NetCenter::Default()->SetProtoHandler(pQuoteHandler);
-	NetCenter::Default()->Connect("127.0.0.1", 11111);
+	NetCenter::Default()->Connect(pHost, nPort);
     uv_run(uv_default_loop(), UV_RUN_DEFAULT);
 
     return 0;

@@ -57,6 +57,10 @@ namespace ftq {
         nDataLen = nRemainDataLen;
     }
     
+	TcpConnect::~TcpConnect(){
+		uv_close((uv_handle_t*)&m_tcp, AfterClose);
+	}
+
     bool TcpConnect::Init(uv_loop_t *pUvLoop, ITcpHandler *pHandler) {
         assert(pUvLoop);
         assert(pHandler);

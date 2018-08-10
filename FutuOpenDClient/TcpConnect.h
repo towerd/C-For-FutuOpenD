@@ -37,6 +37,7 @@ namespace ftq {
     
     class TcpConnect {
     public:
+		~TcpConnect();
         bool Init(uv_loop_t *pUvLoop, ITcpHandler *pHandler);
         void Close();
         bool Connect(const char *pHost, int nPort);

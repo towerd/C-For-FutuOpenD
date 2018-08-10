@@ -12,6 +12,9 @@ using namespace std;
 namespace ftq
 {
 	NetCenter *NetCenter::ms_pDefault = new NetCenter();
+	//从配置文件读取IP地址和端口
+	extern const char* pHost = "127.0.0.1";
+	extern int nPort = 11111;
 
 	NetCenter::~NetCenter()
 	{
@@ -109,9 +112,9 @@ namespace ftq
 	void NetCenter::OnDisconnect(TcpConnect *pConn)
 	{
 		cerr << "Disconnected" << endl;
-
 		uv_timer_stop(&m_keepAliveTimer);
 		uv_timer_init(m_pLoop, &m_keepAliveTimer);
+		//根据正常连接时间来设置心跳
 		uv_timer_start(&m_keepAliveTimer, OnConnectAgain, 4 * 1000, 4 * 1000);
 	}
 
@@ -190,10 +193,11 @@ namespace ftq
 
 	void NetCenter::Req_ConnectAgain(){
 		cout << "Connect Again!" << endl;
+		
 		delete m_pQuoteConn;
 		m_pQuoteConn = new TcpConnect();
 		m_pQuoteConn->Init(m_pLoop, this);
-		m_pQuoteConn->Connect("127.0.0.1", 11111);
+		m_pQuoteConn->Connect(pHost, nPort);
 	}
 
 	u32_t NetCenter::Req_RegPush(const std::vector<Qot_Common::Security> &stocks, const std::vector<Qot_Common::SubType> &subTypes, const std::vector<Qot_Common::RehabType> &rehabTypes, bool isRegPush, bool bFirstPush)

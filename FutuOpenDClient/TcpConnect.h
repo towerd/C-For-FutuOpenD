@@ -42,6 +42,9 @@ namespace ftq {
         void Close();
         bool Connect(const char *pHost, int nPort);
         bool Send(const char *pData, int nLen);
+		const char* GetHost();
+		int GetPort();
+		void SetSocket(const char* pHost,int nPort);
     public:
         static void AfterConnect(uv_connect_t *pReq, int nStatus);
         static void AfterClose(uv_handle_t *pHandle);
@@ -61,6 +64,8 @@ namespace ftq {
         int m_nCurUsingWriteStoreIdx{-1};
         Buffer m_readStore{10 * 1024 * 1024};
         ITcpHandler *m_pHandler{nullptr};
+		const char* m_pHost;
+		int m_nPort;
     };
 }
 

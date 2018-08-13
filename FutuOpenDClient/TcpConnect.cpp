@@ -199,4 +199,17 @@ namespace ftq {
         
         return true;
     }
+
+	const char* TcpConnect::GetHost(){
+		return m_pHost;
+	}
+
+	int TcpConnect::GetPort(){
+		return m_nPort;
+	}
+
+	void TcpConnect::SetSocket(const char* pHost, int nPort){
+		m_pHost = pHost;
+		m_nPort = nPort;
+	}
 }

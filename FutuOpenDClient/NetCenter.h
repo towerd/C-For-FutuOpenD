@@ -10,8 +10,6 @@
 
 namespace ftq
 {
-	extern const char* pHost;
-	extern int nPort;
 	/*
 	 *	处理OpenD发过来的数据包
 	 */

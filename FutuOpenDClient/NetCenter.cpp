@@ -12,9 +12,6 @@ using namespace std;
 namespace ftq
 {
 	NetCenter *NetCenter::ms_pDefault = new NetCenter();
-	//从配置文件读取IP地址和端口
-	extern const char* pHost = "127.0.0.1";
-	extern int nPort = 11111;
 
 	NetCenter::~NetCenter()
 	{
@@ -42,6 +39,7 @@ namespace ftq
 
 	void NetCenter::Connect(const char *pIp, i32_t nPort)
 	{
+		m_pQuoteConn->SetSocket(pIp, nPort);
 		m_pQuoteConn->Connect(pIp, nPort);
 	}
 
@@ -194,10 +192,14 @@ namespace ftq
 	void NetCenter::Req_ConnectAgain(){
 		cout << "Connect Again!" << endl;
 		
+		auto LastHost = m_pQuoteConn->GetHost();
+		auto LastPort = m_pQuoteConn->GetPort();
+
 		delete m_pQuoteConn;
 		m_pQuoteConn = new TcpConnect();
 		m_pQuoteConn->Init(m_pLoop, this);
-		m_pQuoteConn->Connect(pHost, nPort);
+		m_pQuoteConn->SetSocket(LastHost, LastPort);
+		m_pQuoteConn->Connect(LastHost, LastPort);
 	}
 
 	u32_t NetCenter::Req_RegPush(const std::vector<Qot_Common::Security> &stocks, const std::vector<Qot_Common::SubType> &subTypes, const std::vector<Qot_Common::RehabType> &rehabTypes, bool isRegPush, bool bFirstPush)

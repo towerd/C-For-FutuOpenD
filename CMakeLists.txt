@@ -17,4 +17,4 @@ file(GLOB_RECURSE SRC "${SRC_DIR}/*.cpp" "${SRC_DIR}/*.cc")
 
 add_executable(${PROJECT_NAME}  ${SRC})
 target_link_libraries(${PROJECT_NAME}  libf3cnn.a libprotobuf.a libprotobuf-lite.a libuv_a.a pthread ${CMAKE_DL_LIBS})
-
+install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION "$ENV{HOME}/futu/products/FutuOpenD2/${TARGET_OS}") 

@@ -154,6 +154,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::GetGlobalState::S2C, serverbuildno_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::GetGlobalState::S2C, time_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::GetGlobalState::S2C, localtime_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::GetGlobalState::S2C, lastlocalsvrtimediff_),
   0,
   1,
   2,
@@ -165,6 +166,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   8,
   9,
   10,
+  11,
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::GetGlobalState::Request, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::GetGlobalState::Request, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -188,9 +190,9 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   { 0, 6, sizeof(::GetGlobalState::C2S)},
-  { 7, 23, sizeof(::GetGlobalState::S2C)},
-  { 34, 40, sizeof(::GetGlobalState::Request)},
-  { 41, 50, sizeof(::GetGlobalState::Response)},
+  { 7, 24, sizeof(::GetGlobalState::S2C)},
+  { 36, 42, sizeof(::GetGlobalState::Request)},
+  { 43, 52, sizeof(::GetGlobalState::Response)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -224,19 +226,20 @@ void AddDescriptorsImpl() {
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
       "\n\024GetGlobalState.proto\022\016GetGlobalState\032\014"
       "Common.proto\032\020Qot_Common.proto\"\025\n\003C2S\022\016\n"
-      "\006userID\030\001 \002(\004\"\330\001\n\003S2C\022\020\n\010marketHK\030\001 \002(\005\022"
+      "\006userID\030\001 \002(\004\"\366\001\n\003S2C\022\020\n\010marketHK\030\001 \002(\005\022"
       "\020\n\010marketUS\030\002 \002(\005\022\020\n\010marketSH\030\003 \002(\005\022\020\n\010m"
       "arketSZ\030\004 \002(\005\022\026\n\016marketHKFuture\030\005 \002(\005\022\022\n"
       "\nqotLogined\030\006 \002(\010\022\022\n\ntrdLogined\030\007 \002(\010\022\021\n"
       "\tserverVer\030\010 \002(\005\022\025\n\rserverBuildNo\030\t \002(\005\022"
-      "\014\n\004time\030\n \002(\003\022\021\n\tlocalTime\030\013 \001(\001\"+\n\007Requ"
-      "est\022 \n\003c2s\030\001 \002(\0132\023.GetGlobalState.C2S\"d\n"
-      "\010Response\022\025\n\007retType\030\001 \002(\005:\004-400\022\016\n\006retM"
-      "sg\030\002 \001(\t\022\017\n\007errCode\030\003 \001(\005\022 \n\003s2c\030\004 \001(\0132\023"
-      ".GetGlobalState.S2C"
+      "\014\n\004time\030\n \002(\003\022\021\n\tlocalTime\030\013 \001(\001\022\034\n\024last"
+      "LocalSvrTimeDiff\030\014 \001(\001\"+\n\007Request\022 \n\003c2s"
+      "\030\001 \002(\0132\023.GetGlobalState.C2S\"d\n\010Response\022"
+      "\025\n\007retType\030\001 \002(\005:\004-400\022\016\n\006retMsg\030\002 \001(\t\022\017"
+      "\n\007errCode\030\003 \001(\005\022 \n\003s2c\030\004 \001(\0132\023.GetGlobal"
+      "State.S2C"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 459);
+      descriptor, 489);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "GetGlobalState.proto", &protobuf_RegisterTypes);
   ::protobuf_Common_2eproto::AddDescriptors();
@@ -515,6 +518,7 @@ const int S2C::kServerVerFieldNumber;
 const int S2C::kServerBuildNoFieldNumber;
 const int S2C::kTimeFieldNumber;
 const int S2C::kLocalTimeFieldNumber;
+const int S2C::kLastLocalSvrTimeDiffFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 S2C::S2C()
@@ -532,16 +536,16 @@ S2C::S2C(const S2C& from)
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&markethk_, &from.markethk_,
-    static_cast<size_t>(reinterpret_cast<char*>(&localtime_) -
-    reinterpret_cast<char*>(&markethk_)) + sizeof(localtime_));
+    static_cast<size_t>(reinterpret_cast<char*>(&lastlocalsvrtimediff_) -
+    reinterpret_cast<char*>(&markethk_)) + sizeof(lastlocalsvrtimediff_));
   // @@protoc_insertion_point(copy_constructor:GetGlobalState.S2C)
 }
 
 void S2C::SharedCtor() {
   _cached_size_ = 0;
   ::memset(&markethk_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&localtime_) -
-      reinterpret_cast<char*>(&markethk_)) + sizeof(localtime_));
+      reinterpret_cast<char*>(&lastlocalsvrtimediff_) -
+      reinterpret_cast<char*>(&markethk_)) + sizeof(lastlocalsvrtimediff_));
 }
 
 S2C::~S2C() {
@@ -587,10 +591,10 @@ void S2C::Clear() {
         reinterpret_cast<char*>(&serverver_) -
         reinterpret_cast<char*>(&markethk_)) + sizeof(serverver_));
   }
-  if (cached_has_bits & 1792u) {
+  if (cached_has_bits & 3840u) {
     ::memset(&serverbuildno_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&localtime_) -
-        reinterpret_cast<char*>(&serverbuildno_)) + sizeof(localtime_));
+        reinterpret_cast<char*>(&lastlocalsvrtimediff_) -
+        reinterpret_cast<char*>(&serverbuildno_)) + sizeof(lastlocalsvrtimediff_));
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -760,6 +764,20 @@ bool S2C::MergePartialFromCodedStream(
         break;
       }
 
+      // optional double lastLocalSvrTimeDiff = 12;
+      case 12: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(97u /* 97 & 0xFF */)) {
+          set_has_lastlocalsvrtimediff();
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, &lastlocalsvrtimediff_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -842,6 +860,11 @@ void S2C::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteDouble(11, this->localtime(), output);
   }
 
+  // optional double lastLocalSvrTimeDiff = 12;
+  if (cached_has_bits & 0x00000800u) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(12, this->lastlocalsvrtimediff(), output);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
@@ -910,6 +933,11 @@ void S2C::SerializeWithCachedSizes(
   // optional double localTime = 11;
   if (cached_has_bits & 0x00000400u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(11, this->localtime(), target);
+  }
+
+  // optional double lastLocalSvrTimeDiff = 12;
+  if (cached_has_bits & 0x00000800u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(12, this->lastlocalsvrtimediff(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -1051,11 +1079,18 @@ size_t S2C::ByteSizeLong() const {
   } else {
     total_size += RequiredFieldsByteSizeFallback();
   }
-  // optional double localTime = 11;
-  if (has_localtime()) {
-    total_size += 1 + 8;
-  }
+  if (_has_bits_[8 / 32] & 3072u) {
+    // optional double localTime = 11;
+    if (has_localtime()) {
+      total_size += 1 + 8;
+    }
 
+    // optional double lastLocalSvrTimeDiff = 12;
+    if (has_lastlocalsvrtimediff()) {
+      total_size += 1 + 8;
+    }
+
+  }
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = cached_size;
@@ -1113,7 +1148,7 @@ void S2C::MergeFrom(const S2C& from) {
     }
     _has_bits_[0] |= cached_has_bits;
   }
-  if (cached_has_bits & 1792u) {
+  if (cached_has_bits & 3840u) {
     if (cached_has_bits & 0x00000100u) {
       serverbuildno_ = from.serverbuildno_;
     }
@@ -1122,6 +1157,9 @@ void S2C::MergeFrom(const S2C& from) {
     }
     if (cached_has_bits & 0x00000400u) {
       localtime_ = from.localtime_;
+    }
+    if (cached_has_bits & 0x00000800u) {
+      lastlocalsvrtimediff_ = from.lastlocalsvrtimediff_;
     }
     _has_bits_[0] |= cached_has_bits;
   }
@@ -1163,6 +1201,7 @@ void S2C::InternalSwap(S2C* other) {
   swap(serverbuildno_, other->serverbuildno_);
   swap(time_, other->time_);
   swap(localtime_, other->localtime_);
+  swap(lastlocalsvrtimediff_, other->lastlocalsvrtimediff_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);

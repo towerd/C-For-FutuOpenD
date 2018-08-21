@@ -353,6 +353,13 @@ class S2C : public ::google::protobuf::Message /* @@protoc_insertion_point(class
   double localtime() const;
   void set_localtime(double value);
 
+  // optional double lastLocalSvrTimeDiff = 12;
+  bool has_lastlocalsvrtimediff() const;
+  void clear_lastlocalsvrtimediff();
+  static const int kLastLocalSvrTimeDiffFieldNumber = 12;
+  double lastlocalsvrtimediff() const;
+  void set_lastlocalsvrtimediff(double value);
+
   // @@protoc_insertion_point(class_scope:GetGlobalState.S2C)
  private:
   void set_has_markethk();
@@ -377,6 +384,8 @@ class S2C : public ::google::protobuf::Message /* @@protoc_insertion_point(class
   void clear_has_time();
   void set_has_localtime();
   void clear_has_localtime();
+  void set_has_lastlocalsvrtimediff();
+  void clear_has_lastlocalsvrtimediff();
 
   // helper for ByteSizeLong()
   size_t RequiredFieldsByteSizeFallback() const;
@@ -395,6 +404,7 @@ class S2C : public ::google::protobuf::Message /* @@protoc_insertion_point(class
   ::google::protobuf::int32 serverbuildno_;
   ::google::protobuf::int64 time_;
   double localtime_;
+  double lastlocalsvrtimediff_;
   friend struct ::protobuf_GetGlobalState_2eproto::TableStruct;
   friend void ::protobuf_GetGlobalState_2eproto::InitDefaultsS2CImpl();
 };
@@ -961,6 +971,30 @@ inline void S2C::set_localtime(double value) {
   set_has_localtime();
   localtime_ = value;
   // @@protoc_insertion_point(field_set:GetGlobalState.S2C.localTime)
+}
+
+// optional double lastLocalSvrTimeDiff = 12;
+inline bool S2C::has_lastlocalsvrtimediff() const {
+  return (_has_bits_[0] & 0x00000800u) != 0;
+}
+inline void S2C::set_has_lastlocalsvrtimediff() {
+  _has_bits_[0] |= 0x00000800u;
+}
+inline void S2C::clear_has_lastlocalsvrtimediff() {
+  _has_bits_[0] &= ~0x00000800u;
+}
+inline void S2C::clear_lastlocalsvrtimediff() {
+  lastlocalsvrtimediff_ = 0;
+  clear_has_lastlocalsvrtimediff();
+}
+inline double S2C::lastlocalsvrtimediff() const {
+  // @@protoc_insertion_point(field_get:GetGlobalState.S2C.lastLocalSvrTimeDiff)
+  return lastlocalsvrtimediff_;
+}
+inline void S2C::set_lastlocalsvrtimediff(double value) {
+  set_has_lastlocalsvrtimediff();
+  lastlocalsvrtimediff_ = value;
+  // @@protoc_insertion_point(field_set:GetGlobalState.S2C.lastLocalSvrTimeDiff)
 }
 
 // -------------------------------------------------------------------

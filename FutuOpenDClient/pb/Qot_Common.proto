@@ -220,6 +220,7 @@ message BasicQot
 	required double turnoverRate = 13; //换手率
 	required double amplitude = 14; //振幅
 	optional int32 darkStatus = 15; //DarkStatus, 暗盘交易状态
+	optional double recvTime = 16; //收到推送数据的本地时间戳，用于定位延迟
 }
 
 message TimeShare
@@ -281,6 +282,7 @@ message OrderBook
 	required double price = 1; //委托价格
 	required int64 volume = 2; //委托数量
 	required int32 orederCount = 3; //委托订单个数
+	optional double recvTime = 4; //收到推送数据的本地时间戳，用于定位延迟
 }
 
 message SubInfo

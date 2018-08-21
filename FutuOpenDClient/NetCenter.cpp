@@ -290,6 +290,9 @@ namespace ftq
 		case API_ProtoID_Qot_UpdateOrderBook:
 			m_pProtoHandler->OnRsp_Qot_UpdateOrderBook(header, pData, nLen);
 			break;
+		case API_ProtoID_Qot_UpdateStockBasic:
+			m_pProtoHandler->OnRsp_Qot_UpdateStockBasic(header, pData, nLen);
+			break;
 		default:
 			break;
 		}

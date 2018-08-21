@@ -403,6 +403,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Qot_Common::BasicQot, turnoverrate_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Qot_Common::BasicQot, amplitude_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Qot_Common::BasicQot, darkstatus_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Qot_Common::BasicQot, recvtime_),
   2,
   7,
   0,
@@ -418,6 +419,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   13,
   14,
   8,
+  15,
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Qot_Common::TimeShare, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Qot_Common::TimeShare, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -516,8 +518,10 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Qot_Common::OrderBook, price_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Qot_Common::OrderBook, volume_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Qot_Common::OrderBook, oredercount_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Qot_Common::OrderBook, recvtime_),
   0,
   1,
+  3,
   2,
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Qot_Common::SubInfo, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Qot_Common::SubInfo, _internal_metadata_),
@@ -543,16 +547,16 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   { 0, 7, sizeof(::Qot_Common::Security)},
   { 9, 26, sizeof(::Qot_Common::KLine)},
-  { 38, 58, sizeof(::Qot_Common::BasicQot)},
-  { 73, 86, sizeof(::Qot_Common::TimeShare)},
-  { 94, 105, sizeof(::Qot_Common::SecurityStaticBasic)},
-  { 111, 118, sizeof(::Qot_Common::WarrantStaticExData)},
-  { 120, 127, sizeof(::Qot_Common::SecurityStaticInfo)},
-  { 129, 137, sizeof(::Qot_Common::Broker)},
-  { 140, 154, sizeof(::Qot_Common::Ticker)},
-  { 163, 171, sizeof(::Qot_Common::OrderBook)},
-  { 174, 181, sizeof(::Qot_Common::SubInfo)},
-  { 183, 191, sizeof(::Qot_Common::ConnSubInfo)},
+  { 38, 59, sizeof(::Qot_Common::BasicQot)},
+  { 75, 88, sizeof(::Qot_Common::TimeShare)},
+  { 96, 107, sizeof(::Qot_Common::SecurityStaticBasic)},
+  { 113, 120, sizeof(::Qot_Common::WarrantStaticExData)},
+  { 122, 129, sizeof(::Qot_Common::SecurityStaticInfo)},
+  { 131, 139, sizeof(::Qot_Common::Broker)},
+  { 142, 156, sizeof(::Qot_Common::Ticker)},
+  { 165, 174, sizeof(::Qot_Common::OrderBook)},
+  { 178, 185, sizeof(::Qot_Common::SubInfo)},
+  { 187, 195, sizeof(::Qot_Common::ConnSubInfo)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -599,7 +603,7 @@ void AddDescriptorsImpl() {
       "\004 \001(\001\022\020\n\010lowPrice\030\005 \001(\001\022\022\n\nclosePrice\030\006 "
       "\001(\001\022\026\n\016lastClosePrice\030\007 \001(\001\022\016\n\006volume\030\010 "
       "\001(\003\022\020\n\010turnover\030\t \001(\001\022\024\n\014turnoverRate\030\n "
-      "\001(\001\022\n\n\002pe\030\013 \001(\001\022\022\n\nchangeRate\030\014 \001(\001\"\303\002\n\010"
+      "\001(\001\022\n\n\002pe\030\013 \001(\001\022\022\n\nchangeRate\030\014 \001(\001\"\325\002\n\010"
       "BasicQot\022&\n\010security\030\001 \002(\0132\024.Qot_Common."
       "Security\022\023\n\013isSuspended\030\002 \002(\010\022\020\n\010listTim"
       "e\030\003 \002(\t\022\023\n\013priceSpread\030\004 \002(\001\022\022\n\nupdateTi"
@@ -608,116 +612,117 @@ void AddDescriptorsImpl() {
       "(\001\022\026\n\016lastClosePrice\030\n \002(\001\022\016\n\006volume\030\013 \002"
       "(\003\022\020\n\010turnover\030\014 \002(\001\022\024\n\014turnoverRate\030\r \002"
       "(\001\022\021\n\tamplitude\030\016 \002(\001\022\022\n\ndarkStatus\030\017 \001("
-      "\005\"\225\001\n\tTimeShare\022\014\n\004time\030\001 \002(\t\022\016\n\006minute\030"
-      "\002 \002(\005\022\017\n\007isBlank\030\003 \002(\010\022\r\n\005price\030\004 \001(\001\022\026\n"
-      "\016lastClosePrice\030\005 \001(\001\022\020\n\010avgPrice\030\006 \001(\001\022"
-      "\016\n\006volume\030\007 \001(\003\022\020\n\010turnover\030\010 \001(\001\"\213\001\n\023Se"
-      "curityStaticBasic\022&\n\010security\030\001 \002(\0132\024.Qo"
-      "t_Common.Security\022\n\n\002id\030\002 \002(\003\022\017\n\007lotSize"
-      "\030\003 \002(\005\022\017\n\007secType\030\004 \002(\005\022\014\n\004name\030\005 \002(\t\022\020\n"
-      "\010listTime\030\006 \002(\t\"H\n\023WarrantStaticExData\022\014"
-      "\n\004type\030\001 \002(\005\022#\n\005owner\030\002 \002(\0132\024.Qot_Common"
-      ".Security\"|\n\022SecurityStaticInfo\022.\n\005basic"
-      "\030\001 \002(\0132\037.Qot_Common.SecurityStaticBasic\022"
-      "6\n\rwarrantExData\030\002 \001(\0132\037.Qot_Common.Warr"
-      "antStaticExData\"/\n\006Broker\022\n\n\002id\030\001 \002(\003\022\014\n"
-      "\004name\030\002 \002(\t\022\013\n\003pos\030\003 \002(\005\"\230\001\n\006Ticker\022\014\n\004t"
-      "ime\030\001 \002(\t\022\020\n\010sequence\030\002 \002(\003\022\013\n\003dir\030\003 \002(\005"
-      "\022\r\n\005price\030\004 \002(\001\022\016\n\006volume\030\005 \002(\003\022\020\n\010turno"
-      "ver\030\006 \002(\001\022\020\n\010recvTime\030\007 \001(\001\022\014\n\004type\030\010 \001("
-      "\005\022\020\n\010typeSign\030\t \001(\005\"\?\n\tOrderBook\022\r\n\005pric"
-      "e\030\001 \002(\001\022\016\n\006volume\030\002 \002(\003\022\023\n\013orederCount\030\003"
-      " \002(\005\"F\n\007SubInfo\022\017\n\007subType\030\001 \002(\005\022*\n\014secu"
-      "rityList\030\002 \003(\0132\024.Qot_Common.Security\"a\n\013"
-      "ConnSubInfo\022(\n\013subInfoList\030\001 \003(\0132\023.Qot_C"
-      "ommon.SubInfo\022\021\n\tusedQuota\030\002 \002(\005\022\025\n\risOw"
-      "nConnData\030\003 \002(\010*\304\001\n\tQotMarket\022\025\n\021QotMark"
-      "et_Unknown\020\000\022\031\n\025QotMarket_HK_Security\020\001\022"
-      "\027\n\023QotMarket_HK_Future\020\002\022\031\n\025QotMarket_US"
-      "_Security\020\013\022\027\n\023QotMarket_US_Option\020\014\022\033\n\027"
-      "QotMarket_CNSH_Security\020\025\022\033\n\027QotMarket_C"
-      "NSZ_Security\020\026*\201\002\n\014SecurityType\022\030\n\024Secur"
-      "ityType_Unknown\020\000\022\025\n\021SecurityType_Bond\020\001"
-      "\022\025\n\021SecurityType_Bwrt\020\002\022\025\n\021SecurityType_"
-      "Eqty\020\003\022\026\n\022SecurityType_Trust\020\004\022\030\n\024Securi"
-      "tyType_Warrant\020\005\022\026\n\022SecurityType_Index\020\006"
-      "\022\026\n\022SecurityType_Plate\020\007\022\025\n\021SecurityType"
-      "_Drvt\020\010\022\031\n\025SecurityType_PlateSet\020\t*r\n\014Pl"
-      "ateSetType\022\024\n\020PlateSetType_All\020\000\022\031\n\025Plat"
-      "eSetType_Industry\020\001\022\027\n\023PlateSetType_Regi"
-      "on\020\002\022\030\n\024PlateSetType_Concept\020\003*}\n\013Warran"
-      "tType\022\027\n\023WarrantType_Unknown\020\000\022\023\n\017Warran"
-      "tType_Buy\020\001\022\024\n\020WarrantType_Sell\020\002\022\024\n\020War"
-      "rantType_Bull\020\003\022\024\n\020WarrantType_Bear\020\004*\303\004"
-      "\n\016QotMarketState\022\027\n\023QotMarketState_None\020"
-      "\000\022\032\n\026QotMarketState_Auction\020\001\022\036\n\032QotMark"
-      "etState_WaitingOpen\020\002\022\032\n\026QotMarketState_"
-      "Morning\020\003\022\027\n\023QotMarketState_Rest\020\004\022\034\n\030Qo"
-      "tMarketState_Afternoon\020\005\022\031\n\025QotMarketSta"
-      "te_Closed\020\006\022!\n\035QotMarketState_PreMarketB"
-      "egin\020\010\022\037\n\033QotMarketState_PreMarketEnd\020\t\022"
-      "\"\n\036QotMarketState_AfterHoursBegin\020\n\022 \n\034Q"
-      "otMarketState_AfterHoursEnd\020\013\022\034\n\030QotMark"
-      "etState_NightOpen\020\r\022\033\n\027QotMarketState_Ni"
-      "ghtEnd\020\016\022 \n\034QotMarketState_FutureDayOpen"
-      "\020\017\022!\n\035QotMarketState_FutureDayBreak\020\020\022!\n"
-      "\035QotMarketState_FutureDayClose\020\021\022\'\n#QotM"
-      "arketState_FutureDayWaitForOpen\020\022\022\030\n\024Qot"
-      "MarketState_HkCas\020\023*N\n\tRehabType\022\022\n\016Reha"
-      "bType_None\020\000\022\025\n\021RehabType_Forward\020\001\022\026\n\022R"
-      "ehabType_Backward\020\002*\335\001\n\006KLType\022\022\n\016KLType"
-      "_Unknown\020\000\022\017\n\013KLType_1Min\020\001\022\016\n\nKLType_Da"
-      "y\020\002\022\017\n\013KLType_Week\020\003\022\020\n\014KLType_Month\020\004\022\017"
-      "\n\013KLType_Year\020\005\022\017\n\013KLType_5Min\020\006\022\020\n\014KLTy"
-      "pe_15Min\020\007\022\020\n\014KLType_30Min\020\010\022\020\n\014KLType_6"
-      "0Min\020\t\022\017\n\013KLType_3Min\020\n\022\022\n\016KLType_Quarte"
-      "r\020\013*\365\001\n\010KLFields\022\021\n\rKLFields_None\020\000\022\021\n\rK"
-      "LFields_High\020\001\022\021\n\rKLFields_Open\020\002\022\020\n\014KLF"
-      "ields_Low\020\004\022\022\n\016KLFields_Close\020\010\022\026\n\022KLFie"
-      "lds_LastClose\020\020\022\023\n\017KLFields_Volume\020 \022\025\n\021"
-      "KLFields_Turnover\020@\022\032\n\025KLFields_Turnover"
-      "Rate\020\200\001\022\020\n\013KLFields_PE\020\200\002\022\030\n\023KLFields_Ch"
-      "angeRate\020\200\004*\352\002\n\007SubType\022\020\n\014SubType_None\020"
-      "\000\022\021\n\rSubType_Basic\020\001\022\025\n\021SubType_OrderBoo"
-      "k\020\002\022\022\n\016SubType_Ticker\020\004\022\016\n\nSubType_RT\020\005\022"
-      "\022\n\016SubType_KL_Day\020\006\022\023\n\017SubType_KL_5Min\020\007"
-      "\022\024\n\020SubType_KL_15Min\020\010\022\024\n\020SubType_KL_30M"
-      "in\020\t\022\024\n\020SubType_KL_60Min\020\n\022\023\n\017SubType_KL"
-      "_1Min\020\013\022\023\n\017SubType_KL_Week\020\014\022\024\n\020SubType_"
-      "KL_Month\020\r\022\022\n\016SubType_Broker\020\016\022\026\n\022SubTyp"
-      "e_KL_Qurater\020\017\022\023\n\017SubType_KL_Year\020\020\022\023\n\017S"
-      "ubType_KL_3Min\020\021*}\n\017TickerDirection\022\033\n\027T"
-      "ickerDirection_Unknown\020\000\022\027\n\023TickerDirect"
-      "ion_Bid\020\001\022\027\n\023TickerDirection_Ask\020\002\022\033\n\027Ti"
-      "ckerDirection_Neutral\020\003*\207\007\n\nTickerType\022\026"
-      "\n\022TickerType_Unknown\020\000\022\030\n\024TickerType_Aut"
-      "omatch\020\001\022\023\n\017TickerType_Late\020\002\022\034\n\030TickerT"
-      "ype_NoneAutomatch\020\003\022\035\n\031TickerType_InterA"
-      "utomatch\020\004\022!\n\035TickerType_InterNoneAutoma"
-      "tch\020\005\022\025\n\021TickerType_OddLot\020\006\022\026\n\022TickerTy"
-      "pe_Auction\020\007\022\023\n\017TickerType_Bulk\020\010\022\024\n\020Tic"
-      "kerType_Crash\020\t\022\032\n\026TickerType_CrossMarke"
-      "t\020\n\022\027\n\023TickerType_BulkSold\020\013\022\032\n\026TickerTy"
-      "pe_FreeOnBoard\020\014\022\033\n\027TickerType_Rule127Or"
-      "155\020\r\022\024\n\020TickerType_Delay\020\016\022%\n!TickerTyp"
-      "e_MarketCenterClosePrice\020\017\022\026\n\022TickerType"
-      "_NextDay\020\020\022\"\n\036TickerType_MarketCenterOpe"
-      "ning\020\021\022\"\n\036TickerType_PriorReferencePrice"
-      "\020\022\022$\n TickerType_MarketCenterOpenPrice\020\023"
-      "\022\025\n\021TickerType_Seller\020\024\022\020\n\014TickerType_T\020"
-      "\025\022#\n\037TickerType_ExtendedTradingHours\020\026\022\031"
-      "\n\025TickerType_Contingent\020\027\022\033\n\027TickerType_"
-      "AveragePrice\020\030\022\026\n\022TickerType_OTCSold\020\031\022 "
-      "\n\034TickerType_OddLotCrossMarket\020\032\022!\n\035Tick"
-      "erType_DerivativelyPriced\020\033\022\036\n\032TickerTyp"
-      "e_ReOpeningPriced\020\034\022\034\n\030TickerType_Closin"
-      "gPriced\020\035\022&\n\"TickerType_ComprehensiveDel"
-      "ayPrice\020\036*M\n\nDarkStatus\022\023\n\017DarkStatus_No"
-      "ne\020\000\022\026\n\022DarkStatus_Trading\020\001\022\022\n\016DarkStat"
-      "us_End\020\002"
+      "\005\022\020\n\010recvTime\030\020 \001(\001\"\225\001\n\tTimeShare\022\014\n\004tim"
+      "e\030\001 \002(\t\022\016\n\006minute\030\002 \002(\005\022\017\n\007isBlank\030\003 \002(\010"
+      "\022\r\n\005price\030\004 \001(\001\022\026\n\016lastClosePrice\030\005 \001(\001\022"
+      "\020\n\010avgPrice\030\006 \001(\001\022\016\n\006volume\030\007 \001(\003\022\020\n\010tur"
+      "nover\030\010 \001(\001\"\213\001\n\023SecurityStaticBasic\022&\n\010s"
+      "ecurity\030\001 \002(\0132\024.Qot_Common.Security\022\n\n\002i"
+      "d\030\002 \002(\003\022\017\n\007lotSize\030\003 \002(\005\022\017\n\007secType\030\004 \002("
+      "\005\022\014\n\004name\030\005 \002(\t\022\020\n\010listTime\030\006 \002(\t\"H\n\023War"
+      "rantStaticExData\022\014\n\004type\030\001 \002(\005\022#\n\005owner\030"
+      "\002 \002(\0132\024.Qot_Common.Security\"|\n\022SecurityS"
+      "taticInfo\022.\n\005basic\030\001 \002(\0132\037.Qot_Common.Se"
+      "curityStaticBasic\0226\n\rwarrantExData\030\002 \001(\013"
+      "2\037.Qot_Common.WarrantStaticExData\"/\n\006Bro"
+      "ker\022\n\n\002id\030\001 \002(\003\022\014\n\004name\030\002 \002(\t\022\013\n\003pos\030\003 \002"
+      "(\005\"\230\001\n\006Ticker\022\014\n\004time\030\001 \002(\t\022\020\n\010sequence\030"
+      "\002 \002(\003\022\013\n\003dir\030\003 \002(\005\022\r\n\005price\030\004 \002(\001\022\016\n\006vol"
+      "ume\030\005 \002(\003\022\020\n\010turnover\030\006 \002(\001\022\020\n\010recvTime\030"
+      "\007 \001(\001\022\014\n\004type\030\010 \001(\005\022\020\n\010typeSign\030\t \001(\005\"Q\n"
+      "\tOrderBook\022\r\n\005price\030\001 \002(\001\022\016\n\006volume\030\002 \002("
+      "\003\022\023\n\013orederCount\030\003 \002(\005\022\020\n\010recvTime\030\004 \001(\001"
+      "\"F\n\007SubInfo\022\017\n\007subType\030\001 \002(\005\022*\n\014security"
+      "List\030\002 \003(\0132\024.Qot_Common.Security\"a\n\013Conn"
+      "SubInfo\022(\n\013subInfoList\030\001 \003(\0132\023.Qot_Commo"
+      "n.SubInfo\022\021\n\tusedQuota\030\002 \002(\005\022\025\n\risOwnCon"
+      "nData\030\003 \002(\010*\304\001\n\tQotMarket\022\025\n\021QotMarket_U"
+      "nknown\020\000\022\031\n\025QotMarket_HK_Security\020\001\022\027\n\023Q"
+      "otMarket_HK_Future\020\002\022\031\n\025QotMarket_US_Sec"
+      "urity\020\013\022\027\n\023QotMarket_US_Option\020\014\022\033\n\027QotM"
+      "arket_CNSH_Security\020\025\022\033\n\027QotMarket_CNSZ_"
+      "Security\020\026*\201\002\n\014SecurityType\022\030\n\024SecurityT"
+      "ype_Unknown\020\000\022\025\n\021SecurityType_Bond\020\001\022\025\n\021"
+      "SecurityType_Bwrt\020\002\022\025\n\021SecurityType_Eqty"
+      "\020\003\022\026\n\022SecurityType_Trust\020\004\022\030\n\024SecurityTy"
+      "pe_Warrant\020\005\022\026\n\022SecurityType_Index\020\006\022\026\n\022"
+      "SecurityType_Plate\020\007\022\025\n\021SecurityType_Drv"
+      "t\020\010\022\031\n\025SecurityType_PlateSet\020\t*r\n\014PlateS"
+      "etType\022\024\n\020PlateSetType_All\020\000\022\031\n\025PlateSet"
+      "Type_Industry\020\001\022\027\n\023PlateSetType_Region\020\002"
+      "\022\030\n\024PlateSetType_Concept\020\003*}\n\013WarrantTyp"
+      "e\022\027\n\023WarrantType_Unknown\020\000\022\023\n\017WarrantTyp"
+      "e_Buy\020\001\022\024\n\020WarrantType_Sell\020\002\022\024\n\020Warrant"
+      "Type_Bull\020\003\022\024\n\020WarrantType_Bear\020\004*\303\004\n\016Qo"
+      "tMarketState\022\027\n\023QotMarketState_None\020\000\022\032\n"
+      "\026QotMarketState_Auction\020\001\022\036\n\032QotMarketSt"
+      "ate_WaitingOpen\020\002\022\032\n\026QotMarketState_Morn"
+      "ing\020\003\022\027\n\023QotMarketState_Rest\020\004\022\034\n\030QotMar"
+      "ketState_Afternoon\020\005\022\031\n\025QotMarketState_C"
+      "losed\020\006\022!\n\035QotMarketState_PreMarketBegin"
+      "\020\010\022\037\n\033QotMarketState_PreMarketEnd\020\t\022\"\n\036Q"
+      "otMarketState_AfterHoursBegin\020\n\022 \n\034QotMa"
+      "rketState_AfterHoursEnd\020\013\022\034\n\030QotMarketSt"
+      "ate_NightOpen\020\r\022\033\n\027QotMarketState_NightE"
+      "nd\020\016\022 \n\034QotMarketState_FutureDayOpen\020\017\022!"
+      "\n\035QotMarketState_FutureDayBreak\020\020\022!\n\035Qot"
+      "MarketState_FutureDayClose\020\021\022\'\n#QotMarke"
+      "tState_FutureDayWaitForOpen\020\022\022\030\n\024QotMark"
+      "etState_HkCas\020\023*N\n\tRehabType\022\022\n\016RehabTyp"
+      "e_None\020\000\022\025\n\021RehabType_Forward\020\001\022\026\n\022Rehab"
+      "Type_Backward\020\002*\335\001\n\006KLType\022\022\n\016KLType_Unk"
+      "nown\020\000\022\017\n\013KLType_1Min\020\001\022\016\n\nKLType_Day\020\002\022"
+      "\017\n\013KLType_Week\020\003\022\020\n\014KLType_Month\020\004\022\017\n\013KL"
+      "Type_Year\020\005\022\017\n\013KLType_5Min\020\006\022\020\n\014KLType_1"
+      "5Min\020\007\022\020\n\014KLType_30Min\020\010\022\020\n\014KLType_60Min"
+      "\020\t\022\017\n\013KLType_3Min\020\n\022\022\n\016KLType_Quarter\020\013*"
+      "\365\001\n\010KLFields\022\021\n\rKLFields_None\020\000\022\021\n\rKLFie"
+      "lds_High\020\001\022\021\n\rKLFields_Open\020\002\022\020\n\014KLField"
+      "s_Low\020\004\022\022\n\016KLFields_Close\020\010\022\026\n\022KLFields_"
+      "LastClose\020\020\022\023\n\017KLFields_Volume\020 \022\025\n\021KLFi"
+      "elds_Turnover\020@\022\032\n\025KLFields_TurnoverRate"
+      "\020\200\001\022\020\n\013KLFields_PE\020\200\002\022\030\n\023KLFields_Change"
+      "Rate\020\200\004*\352\002\n\007SubType\022\020\n\014SubType_None\020\000\022\021\n"
+      "\rSubType_Basic\020\001\022\025\n\021SubType_OrderBook\020\002\022"
+      "\022\n\016SubType_Ticker\020\004\022\016\n\nSubType_RT\020\005\022\022\n\016S"
+      "ubType_KL_Day\020\006\022\023\n\017SubType_KL_5Min\020\007\022\024\n\020"
+      "SubType_KL_15Min\020\010\022\024\n\020SubType_KL_30Min\020\t"
+      "\022\024\n\020SubType_KL_60Min\020\n\022\023\n\017SubType_KL_1Mi"
+      "n\020\013\022\023\n\017SubType_KL_Week\020\014\022\024\n\020SubType_KL_M"
+      "onth\020\r\022\022\n\016SubType_Broker\020\016\022\026\n\022SubType_KL"
+      "_Qurater\020\017\022\023\n\017SubType_KL_Year\020\020\022\023\n\017SubTy"
+      "pe_KL_3Min\020\021*}\n\017TickerDirection\022\033\n\027Ticke"
+      "rDirection_Unknown\020\000\022\027\n\023TickerDirection_"
+      "Bid\020\001\022\027\n\023TickerDirection_Ask\020\002\022\033\n\027Ticker"
+      "Direction_Neutral\020\003*\207\007\n\nTickerType\022\026\n\022Ti"
+      "ckerType_Unknown\020\000\022\030\n\024TickerType_Automat"
+      "ch\020\001\022\023\n\017TickerType_Late\020\002\022\034\n\030TickerType_"
+      "NoneAutomatch\020\003\022\035\n\031TickerType_InterAutom"
+      "atch\020\004\022!\n\035TickerType_InterNoneAutomatch\020"
+      "\005\022\025\n\021TickerType_OddLot\020\006\022\026\n\022TickerType_A"
+      "uction\020\007\022\023\n\017TickerType_Bulk\020\010\022\024\n\020TickerT"
+      "ype_Crash\020\t\022\032\n\026TickerType_CrossMarket\020\n\022"
+      "\027\n\023TickerType_BulkSold\020\013\022\032\n\026TickerType_F"
+      "reeOnBoard\020\014\022\033\n\027TickerType_Rule127Or155\020"
+      "\r\022\024\n\020TickerType_Delay\020\016\022%\n!TickerType_Ma"
+      "rketCenterClosePrice\020\017\022\026\n\022TickerType_Nex"
+      "tDay\020\020\022\"\n\036TickerType_MarketCenterOpening"
+      "\020\021\022\"\n\036TickerType_PriorReferencePrice\020\022\022$"
+      "\n TickerType_MarketCenterOpenPrice\020\023\022\025\n\021"
+      "TickerType_Seller\020\024\022\020\n\014TickerType_T\020\025\022#\n"
+      "\037TickerType_ExtendedTradingHours\020\026\022\031\n\025Ti"
+      "ckerType_Contingent\020\027\022\033\n\027TickerType_Aver"
+      "agePrice\020\030\022\026\n\022TickerType_OTCSold\020\031\022 \n\034Ti"
+      "ckerType_OddLotCrossMarket\020\032\022!\n\035TickerTy"
+      "pe_DerivativelyPriced\020\033\022\036\n\032TickerType_Re"
+      "OpeningPriced\020\034\022\034\n\030TickerType_ClosingPri"
+      "ced\020\035\022&\n\"TickerType_ComprehensiveDelayPr"
+      "ice\020\036*M\n\nDarkStatus\022\023\n\017DarkStatus_None\020\000"
+      "\022\026\n\022DarkStatus_Trading\020\001\022\022\n\016DarkStatus_E"
+      "nd\020\002"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 4888);
+      descriptor, 4924);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "Qot_Common.proto", &protobuf_RegisterTypes);
   ::protobuf_Common_2eproto::AddDescriptors();
@@ -2043,6 +2048,7 @@ const int BasicQot::kTurnoverFieldNumber;
 const int BasicQot::kTurnoverRateFieldNumber;
 const int BasicQot::kAmplitudeFieldNumber;
 const int BasicQot::kDarkStatusFieldNumber;
+const int BasicQot::kRecvTimeFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 BasicQot::BasicQot()
@@ -2073,8 +2079,8 @@ BasicQot::BasicQot(const BasicQot& from)
     security_ = NULL;
   }
   ::memcpy(&pricespread_, &from.pricespread_,
-    static_cast<size_t>(reinterpret_cast<char*>(&amplitude_) -
-    reinterpret_cast<char*>(&pricespread_)) + sizeof(amplitude_));
+    static_cast<size_t>(reinterpret_cast<char*>(&recvtime_) -
+    reinterpret_cast<char*>(&pricespread_)) + sizeof(recvtime_));
   // @@protoc_insertion_point(copy_constructor:Qot_Common.BasicQot)
 }
 
@@ -2083,8 +2089,8 @@ void BasicQot::SharedCtor() {
   listtime_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   updatetime_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&security_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&amplitude_) -
-      reinterpret_cast<char*>(&security_)) + sizeof(amplitude_));
+      reinterpret_cast<char*>(&recvtime_) -
+      reinterpret_cast<char*>(&security_)) + sizeof(recvtime_));
 }
 
 BasicQot::~BasicQot() {
@@ -2147,10 +2153,10 @@ void BasicQot::Clear() {
         reinterpret_cast<char*>(&issuspended_) -
         reinterpret_cast<char*>(&pricespread_)) + sizeof(issuspended_));
   }
-  if (cached_has_bits & 32512u) {
+  if (cached_has_bits & 65280u) {
     ::memset(&darkstatus_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&amplitude_) -
-        reinterpret_cast<char*>(&darkstatus_)) + sizeof(amplitude_));
+        reinterpret_cast<char*>(&recvtime_) -
+        reinterpret_cast<char*>(&darkstatus_)) + sizeof(recvtime_));
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -2162,7 +2168,7 @@ bool BasicQot::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:Qot_Common.BasicQot)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -2378,6 +2384,20 @@ bool BasicQot::MergePartialFromCodedStream(
         break;
       }
 
+      // optional double recvTime = 16;
+      case 16: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(129u /* 129 & 0xFF */)) {
+          set_has_recvtime();
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, &recvtime_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -2491,6 +2511,11 @@ void BasicQot::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(15, this->darkstatus(), output);
   }
 
+  // optional double recvTime = 16;
+  if (cached_has_bits & 0x00008000u) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(16, this->recvtime(), output);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
@@ -2593,6 +2618,11 @@ void BasicQot::SerializeWithCachedSizes(
   // optional int32 darkStatus = 15;
   if (cached_has_bits & 0x00000100u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(15, this->darkstatus(), target);
+  }
+
+  // optional double recvTime = 16;
+  if (cached_has_bits & 0x00008000u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(16, this->recvtime(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -2757,6 +2787,11 @@ size_t BasicQot::ByteSizeLong() const {
         this->darkstatus());
   }
 
+  // optional double recvTime = 16;
+  if (has_recvtime()) {
+    total_size += 2 + 8;
+  }
+
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = cached_size;
@@ -2816,7 +2851,7 @@ void BasicQot::MergeFrom(const BasicQot& from) {
     }
     _has_bits_[0] |= cached_has_bits;
   }
-  if (cached_has_bits & 32512u) {
+  if (cached_has_bits & 65280u) {
     if (cached_has_bits & 0x00000100u) {
       darkstatus_ = from.darkstatus_;
     }
@@ -2837,6 +2872,9 @@ void BasicQot::MergeFrom(const BasicQot& from) {
     }
     if (cached_has_bits & 0x00004000u) {
       amplitude_ = from.amplitude_;
+    }
+    if (cached_has_bits & 0x00008000u) {
+      recvtime_ = from.recvtime_;
     }
     _has_bits_[0] |= cached_has_bits;
   }
@@ -2885,6 +2923,7 @@ void BasicQot::InternalSwap(BasicQot* other) {
   swap(turnover_, other->turnover_);
   swap(turnoverrate_, other->turnoverrate_);
   swap(amplitude_, other->amplitude_);
+  swap(recvtime_, other->recvtime_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
@@ -5613,6 +5652,7 @@ void OrderBook::InitAsDefaultInstance() {
 const int OrderBook::kPriceFieldNumber;
 const int OrderBook::kVolumeFieldNumber;
 const int OrderBook::kOrederCountFieldNumber;
+const int OrderBook::kRecvTimeFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 OrderBook::OrderBook()
@@ -5680,7 +5720,7 @@ void OrderBook::Clear() {
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 7u) {
+  if (cached_has_bits & 15u) {
     ::memset(&price_, 0, static_cast<size_t>(
         reinterpret_cast<char*>(&oredercount_) -
         reinterpret_cast<char*>(&price_)) + sizeof(oredercount_));
@@ -5741,6 +5781,20 @@ bool OrderBook::MergePartialFromCodedStream(
         break;
       }
 
+      // optional double recvTime = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(33u /* 33 & 0xFF */)) {
+          set_has_recvtime();
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, &recvtime_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -5779,8 +5833,13 @@ void OrderBook::SerializeWithCachedSizes(
   }
 
   // required int32 orederCount = 3;
-  if (cached_has_bits & 0x00000004u) {
+  if (cached_has_bits & 0x00000008u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->oredercount(), output);
+  }
+
+  // optional double recvTime = 4;
+  if (cached_has_bits & 0x00000004u) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(4, this->recvtime(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -5809,8 +5868,13 @@ void OrderBook::SerializeWithCachedSizes(
   }
 
   // required int32 orederCount = 3;
-  if (cached_has_bits & 0x00000004u) {
+  if (cached_has_bits & 0x00000008u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->oredercount(), target);
+  }
+
+  // optional double recvTime = 4;
+  if (cached_has_bits & 0x00000004u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(4, this->recvtime(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -5855,7 +5919,7 @@ size_t OrderBook::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
-  if (((_has_bits_[0] & 0x00000007) ^ 0x00000007) == 0) {  // All required fields are present.
+  if (((_has_bits_[0] & 0x0000000b) ^ 0x0000000b) == 0) {  // All required fields are present.
     // required double price = 1;
     total_size += 1 + 8;
 
@@ -5872,6 +5936,11 @@ size_t OrderBook::ByteSizeLong() const {
   } else {
     total_size += RequiredFieldsByteSizeFallback();
   }
+  // optional double recvTime = 4;
+  if (has_recvtime()) {
+    total_size += 1 + 8;
+  }
+
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = cached_size;
@@ -5902,7 +5971,7 @@ void OrderBook::MergeFrom(const OrderBook& from) {
   (void) cached_has_bits;
 
   cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 7u) {
+  if (cached_has_bits & 15u) {
     if (cached_has_bits & 0x00000001u) {
       price_ = from.price_;
     }
@@ -5910,6 +5979,9 @@ void OrderBook::MergeFrom(const OrderBook& from) {
       volume_ = from.volume_;
     }
     if (cached_has_bits & 0x00000004u) {
+      recvtime_ = from.recvtime_;
+    }
+    if (cached_has_bits & 0x00000008u) {
       oredercount_ = from.oredercount_;
     }
     _has_bits_[0] |= cached_has_bits;
@@ -5931,7 +6003,7 @@ void OrderBook::CopyFrom(const OrderBook& from) {
 }
 
 bool OrderBook::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+  if ((_has_bits_[0] & 0x0000000b) != 0x0000000b) return false;
   return true;
 }
 
@@ -5943,6 +6015,7 @@ void OrderBook::InternalSwap(OrderBook* other) {
   using std::swap;
   swap(price_, other->price_);
   swap(volume_, other->volume_);
+  swap(recvtime_, other->recvtime_);
   swap(oredercount_, other->oredercount_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);

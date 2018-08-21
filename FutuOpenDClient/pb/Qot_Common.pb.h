@@ -1028,6 +1028,13 @@ class BasicQot : public ::google::protobuf::Message /* @@protoc_insertion_point(
   double amplitude() const;
   void set_amplitude(double value);
 
+  // optional double recvTime = 16;
+  bool has_recvtime() const;
+  void clear_recvtime();
+  static const int kRecvTimeFieldNumber = 16;
+  double recvtime() const;
+  void set_recvtime(double value);
+
   // @@protoc_insertion_point(class_scope:Qot_Common.BasicQot)
  private:
   void set_has_security();
@@ -1060,6 +1067,8 @@ class BasicQot : public ::google::protobuf::Message /* @@protoc_insertion_point(
   void clear_has_amplitude();
   void set_has_darkstatus();
   void clear_has_darkstatus();
+  void set_has_recvtime();
+  void clear_has_recvtime();
 
   // helper for ByteSizeLong()
   size_t RequiredFieldsByteSizeFallback() const;
@@ -1082,6 +1091,7 @@ class BasicQot : public ::google::protobuf::Message /* @@protoc_insertion_point(
   double turnover_;
   double turnoverrate_;
   double amplitude_;
+  double recvtime_;
   friend struct ::protobuf_Qot_5fCommon_2eproto::TableStruct;
   friend void ::protobuf_Qot_5fCommon_2eproto::InitDefaultsBasicQotImpl();
 };
@@ -2153,6 +2163,13 @@ class OrderBook : public ::google::protobuf::Message /* @@protoc_insertion_point
   ::google::protobuf::int64 volume() const;
   void set_volume(::google::protobuf::int64 value);
 
+  // optional double recvTime = 4;
+  bool has_recvtime() const;
+  void clear_recvtime();
+  static const int kRecvTimeFieldNumber = 4;
+  double recvtime() const;
+  void set_recvtime(double value);
+
   // required int32 orederCount = 3;
   bool has_oredercount() const;
   void clear_oredercount();
@@ -2168,6 +2185,8 @@ class OrderBook : public ::google::protobuf::Message /* @@protoc_insertion_point
   void clear_has_volume();
   void set_has_oredercount();
   void clear_has_oredercount();
+  void set_has_recvtime();
+  void clear_has_recvtime();
 
   // helper for ByteSizeLong()
   size_t RequiredFieldsByteSizeFallback() const;
@@ -2177,6 +2196,7 @@ class OrderBook : public ::google::protobuf::Message /* @@protoc_insertion_point
   mutable int _cached_size_;
   double price_;
   ::google::protobuf::int64 volume_;
+  double recvtime_;
   ::google::protobuf::int32 oredercount_;
   friend struct ::protobuf_Qot_5fCommon_2eproto::TableStruct;
   friend void ::protobuf_Qot_5fCommon_2eproto::InitDefaultsOrderBookImpl();
@@ -3341,6 +3361,30 @@ inline void BasicQot::set_darkstatus(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:Qot_Common.BasicQot.darkStatus)
 }
 
+// optional double recvTime = 16;
+inline bool BasicQot::has_recvtime() const {
+  return (_has_bits_[0] & 0x00008000u) != 0;
+}
+inline void BasicQot::set_has_recvtime() {
+  _has_bits_[0] |= 0x00008000u;
+}
+inline void BasicQot::clear_has_recvtime() {
+  _has_bits_[0] &= ~0x00008000u;
+}
+inline void BasicQot::clear_recvtime() {
+  recvtime_ = 0;
+  clear_has_recvtime();
+}
+inline double BasicQot::recvtime() const {
+  // @@protoc_insertion_point(field_get:Qot_Common.BasicQot.recvTime)
+  return recvtime_;
+}
+inline void BasicQot::set_recvtime(double value) {
+  set_has_recvtime();
+  recvtime_ = value;
+  // @@protoc_insertion_point(field_set:Qot_Common.BasicQot.recvTime)
+}
+
 // -------------------------------------------------------------------
 
 // TimeShare
@@ -4454,13 +4498,13 @@ inline void OrderBook::set_volume(::google::protobuf::int64 value) {
 
 // required int32 orederCount = 3;
 inline bool OrderBook::has_oredercount() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void OrderBook::set_has_oredercount() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000008u;
 }
 inline void OrderBook::clear_has_oredercount() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void OrderBook::clear_oredercount() {
   oredercount_ = 0;
@@ -4474,6 +4518,30 @@ inline void OrderBook::set_oredercount(::google::protobuf::int32 value) {
   set_has_oredercount();
   oredercount_ = value;
   // @@protoc_insertion_point(field_set:Qot_Common.OrderBook.orederCount)
+}
+
+// optional double recvTime = 4;
+inline bool OrderBook::has_recvtime() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void OrderBook::set_has_recvtime() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void OrderBook::clear_has_recvtime() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void OrderBook::clear_recvtime() {
+  recvtime_ = 0;
+  clear_has_recvtime();
+}
+inline double OrderBook::recvtime() const {
+  // @@protoc_insertion_point(field_get:Qot_Common.OrderBook.recvTime)
+  return recvtime_;
+}
+inline void OrderBook::set_recvtime(double value) {
+  set_has_recvtime();
+  recvtime_ = value;
+  // @@protoc_insertion_point(field_set:Qot_Common.OrderBook.recvTime)
 }
 
 // -------------------------------------------------------------------

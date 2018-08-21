@@ -22,6 +22,7 @@ message S2C
 	required int32 serverBuildNo = 9; //buildNo
 	required int64 time = 10; //当前服务器时间
 	optional double localTime = 11; //当前本地时间
+	optional double lastLocalSvrTimeDiff = 12; //上次本地和svr时间较准的时间差(精度:微秒)
 }
 
 message Request

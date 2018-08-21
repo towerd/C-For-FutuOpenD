@@ -11,9 +11,10 @@ set(ROOT_DIR ${CMAKE_SOURCE_DIR})
 set(SRC_DIR ${CMAKE_SOURCE_DIR}/FutuOpenDClient)
 
 include_directories("${ROOT_DIR}/3rd/Include")
+link_directories("${ROOT_DIR}/3rd/Lib/Linux")
 
 file(GLOB_RECURSE SRC "${SRC_DIR}/*.cpp" "${SRC_DIR}/*.cc")
 
 add_executable(${PROJECT_NAME}  ${SRC})
-target_link_libraries(${PROJECT_NAME}  libprotobuf.a libprotobuf-lite.a libuv_a.a pthread ${CMAKE_DL_LIBS})
+target_link_libraries(${PROJECT_NAME}  libf3cnn.a libprotobuf.a libprotobuf-lite.a libuv_a.a pthread ${CMAKE_DL_LIBS})
 

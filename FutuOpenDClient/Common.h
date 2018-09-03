@@ -91,6 +91,8 @@ namespace ftq
 #define API_ProtoID_Qot_UpdateOrderBook							3013 /**< 推送买卖盘 */
 #define API_ProtoID_Qot_GetBroker								3014 /**< 获取经纪队列 */
 #define API_ProtoID_Qot_UpdateBroker							3015 /**< 推送经纪队列 */
+#define API_ProtoID_Qot_GetOrderDetail							3016 /**< 获取委托明细 */
+#define API_ProtoID_Qot_UpdateOrderDetail						3017 /**< 推送委托明细 */
 
 //历史数据
 #define API_ProtoID_Qot_GetHistoryKL							3100 /**< 获取历史K线 */

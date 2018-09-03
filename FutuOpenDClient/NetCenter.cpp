@@ -6,6 +6,7 @@
 #include "pb/KeepAlive.pb.h"
 #include "pb/Qot_RegQotPush.pb.h"
 #include "pb/GetGlobalState.pb.h"
+#include "pb/Qot_GetOrderDetail.pb.h"
 
 using namespace std;
 
@@ -202,6 +203,18 @@ namespace ftq
 		return Send(API_ProtoID_Qot_RegQotPush, req);
 	}
 
+	u32_t NetCenter::Qot_GetOrderDetail(const Qot_Common::Security &stocks)
+	{
+		Qot_GetOrderDetail::C2S *pC2S = new Qot_GetOrderDetail::C2S();
+
+		Qot_Common::Security *pStock = pC2S->mutable_security();
+		*pStock = stocks;
+
+		Qot_GetOrderDetail::Request req;
+		req.set_allocated_c2s(pC2S);
+		return Send(API_ProtoID_Qot_GetOrderDetail, req);
+	}
+
 	u32_t NetCenter::Send(u32_t nProtoID, const google::protobuf::Message &pbObj)
 	{
 		u32_t nPacketNo = 0;
@@ -261,6 +274,12 @@ namespace ftq
 			break;
 		case API_ProtoID_Qot_UpdateOrderBook:
 			m_pProtoHandler->OnRsp_Qot_UpdateOrderBook(header, pData, nLen);
+			break;
+		case API_ProtoID_Qot_UpdateOrderDetail:
+			m_pProtoHandler->OnRsp_Qot_UpdateOrderDetail(header, pData, nLen);
+			break;
+		case API_ProtoID_Qot_GetOrderDetail:
+			m_pProtoHandler->OnRsp_Qot_GetOrderDetail(header, pData, nLen);
 			break;
 		default:
 			break;

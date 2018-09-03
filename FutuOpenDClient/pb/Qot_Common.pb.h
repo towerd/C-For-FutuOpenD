@@ -38,7 +38,7 @@ namespace protobuf_Qot_5fCommon_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[12];
+  static const ::google::protobuf::internal::ParseTable schema[13];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -64,6 +64,8 @@ void InitDefaultsTickerImpl();
 void InitDefaultsTicker();
 void InitDefaultsOrderBookImpl();
 void InitDefaultsOrderBook();
+void InitDefaultsOrderDetailImpl();
+void InitDefaultsOrderDetail();
 void InitDefaultsSubInfoImpl();
 void InitDefaultsSubInfo();
 void InitDefaultsConnSubInfoImpl();
@@ -79,6 +81,7 @@ inline void InitDefaults() {
   InitDefaultsBroker();
   InitDefaultsTicker();
   InitDefaultsOrderBook();
+  InitDefaultsOrderDetail();
   InitDefaultsSubInfo();
   InitDefaultsConnSubInfo();
 }
@@ -99,6 +102,9 @@ extern KLineDefaultTypeInternal _KLine_default_instance_;
 class OrderBook;
 class OrderBookDefaultTypeInternal;
 extern OrderBookDefaultTypeInternal _OrderBook_default_instance_;
+class OrderDetail;
+class OrderDetailDefaultTypeInternal;
+extern OrderDetailDefaultTypeInternal _OrderDetail_default_instance_;
 class Security;
 class SecurityDefaultTypeInternal;
 extern SecurityDefaultTypeInternal _Security_default_instance_;
@@ -346,11 +352,12 @@ enum SubType {
   SubType_Broker = 14,
   SubType_KL_Qurater = 15,
   SubType_KL_Year = 16,
-  SubType_KL_3Min = 17
+  SubType_KL_3Min = 17,
+  SubType_OrderDetail = 18
 };
 bool SubType_IsValid(int value);
 const SubType SubType_MIN = SubType_None;
-const SubType SubType_MAX = SubType_KL_3Min;
+const SubType SubType_MAX = SubType_OrderDetail;
 const int SubType_ARRAYSIZE = SubType_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* SubType_descriptor();
@@ -383,74 +390,6 @@ inline bool TickerDirection_Parse(
     const ::std::string& name, TickerDirection* value) {
   return ::google::protobuf::internal::ParseNamedEnum<TickerDirection>(
     TickerDirection_descriptor(), name, value);
-}
-enum TickerType {
-  TickerType_Unknown = 0,
-  TickerType_Automatch = 1,
-  TickerType_Late = 2,
-  TickerType_NoneAutomatch = 3,
-  TickerType_InterAutomatch = 4,
-  TickerType_InterNoneAutomatch = 5,
-  TickerType_OddLot = 6,
-  TickerType_Auction = 7,
-  TickerType_Bulk = 8,
-  TickerType_Crash = 9,
-  TickerType_CrossMarket = 10,
-  TickerType_BulkSold = 11,
-  TickerType_FreeOnBoard = 12,
-  TickerType_Rule127Or155 = 13,
-  TickerType_Delay = 14,
-  TickerType_MarketCenterClosePrice = 15,
-  TickerType_NextDay = 16,
-  TickerType_MarketCenterOpening = 17,
-  TickerType_PriorReferencePrice = 18,
-  TickerType_MarketCenterOpenPrice = 19,
-  TickerType_Seller = 20,
-  TickerType_T = 21,
-  TickerType_ExtendedTradingHours = 22,
-  TickerType_Contingent = 23,
-  TickerType_AveragePrice = 24,
-  TickerType_OTCSold = 25,
-  TickerType_OddLotCrossMarket = 26,
-  TickerType_DerivativelyPriced = 27,
-  TickerType_ReOpeningPriced = 28,
-  TickerType_ClosingPriced = 29,
-  TickerType_ComprehensiveDelayPrice = 30
-};
-bool TickerType_IsValid(int value);
-const TickerType TickerType_MIN = TickerType_Unknown;
-const TickerType TickerType_MAX = TickerType_ComprehensiveDelayPrice;
-const int TickerType_ARRAYSIZE = TickerType_MAX + 1;
-
-const ::google::protobuf::EnumDescriptor* TickerType_descriptor();
-inline const ::std::string& TickerType_Name(TickerType value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    TickerType_descriptor(), value);
-}
-inline bool TickerType_Parse(
-    const ::std::string& name, TickerType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<TickerType>(
-    TickerType_descriptor(), name, value);
-}
-enum DarkStatus {
-  DarkStatus_None = 0,
-  DarkStatus_Trading = 1,
-  DarkStatus_End = 2
-};
-bool DarkStatus_IsValid(int value);
-const DarkStatus DarkStatus_MIN = DarkStatus_None;
-const DarkStatus DarkStatus_MAX = DarkStatus_End;
-const int DarkStatus_ARRAYSIZE = DarkStatus_MAX + 1;
-
-const ::google::protobuf::EnumDescriptor* DarkStatus_descriptor();
-inline const ::std::string& DarkStatus_Name(DarkStatus value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    DarkStatus_descriptor(), value);
-}
-inline bool DarkStatus_Parse(
-    const ::std::string& name, DarkStatus* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<DarkStatus>(
-    DarkStatus_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -972,20 +911,6 @@ class BasicQot : public ::google::protobuf::Message /* @@protoc_insertion_point(
   double lowprice() const;
   void set_lowprice(double value);
 
-  // required bool isSuspended = 2;
-  bool has_issuspended() const;
-  void clear_issuspended();
-  static const int kIsSuspendedFieldNumber = 2;
-  bool issuspended() const;
-  void set_issuspended(bool value);
-
-  // optional int32 darkStatus = 15;
-  bool has_darkstatus() const;
-  void clear_darkstatus();
-  static const int kDarkStatusFieldNumber = 15;
-  ::google::protobuf::int32 darkstatus() const;
-  void set_darkstatus(::google::protobuf::int32 value);
-
   // required double curPrice = 9;
   bool has_curprice() const;
   void clear_curprice();
@@ -1028,6 +953,13 @@ class BasicQot : public ::google::protobuf::Message /* @@protoc_insertion_point(
   double amplitude() const;
   void set_amplitude(double value);
 
+  // required bool isSuspended = 2;
+  bool has_issuspended() const;
+  void clear_issuspended();
+  static const int kIsSuspendedFieldNumber = 2;
+  bool issuspended() const;
+  void set_issuspended(bool value);
+
   // @@protoc_insertion_point(class_scope:Qot_Common.BasicQot)
  private:
   void set_has_security();
@@ -1058,8 +990,6 @@ class BasicQot : public ::google::protobuf::Message /* @@protoc_insertion_point(
   void clear_has_turnoverrate();
   void set_has_amplitude();
   void clear_has_amplitude();
-  void set_has_darkstatus();
-  void clear_has_darkstatus();
 
   // helper for ByteSizeLong()
   size_t RequiredFieldsByteSizeFallback() const;
@@ -1074,14 +1004,13 @@ class BasicQot : public ::google::protobuf::Message /* @@protoc_insertion_point(
   double highprice_;
   double openprice_;
   double lowprice_;
-  bool issuspended_;
-  ::google::protobuf::int32 darkstatus_;
   double curprice_;
   double lastcloseprice_;
   ::google::protobuf::int64 volume_;
   double turnover_;
   double turnoverrate_;
   double amplitude_;
+  bool issuspended_;
   friend struct ::protobuf_Qot_5fCommon_2eproto::TableStruct;
   friend void ::protobuf_Qot_5fCommon_2eproto::InitDefaultsBasicQotImpl();
 };
@@ -1974,20 +1903,6 @@ class Ticker : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
   ::google::protobuf::int64 volume() const;
   void set_volume(::google::protobuf::int64 value);
 
-  // required int32 dir = 3;
-  bool has_dir() const;
-  void clear_dir();
-  static const int kDirFieldNumber = 3;
-  ::google::protobuf::int32 dir() const;
-  void set_dir(::google::protobuf::int32 value);
-
-  // optional int32 type = 8;
-  bool has_type() const;
-  void clear_type();
-  static const int kTypeFieldNumber = 8;
-  ::google::protobuf::int32 type() const;
-  void set_type(::google::protobuf::int32 value);
-
   // required double turnover = 6;
   bool has_turnover() const;
   void clear_turnover();
@@ -2002,12 +1917,12 @@ class Ticker : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
   double recvtime() const;
   void set_recvtime(double value);
 
-  // optional int32 typeSign = 9;
-  bool has_typesign() const;
-  void clear_typesign();
-  static const int kTypeSignFieldNumber = 9;
-  ::google::protobuf::int32 typesign() const;
-  void set_typesign(::google::protobuf::int32 value);
+  // required int32 dir = 3;
+  bool has_dir() const;
+  void clear_dir();
+  static const int kDirFieldNumber = 3;
+  ::google::protobuf::int32 dir() const;
+  void set_dir(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:Qot_Common.Ticker)
  private:
@@ -2025,10 +1940,6 @@ class Ticker : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
   void clear_has_turnover();
   void set_has_recvtime();
   void clear_has_recvtime();
-  void set_has_type();
-  void clear_has_type();
-  void set_has_typesign();
-  void clear_has_typesign();
 
   // helper for ByteSizeLong()
   size_t RequiredFieldsByteSizeFallback() const;
@@ -2040,11 +1951,9 @@ class Ticker : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
   ::google::protobuf::int64 sequence_;
   double price_;
   ::google::protobuf::int64 volume_;
-  ::google::protobuf::int32 dir_;
-  ::google::protobuf::int32 type_;
   double turnover_;
   double recvtime_;
-  ::google::protobuf::int32 typesign_;
+  ::google::protobuf::int32 dir_;
   friend struct ::protobuf_Qot_5fCommon_2eproto::TableStruct;
   friend void ::protobuf_Qot_5fCommon_2eproto::InitDefaultsTickerImpl();
 };
@@ -2183,6 +2092,129 @@ class OrderBook : public ::google::protobuf::Message /* @@protoc_insertion_point
 };
 // -------------------------------------------------------------------
 
+class OrderDetail : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Qot_Common.OrderDetail) */ {
+ public:
+  OrderDetail();
+  virtual ~OrderDetail();
+
+  OrderDetail(const OrderDetail& from);
+
+  inline OrderDetail& operator=(const OrderDetail& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  OrderDetail(OrderDetail&& from) noexcept
+    : OrderDetail() {
+    *this = ::std::move(from);
+  }
+
+  inline OrderDetail& operator=(OrderDetail&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const OrderDetail& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const OrderDetail* internal_default_instance() {
+    return reinterpret_cast<const OrderDetail*>(
+               &_OrderDetail_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    10;
+
+  void Swap(OrderDetail* other);
+  friend void swap(OrderDetail& a, OrderDetail& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline OrderDetail* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  OrderDetail* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const OrderDetail& from);
+  void MergeFrom(const OrderDetail& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(OrderDetail* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated double orderVol = 2;
+  int ordervol_size() const;
+  void clear_ordervol();
+  static const int kOrderVolFieldNumber = 2;
+  double ordervol(int index) const;
+  void set_ordervol(int index, double value);
+  void add_ordervol(double value);
+  const ::google::protobuf::RepeatedField< double >&
+      ordervol() const;
+  ::google::protobuf::RepeatedField< double >*
+      mutable_ordervol();
+
+  // required int32 orderCount = 1;
+  bool has_ordercount() const;
+  void clear_ordercount();
+  static const int kOrderCountFieldNumber = 1;
+  ::google::protobuf::int32 ordercount() const;
+  void set_ordercount(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:Qot_Common.OrderDetail)
+ private:
+  void set_has_ordercount();
+  void clear_has_ordercount();
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable int _cached_size_;
+  ::google::protobuf::RepeatedField< double > ordervol_;
+  ::google::protobuf::int32 ordercount_;
+  friend struct ::protobuf_Qot_5fCommon_2eproto::TableStruct;
+  friend void ::protobuf_Qot_5fCommon_2eproto::InitDefaultsOrderDetailImpl();
+};
+// -------------------------------------------------------------------
+
 class SubInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Qot_Common.SubInfo) */ {
  public:
   SubInfo();
@@ -2225,7 +2257,7 @@ class SubInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(c
                &_SubInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    10;
+    11;
 
   void Swap(SubInfo* other);
   friend void swap(SubInfo& a, SubInfo& b) {
@@ -2348,7 +2380,7 @@ class ConnSubInfo : public ::google::protobuf::Message /* @@protoc_insertion_poi
                &_ConnSubInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    11;
+    12;
 
   void Swap(ConnSubInfo* other);
   friend void swap(ConnSubInfo& a, ConnSubInfo& b) {
@@ -2929,13 +2961,13 @@ inline void BasicQot::set_allocated_security(::Qot_Common::Security* security) {
 
 // required bool isSuspended = 2;
 inline bool BasicQot::has_issuspended() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
+  return (_has_bits_[0] & 0x00002000u) != 0;
 }
 inline void BasicQot::set_has_issuspended() {
-  _has_bits_[0] |= 0x00000080u;
+  _has_bits_[0] |= 0x00002000u;
 }
 inline void BasicQot::clear_has_issuspended() {
-  _has_bits_[0] &= ~0x00000080u;
+  _has_bits_[0] &= ~0x00002000u;
 }
 inline void BasicQot::clear_issuspended() {
   issuspended_ = false;
@@ -3175,13 +3207,13 @@ inline void BasicQot::set_lowprice(double value) {
 
 // required double curPrice = 9;
 inline bool BasicQot::has_curprice() const {
-  return (_has_bits_[0] & 0x00000200u) != 0;
+  return (_has_bits_[0] & 0x00000080u) != 0;
 }
 inline void BasicQot::set_has_curprice() {
-  _has_bits_[0] |= 0x00000200u;
+  _has_bits_[0] |= 0x00000080u;
 }
 inline void BasicQot::clear_has_curprice() {
-  _has_bits_[0] &= ~0x00000200u;
+  _has_bits_[0] &= ~0x00000080u;
 }
 inline void BasicQot::clear_curprice() {
   curprice_ = 0;
@@ -3199,13 +3231,13 @@ inline void BasicQot::set_curprice(double value) {
 
 // required double lastClosePrice = 10;
 inline bool BasicQot::has_lastcloseprice() const {
-  return (_has_bits_[0] & 0x00000400u) != 0;
+  return (_has_bits_[0] & 0x00000100u) != 0;
 }
 inline void BasicQot::set_has_lastcloseprice() {
-  _has_bits_[0] |= 0x00000400u;
+  _has_bits_[0] |= 0x00000100u;
 }
 inline void BasicQot::clear_has_lastcloseprice() {
-  _has_bits_[0] &= ~0x00000400u;
+  _has_bits_[0] &= ~0x00000100u;
 }
 inline void BasicQot::clear_lastcloseprice() {
   lastcloseprice_ = 0;
@@ -3223,13 +3255,13 @@ inline void BasicQot::set_lastcloseprice(double value) {
 
 // required int64 volume = 11;
 inline bool BasicQot::has_volume() const {
-  return (_has_bits_[0] & 0x00000800u) != 0;
+  return (_has_bits_[0] & 0x00000200u) != 0;
 }
 inline void BasicQot::set_has_volume() {
-  _has_bits_[0] |= 0x00000800u;
+  _has_bits_[0] |= 0x00000200u;
 }
 inline void BasicQot::clear_has_volume() {
-  _has_bits_[0] &= ~0x00000800u;
+  _has_bits_[0] &= ~0x00000200u;
 }
 inline void BasicQot::clear_volume() {
   volume_ = GOOGLE_LONGLONG(0);
@@ -3247,13 +3279,13 @@ inline void BasicQot::set_volume(::google::protobuf::int64 value) {
 
 // required double turnover = 12;
 inline bool BasicQot::has_turnover() const {
-  return (_has_bits_[0] & 0x00001000u) != 0;
+  return (_has_bits_[0] & 0x00000400u) != 0;
 }
 inline void BasicQot::set_has_turnover() {
-  _has_bits_[0] |= 0x00001000u;
+  _has_bits_[0] |= 0x00000400u;
 }
 inline void BasicQot::clear_has_turnover() {
-  _has_bits_[0] &= ~0x00001000u;
+  _has_bits_[0] &= ~0x00000400u;
 }
 inline void BasicQot::clear_turnover() {
   turnover_ = 0;
@@ -3271,13 +3303,13 @@ inline void BasicQot::set_turnover(double value) {
 
 // required double turnoverRate = 13;
 inline bool BasicQot::has_turnoverrate() const {
-  return (_has_bits_[0] & 0x00002000u) != 0;
+  return (_has_bits_[0] & 0x00000800u) != 0;
 }
 inline void BasicQot::set_has_turnoverrate() {
-  _has_bits_[0] |= 0x00002000u;
+  _has_bits_[0] |= 0x00000800u;
 }
 inline void BasicQot::clear_has_turnoverrate() {
-  _has_bits_[0] &= ~0x00002000u;
+  _has_bits_[0] &= ~0x00000800u;
 }
 inline void BasicQot::clear_turnoverrate() {
   turnoverrate_ = 0;
@@ -3295,13 +3327,13 @@ inline void BasicQot::set_turnoverrate(double value) {
 
 // required double amplitude = 14;
 inline bool BasicQot::has_amplitude() const {
-  return (_has_bits_[0] & 0x00004000u) != 0;
+  return (_has_bits_[0] & 0x00001000u) != 0;
 }
 inline void BasicQot::set_has_amplitude() {
-  _has_bits_[0] |= 0x00004000u;
+  _has_bits_[0] |= 0x00001000u;
 }
 inline void BasicQot::clear_has_amplitude() {
-  _has_bits_[0] &= ~0x00004000u;
+  _has_bits_[0] &= ~0x00001000u;
 }
 inline void BasicQot::clear_amplitude() {
   amplitude_ = 0;
@@ -3315,30 +3347,6 @@ inline void BasicQot::set_amplitude(double value) {
   set_has_amplitude();
   amplitude_ = value;
   // @@protoc_insertion_point(field_set:Qot_Common.BasicQot.amplitude)
-}
-
-// optional int32 darkStatus = 15;
-inline bool BasicQot::has_darkstatus() const {
-  return (_has_bits_[0] & 0x00000100u) != 0;
-}
-inline void BasicQot::set_has_darkstatus() {
-  _has_bits_[0] |= 0x00000100u;
-}
-inline void BasicQot::clear_has_darkstatus() {
-  _has_bits_[0] &= ~0x00000100u;
-}
-inline void BasicQot::clear_darkstatus() {
-  darkstatus_ = 0;
-  clear_has_darkstatus();
-}
-inline ::google::protobuf::int32 BasicQot::darkstatus() const {
-  // @@protoc_insertion_point(field_get:Qot_Common.BasicQot.darkStatus)
-  return darkstatus_;
-}
-inline void BasicQot::set_darkstatus(::google::protobuf::int32 value) {
-  set_has_darkstatus();
-  darkstatus_ = value;
-  // @@protoc_insertion_point(field_set:Qot_Common.BasicQot.darkStatus)
 }
 
 // -------------------------------------------------------------------
@@ -4234,13 +4242,13 @@ inline void Ticker::set_sequence(::google::protobuf::int64 value) {
 
 // required int32 dir = 3;
 inline bool Ticker::has_dir() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
+  return (_has_bits_[0] & 0x00000040u) != 0;
 }
 inline void Ticker::set_has_dir() {
-  _has_bits_[0] |= 0x00000010u;
+  _has_bits_[0] |= 0x00000040u;
 }
 inline void Ticker::clear_has_dir() {
-  _has_bits_[0] &= ~0x00000010u;
+  _has_bits_[0] &= ~0x00000040u;
 }
 inline void Ticker::clear_dir() {
   dir_ = 0;
@@ -4306,13 +4314,13 @@ inline void Ticker::set_volume(::google::protobuf::int64 value) {
 
 // required double turnover = 6;
 inline bool Ticker::has_turnover() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
 inline void Ticker::set_has_turnover() {
-  _has_bits_[0] |= 0x00000040u;
+  _has_bits_[0] |= 0x00000010u;
 }
 inline void Ticker::clear_has_turnover() {
-  _has_bits_[0] &= ~0x00000040u;
+  _has_bits_[0] &= ~0x00000010u;
 }
 inline void Ticker::clear_turnover() {
   turnover_ = 0;
@@ -4330,13 +4338,13 @@ inline void Ticker::set_turnover(double value) {
 
 // optional double recvTime = 7;
 inline bool Ticker::has_recvtime() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
+  return (_has_bits_[0] & 0x00000020u) != 0;
 }
 inline void Ticker::set_has_recvtime() {
-  _has_bits_[0] |= 0x00000080u;
+  _has_bits_[0] |= 0x00000020u;
 }
 inline void Ticker::clear_has_recvtime() {
-  _has_bits_[0] &= ~0x00000080u;
+  _has_bits_[0] &= ~0x00000020u;
 }
 inline void Ticker::clear_recvtime() {
   recvtime_ = 0;
@@ -4350,54 +4358,6 @@ inline void Ticker::set_recvtime(double value) {
   set_has_recvtime();
   recvtime_ = value;
   // @@protoc_insertion_point(field_set:Qot_Common.Ticker.recvTime)
-}
-
-// optional int32 type = 8;
-inline bool Ticker::has_type() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
-}
-inline void Ticker::set_has_type() {
-  _has_bits_[0] |= 0x00000020u;
-}
-inline void Ticker::clear_has_type() {
-  _has_bits_[0] &= ~0x00000020u;
-}
-inline void Ticker::clear_type() {
-  type_ = 0;
-  clear_has_type();
-}
-inline ::google::protobuf::int32 Ticker::type() const {
-  // @@protoc_insertion_point(field_get:Qot_Common.Ticker.type)
-  return type_;
-}
-inline void Ticker::set_type(::google::protobuf::int32 value) {
-  set_has_type();
-  type_ = value;
-  // @@protoc_insertion_point(field_set:Qot_Common.Ticker.type)
-}
-
-// optional int32 typeSign = 9;
-inline bool Ticker::has_typesign() const {
-  return (_has_bits_[0] & 0x00000100u) != 0;
-}
-inline void Ticker::set_has_typesign() {
-  _has_bits_[0] |= 0x00000100u;
-}
-inline void Ticker::clear_has_typesign() {
-  _has_bits_[0] &= ~0x00000100u;
-}
-inline void Ticker::clear_typesign() {
-  typesign_ = 0;
-  clear_has_typesign();
-}
-inline ::google::protobuf::int32 Ticker::typesign() const {
-  // @@protoc_insertion_point(field_get:Qot_Common.Ticker.typeSign)
-  return typesign_;
-}
-inline void Ticker::set_typesign(::google::protobuf::int32 value) {
-  set_has_typesign();
-  typesign_ = value;
-  // @@protoc_insertion_point(field_set:Qot_Common.Ticker.typeSign)
 }
 
 // -------------------------------------------------------------------
@@ -4474,6 +4434,64 @@ inline void OrderBook::set_oredercount(::google::protobuf::int32 value) {
   set_has_oredercount();
   oredercount_ = value;
   // @@protoc_insertion_point(field_set:Qot_Common.OrderBook.orederCount)
+}
+
+// -------------------------------------------------------------------
+
+// OrderDetail
+
+// required int32 orderCount = 1;
+inline bool OrderDetail::has_ordercount() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void OrderDetail::set_has_ordercount() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void OrderDetail::clear_has_ordercount() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void OrderDetail::clear_ordercount() {
+  ordercount_ = 0;
+  clear_has_ordercount();
+}
+inline ::google::protobuf::int32 OrderDetail::ordercount() const {
+  // @@protoc_insertion_point(field_get:Qot_Common.OrderDetail.orderCount)
+  return ordercount_;
+}
+inline void OrderDetail::set_ordercount(::google::protobuf::int32 value) {
+  set_has_ordercount();
+  ordercount_ = value;
+  // @@protoc_insertion_point(field_set:Qot_Common.OrderDetail.orderCount)
+}
+
+// repeated double orderVol = 2;
+inline int OrderDetail::ordervol_size() const {
+  return ordervol_.size();
+}
+inline void OrderDetail::clear_ordervol() {
+  ordervol_.Clear();
+}
+inline double OrderDetail::ordervol(int index) const {
+  // @@protoc_insertion_point(field_get:Qot_Common.OrderDetail.orderVol)
+  return ordervol_.Get(index);
+}
+inline void OrderDetail::set_ordervol(int index, double value) {
+  ordervol_.Set(index, value);
+  // @@protoc_insertion_point(field_set:Qot_Common.OrderDetail.orderVol)
+}
+inline void OrderDetail::add_ordervol(double value) {
+  ordervol_.Add(value);
+  // @@protoc_insertion_point(field_add:Qot_Common.OrderDetail.orderVol)
+}
+inline const ::google::protobuf::RepeatedField< double >&
+OrderDetail::ordervol() const {
+  // @@protoc_insertion_point(field_list:Qot_Common.OrderDetail.orderVol)
+  return ordervol_;
+}
+inline ::google::protobuf::RepeatedField< double >*
+OrderDetail::mutable_ordervol() {
+  // @@protoc_insertion_point(field_mutable_list:Qot_Common.OrderDetail.orderVol)
+  return &ordervol_;
 }
 
 // -------------------------------------------------------------------
@@ -4641,6 +4659,8 @@ inline void ConnSubInfo::set_isownconndata(bool value) {
 
 // -------------------------------------------------------------------
 
+// -------------------------------------------------------------------
+
 
 // @@protoc_insertion_point(namespace_scope)
 
@@ -4698,16 +4718,6 @@ template <> struct is_proto_enum< ::Qot_Common::TickerDirection> : ::google::pro
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::Qot_Common::TickerDirection>() {
   return ::Qot_Common::TickerDirection_descriptor();
-}
-template <> struct is_proto_enum< ::Qot_Common::TickerType> : ::google::protobuf::internal::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Qot_Common::TickerType>() {
-  return ::Qot_Common::TickerType_descriptor();
-}
-template <> struct is_proto_enum< ::Qot_Common::DarkStatus> : ::google::protobuf::internal::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Qot_Common::DarkStatus>() {
-  return ::Qot_Common::DarkStatus_descriptor();
 }
 
 }  // namespace protobuf

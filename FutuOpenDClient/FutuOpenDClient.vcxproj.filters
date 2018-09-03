@@ -183,6 +183,12 @@
     <ClCompile Include="NetCenter.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="pb\Qot_GetOrderDetail.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
+    <ClCompile Include="pb\Qot_UpdateOrderDetail.pb.cc">
+      <Filter>源文件\pb</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TcpConnect.h">
@@ -347,6 +353,12 @@
     <ClInclude Include="NetCenter.h">
       <Filter>源文件</Filter>
     </ClInclude>
+    <ClInclude Include="pb\Qot_GetOrderDetail.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
+    <ClInclude Include="pb\Qot_UpdateOrderDetail.pb.h">
+      <Filter>源文件\pb</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="pb\Common.proto">
@@ -491,6 +503,12 @@
       <Filter>源文件\pb</Filter>
     </None>
     <None Include="pb\Trd_UpdateOrderFill.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Qot_GetOrderDetail.proto">
+      <Filter>源文件\pb</Filter>
+    </None>
+    <None Include="pb\Qot_UpdateOrderDetail.proto">
       <Filter>源文件\pb</Filter>
     </None>
   </ItemGroup>

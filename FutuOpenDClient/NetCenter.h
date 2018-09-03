@@ -25,6 +25,8 @@ namespace ftq
 		PROTO_HANDLER_MEMBER(Qot_UpdateTicker);
 		PROTO_HANDLER_MEMBER(Qot_UpdateBroker);
 		PROTO_HANDLER_MEMBER(Qot_UpdateOrderBook);
+		PROTO_HANDLER_MEMBER(Qot_UpdateOrderDetail);
+		PROTO_HANDLER_MEMBER(Qot_GetOrderDetail);
 	};
 #undef PROTO_HANDLER_MEMBER
 
@@ -84,6 +86,9 @@ namespace ftq
 							bool isRegPush,
 							bool bFirstPush
 							);
+
+		u32_t Qot_GetOrderDetail(const Qot_Common::Security &stocks);
+
 	private:
 		u32_t Send(u32_t nProtoID, const google::protobuf::Message &pbObj);
 		void HandlePacket(const APIProtoHeader &header, const i8_t *pData, i32_t nLen);

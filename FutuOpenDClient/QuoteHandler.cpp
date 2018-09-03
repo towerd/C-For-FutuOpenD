@@ -11,7 +11,8 @@
 #include "pb/GetGlobalState.pb.h"
 #include "pb/Qot_UpdateBroker.pb.h"
 #include "pb/Qot_UpdateOrderBook.pb.h"
-
+#include "pb/Qot_UpdateOrderDetail.pb.h"
+#include "pb/Qot_GetOrderDetail.pb.h"
 
 using namespace std;
 
@@ -58,8 +59,7 @@ namespace ftq
 		stocks.push_back(stock);
 
 		vector<Qot_Common::SubType> subTypes;
-		subTypes.push_back(Qot_Common::SubType_OrderBook);
-		subTypes.push_back(Qot_Common::SubType_Broker);
+		subTypes.push_back(Qot_Common::SubType_OrderDetail);
 
 		vector<Qot_Common::RehabType> rehabTypes;
 		rehabTypes.push_back(Qot_Common::RehabType_None);
@@ -69,6 +69,8 @@ namespace ftq
 
 		//注册接收逐笔推送
 		NetCenter::Default()->Req_RegPush(stocks, subTypes, rehabTypes, true, true);
+
+		NetCenter::Default()->Qot_GetOrderDetail(stock);
 	}
 
 	void QuoteHandler::OnRsp_KeepAlive(const APIProtoHeader &header, const i8_t *pData, i32_t nLen)
@@ -189,4 +191,42 @@ namespace ftq
 		}
 	}
 
+	void QuoteHandler::OnRsp_Qot_UpdateOrderDetail(const APIProtoHeader &header, const i8_t *pData, i32_t nLen)
+	{
+		cout << "OnRsp_Qot_UpdateOrderDetail:" << endl;
+
+		Qot_UpdateOrderDetail::Response rsp;
+		if (!ParsePb(&rsp, header.nProtoID, pData, nLen))
+		{
+			return;
+		}
+
+		cout << "Ret=" << rsp.rettype() << "; Msg=" << rsp.retmsg() << endl;
+		if (rsp.rettype() != 0)
+		{
+			return;
+		}
+
+	}
+
+	void QuoteHandler::OnRsp_Qot_GetOrderDetail(const APIProtoHeader &header, const i8_t *pData, i32_t nLen)
+	{
+		cout << "OnRsp_Qot_GetOrderDetail:" << endl;
+
+		Qot_GetOrderDetail::Response rsp;
+		if (!ParsePb(&rsp, header.nProtoID, pData, nLen))
+		{
+			return;
+		}
+
+		cout << "Ret=" << rsp.rettype() << "; Msg=" << rsp.retmsg() << endl;
+		if (rsp.rettype() != 0)
+		{
+			return;
+		}
+
+	}
+
 }
+
+

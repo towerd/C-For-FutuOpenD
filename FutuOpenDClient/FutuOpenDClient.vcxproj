@@ -100,6 +100,7 @@
     <ClCompile Include="pb\Qot_GetHistoryKLPoints.pb.cc" />
     <ClCompile Include="pb\Qot_GetKL.pb.cc" />
     <ClCompile Include="pb\Qot_GetOrderBook.pb.cc" />
+    <ClCompile Include="pb\Qot_GetOrderDetail.pb.cc" />
     <ClCompile Include="pb\Qot_GetPlateSecurity.pb.cc" />
     <ClCompile Include="pb\Qot_GetPlateSet.pb.cc" />
     <ClCompile Include="pb\Qot_GetReference.pb.cc" />
@@ -117,6 +118,7 @@
     <ClCompile Include="pb\Qot_UpdateBroker.pb.cc" />
     <ClCompile Include="pb\Qot_UpdateKL.pb.cc" />
     <ClCompile Include="pb\Qot_UpdateOrderBook.pb.cc" />
+    <ClCompile Include="pb\Qot_UpdateOrderDetail.pb.cc" />
     <ClCompile Include="pb\Qot_UpdateRT.pb.cc" />
     <ClCompile Include="pb\Qot_UpdateTicker.pb.cc" />
     <ClCompile Include="pb\Trd_Common.pb.cc" />
@@ -156,6 +158,7 @@
     <ClInclude Include="pb\Qot_GetHistoryKLPoints.pb.h" />
     <ClInclude Include="pb\Qot_GetKL.pb.h" />
     <ClInclude Include="pb\Qot_GetOrderBook.pb.h" />
+    <ClInclude Include="pb\Qot_GetOrderDetail.pb.h" />
     <ClInclude Include="pb\Qot_GetPlateSecurity.pb.h" />
     <ClInclude Include="pb\Qot_GetPlateSet.pb.h" />
     <ClInclude Include="pb\Qot_GetReference.pb.h" />
@@ -173,6 +176,7 @@
     <ClInclude Include="pb\Qot_UpdateBroker.pb.h" />
     <ClInclude Include="pb\Qot_UpdateKL.pb.h" />
     <ClInclude Include="pb\Qot_UpdateOrderBook.pb.h" />
+    <ClInclude Include="pb\Qot_UpdateOrderDetail.pb.h" />
     <ClInclude Include="pb\Qot_UpdateRT.pb.h" />
     <ClInclude Include="pb\Qot_UpdateTicker.pb.h" />
     <ClInclude Include="pb\Trd_Common.pb.h" />
@@ -209,6 +213,7 @@
     <None Include="pb\Qot_GetHistoryKLPoints.proto" />
     <None Include="pb\Qot_GetKL.proto" />
     <None Include="pb\Qot_GetOrderBook.proto" />
+    <None Include="pb\Qot_GetOrderDetail.proto" />
     <None Include="pb\Qot_GetPlateSecurity.proto" />
     <None Include="pb\Qot_GetPlateSet.proto" />
     <None Include="pb\Qot_GetReference.proto" />
@@ -226,6 +231,7 @@
     <None Include="pb\Qot_UpdateBroker.proto" />
     <None Include="pb\Qot_UpdateKL.proto" />
     <None Include="pb\Qot_UpdateOrderBook.proto" />
+    <None Include="pb\Qot_UpdateOrderDetail.proto" />
     <None Include="pb\Qot_UpdateRT.proto" />
     <None Include="pb\Qot_UpdateTicker.proto" />
     <None Include="pb\Trd_Common.proto" />

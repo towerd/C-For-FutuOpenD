@@ -38,7 +38,7 @@ namespace protobuf_Qot_5fCommon_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[12];
+  static const ::google::protobuf::internal::ParseTable schema[16];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -48,6 +48,8 @@ void InitDefaultsSecurityImpl();
 void InitDefaultsSecurity();
 void InitDefaultsKLineImpl();
 void InitDefaultsKLine();
+void InitDefaultsOptionBasicQotExDataImpl();
+void InitDefaultsOptionBasicQotExData();
 void InitDefaultsBasicQotImpl();
 void InitDefaultsBasicQot();
 void InitDefaultsTimeShareImpl();
@@ -56,6 +58,8 @@ void InitDefaultsSecurityStaticBasicImpl();
 void InitDefaultsSecurityStaticBasic();
 void InitDefaultsWarrantStaticExDataImpl();
 void InitDefaultsWarrantStaticExData();
+void InitDefaultsOptionStaticExDataImpl();
+void InitDefaultsOptionStaticExData();
 void InitDefaultsSecurityStaticInfoImpl();
 void InitDefaultsSecurityStaticInfo();
 void InitDefaultsBrokerImpl();
@@ -64,23 +68,31 @@ void InitDefaultsTickerImpl();
 void InitDefaultsTicker();
 void InitDefaultsOrderBookImpl();
 void InitDefaultsOrderBook();
+void InitDefaultsShareHoldingChangeImpl();
+void InitDefaultsShareHoldingChange();
 void InitDefaultsSubInfoImpl();
 void InitDefaultsSubInfo();
 void InitDefaultsConnSubInfoImpl();
 void InitDefaultsConnSubInfo();
+void InitDefaultsPlateInfoImpl();
+void InitDefaultsPlateInfo();
 inline void InitDefaults() {
   InitDefaultsSecurity();
   InitDefaultsKLine();
+  InitDefaultsOptionBasicQotExData();
   InitDefaultsBasicQot();
   InitDefaultsTimeShare();
   InitDefaultsSecurityStaticBasic();
   InitDefaultsWarrantStaticExData();
+  InitDefaultsOptionStaticExData();
   InitDefaultsSecurityStaticInfo();
   InitDefaultsBroker();
   InitDefaultsTicker();
   InitDefaultsOrderBook();
+  InitDefaultsShareHoldingChange();
   InitDefaultsSubInfo();
   InitDefaultsConnSubInfo();
+  InitDefaultsPlateInfo();
 }
 }  // namespace protobuf_Qot_5fCommon_2eproto
 namespace Qot_Common {
@@ -96,9 +108,18 @@ extern ConnSubInfoDefaultTypeInternal _ConnSubInfo_default_instance_;
 class KLine;
 class KLineDefaultTypeInternal;
 extern KLineDefaultTypeInternal _KLine_default_instance_;
+class OptionBasicQotExData;
+class OptionBasicQotExDataDefaultTypeInternal;
+extern OptionBasicQotExDataDefaultTypeInternal _OptionBasicQotExData_default_instance_;
+class OptionStaticExData;
+class OptionStaticExDataDefaultTypeInternal;
+extern OptionStaticExDataDefaultTypeInternal _OptionStaticExData_default_instance_;
 class OrderBook;
 class OrderBookDefaultTypeInternal;
 extern OrderBookDefaultTypeInternal _OrderBook_default_instance_;
+class PlateInfo;
+class PlateInfoDefaultTypeInternal;
+extern PlateInfoDefaultTypeInternal _PlateInfo_default_instance_;
 class Security;
 class SecurityDefaultTypeInternal;
 extern SecurityDefaultTypeInternal _Security_default_instance_;
@@ -108,6 +129,9 @@ extern SecurityStaticBasicDefaultTypeInternal _SecurityStaticBasic_default_insta
 class SecurityStaticInfo;
 class SecurityStaticInfoDefaultTypeInternal;
 extern SecurityStaticInfoDefaultTypeInternal _SecurityStaticInfo_default_instance_;
+class ShareHoldingChange;
+class ShareHoldingChangeDefaultTypeInternal;
+extern ShareHoldingChangeDefaultTypeInternal _ShareHoldingChange_default_instance_;
 class SubInfo;
 class SubInfoDefaultTypeInternal;
 extern SubInfoDefaultTypeInternal _SubInfo_default_instance_;
@@ -128,7 +152,6 @@ enum QotMarket {
   QotMarket_HK_Security = 1,
   QotMarket_HK_Future = 2,
   QotMarket_US_Security = 11,
-  QotMarket_US_Option = 12,
   QotMarket_CNSH_Security = 21,
   QotMarket_CNSZ_Security = 22
 };
@@ -178,11 +201,12 @@ enum PlateSetType {
   PlateSetType_All = 0,
   PlateSetType_Industry = 1,
   PlateSetType_Region = 2,
-  PlateSetType_Concept = 3
+  PlateSetType_Concept = 3,
+  PlateSetType_Other = 4
 };
 bool PlateSetType_IsValid(int value);
 const PlateSetType PlateSetType_MIN = PlateSetType_All;
-const PlateSetType PlateSetType_MAX = PlateSetType_Concept;
+const PlateSetType PlateSetType_MAX = PlateSetType_Other;
 const int PlateSetType_ARRAYSIZE = PlateSetType_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* PlateSetType_descriptor();
@@ -216,6 +240,26 @@ inline bool WarrantType_Parse(
     const ::std::string& name, WarrantType* value) {
   return ::google::protobuf::internal::ParseNamedEnum<WarrantType>(
     WarrantType_descriptor(), name, value);
+}
+enum OptionType {
+  OptionType_Unknown = 0,
+  OptionType_Call = 1,
+  OptionType_Put = 2
+};
+bool OptionType_IsValid(int value);
+const OptionType OptionType_MIN = OptionType_Unknown;
+const OptionType OptionType_MAX = OptionType_Put;
+const int OptionType_ARRAYSIZE = OptionType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* OptionType_descriptor();
+inline const ::std::string& OptionType_Name(OptionType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    OptionType_descriptor(), value);
+}
+inline bool OptionType_Parse(
+    const ::std::string& name, OptionType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<OptionType>(
+    OptionType_descriptor(), name, value);
 }
 enum QotMarketState {
   QotMarketState_None = 0,
@@ -451,6 +495,27 @@ inline bool DarkStatus_Parse(
     const ::std::string& name, DarkStatus* value) {
   return ::google::protobuf::internal::ParseNamedEnum<DarkStatus>(
     DarkStatus_descriptor(), name, value);
+}
+enum HolderCategory {
+  HolderCategory_Unknow = 0,
+  HolderCategory_Agency = 1,
+  HolderCategory_Fund = 2,
+  HolderCategory_SeniorManager = 3
+};
+bool HolderCategory_IsValid(int value);
+const HolderCategory HolderCategory_MIN = HolderCategory_Unknow;
+const HolderCategory HolderCategory_MAX = HolderCategory_SeniorManager;
+const int HolderCategory_ARRAYSIZE = HolderCategory_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* HolderCategory_descriptor();
+inline const ::std::string& HolderCategory_Name(HolderCategory value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    HolderCategory_descriptor(), value);
+}
+inline bool HolderCategory_Parse(
+    const ::std::string& name, HolderCategory* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<HolderCategory>(
+    HolderCategory_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -816,6 +881,209 @@ class KLine : public ::google::protobuf::Message /* @@protoc_insertion_point(cla
 };
 // -------------------------------------------------------------------
 
+class OptionBasicQotExData : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Qot_Common.OptionBasicQotExData) */ {
+ public:
+  OptionBasicQotExData();
+  virtual ~OptionBasicQotExData();
+
+  OptionBasicQotExData(const OptionBasicQotExData& from);
+
+  inline OptionBasicQotExData& operator=(const OptionBasicQotExData& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  OptionBasicQotExData(OptionBasicQotExData&& from) noexcept
+    : OptionBasicQotExData() {
+    *this = ::std::move(from);
+  }
+
+  inline OptionBasicQotExData& operator=(OptionBasicQotExData&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const OptionBasicQotExData& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const OptionBasicQotExData* internal_default_instance() {
+    return reinterpret_cast<const OptionBasicQotExData*>(
+               &_OptionBasicQotExData_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    2;
+
+  void Swap(OptionBasicQotExData* other);
+  friend void swap(OptionBasicQotExData& a, OptionBasicQotExData& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline OptionBasicQotExData* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  OptionBasicQotExData* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const OptionBasicQotExData& from);
+  void MergeFrom(const OptionBasicQotExData& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(OptionBasicQotExData* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required double strikePrice = 1;
+  bool has_strikeprice() const;
+  void clear_strikeprice();
+  static const int kStrikePriceFieldNumber = 1;
+  double strikeprice() const;
+  void set_strikeprice(double value);
+
+  // required int32 contractSize = 2;
+  bool has_contractsize() const;
+  void clear_contractsize();
+  static const int kContractSizeFieldNumber = 2;
+  ::google::protobuf::int32 contractsize() const;
+  void set_contractsize(::google::protobuf::int32 value);
+
+  // required int32 openInterest = 3;
+  bool has_openinterest() const;
+  void clear_openinterest();
+  static const int kOpenInterestFieldNumber = 3;
+  ::google::protobuf::int32 openinterest() const;
+  void set_openinterest(::google::protobuf::int32 value);
+
+  // required double impliedVolatility = 4;
+  bool has_impliedvolatility() const;
+  void clear_impliedvolatility();
+  static const int kImpliedVolatilityFieldNumber = 4;
+  double impliedvolatility() const;
+  void set_impliedvolatility(double value);
+
+  // required double premium = 5;
+  bool has_premium() const;
+  void clear_premium();
+  static const int kPremiumFieldNumber = 5;
+  double premium() const;
+  void set_premium(double value);
+
+  // required double delta = 6;
+  bool has_delta() const;
+  void clear_delta();
+  static const int kDeltaFieldNumber = 6;
+  double delta() const;
+  void set_delta(double value);
+
+  // required double gamma = 7;
+  bool has_gamma() const;
+  void clear_gamma();
+  static const int kGammaFieldNumber = 7;
+  double gamma() const;
+  void set_gamma(double value);
+
+  // required double vega = 8;
+  bool has_vega() const;
+  void clear_vega();
+  static const int kVegaFieldNumber = 8;
+  double vega() const;
+  void set_vega(double value);
+
+  // required double theta = 9;
+  bool has_theta() const;
+  void clear_theta();
+  static const int kThetaFieldNumber = 9;
+  double theta() const;
+  void set_theta(double value);
+
+  // required double rho = 10;
+  bool has_rho() const;
+  void clear_rho();
+  static const int kRhoFieldNumber = 10;
+  double rho() const;
+  void set_rho(double value);
+
+  // @@protoc_insertion_point(class_scope:Qot_Common.OptionBasicQotExData)
+ private:
+  void set_has_strikeprice();
+  void clear_has_strikeprice();
+  void set_has_contractsize();
+  void clear_has_contractsize();
+  void set_has_openinterest();
+  void clear_has_openinterest();
+  void set_has_impliedvolatility();
+  void clear_has_impliedvolatility();
+  void set_has_premium();
+  void clear_has_premium();
+  void set_has_delta();
+  void clear_has_delta();
+  void set_has_gamma();
+  void clear_has_gamma();
+  void set_has_vega();
+  void clear_has_vega();
+  void set_has_theta();
+  void clear_has_theta();
+  void set_has_rho();
+  void clear_has_rho();
+
+  // helper for ByteSizeLong()
+  size_t RequiredFieldsByteSizeFallback() const;
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable int _cached_size_;
+  double strikeprice_;
+  ::google::protobuf::int32 contractsize_;
+  ::google::protobuf::int32 openinterest_;
+  double impliedvolatility_;
+  double premium_;
+  double delta_;
+  double gamma_;
+  double vega_;
+  double theta_;
+  double rho_;
+  friend struct ::protobuf_Qot_5fCommon_2eproto::TableStruct;
+  friend void ::protobuf_Qot_5fCommon_2eproto::InitDefaultsOptionBasicQotExDataImpl();
+};
+// -------------------------------------------------------------------
+
 class BasicQot : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Qot_Common.BasicQot) */ {
  public:
   BasicQot();
@@ -858,7 +1126,7 @@ class BasicQot : public ::google::protobuf::Message /* @@protoc_insertion_point(
                &_BasicQot_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    2;
+    3;
 
   void Swap(BasicQot* other);
   friend void swap(BasicQot& a, BasicQot& b) {
@@ -944,6 +1212,15 @@ class BasicQot : public ::google::protobuf::Message /* @@protoc_insertion_point(
   ::Qot_Common::Security* mutable_security();
   void set_allocated_security(::Qot_Common::Security* security);
 
+  // optional .Qot_Common.OptionBasicQotExData optionExData = 16;
+  bool has_optionexdata() const;
+  void clear_optionexdata();
+  static const int kOptionExDataFieldNumber = 16;
+  const ::Qot_Common::OptionBasicQotExData& optionexdata() const;
+  ::Qot_Common::OptionBasicQotExData* release_optionexdata();
+  ::Qot_Common::OptionBasicQotExData* mutable_optionexdata();
+  void set_allocated_optionexdata(::Qot_Common::OptionBasicQotExData* optionexdata);
+
   // required double priceSpread = 4;
   bool has_pricespread() const;
   void clear_pricespread();
@@ -1028,10 +1305,10 @@ class BasicQot : public ::google::protobuf::Message /* @@protoc_insertion_point(
   double amplitude() const;
   void set_amplitude(double value);
 
-  // optional double recvTime = 16;
+  // optional double recvTime = 17;
   bool has_recvtime() const;
   void clear_recvtime();
-  static const int kRecvTimeFieldNumber = 16;
+  static const int kRecvTimeFieldNumber = 17;
   double recvtime() const;
   void set_recvtime(double value);
 
@@ -1067,6 +1344,8 @@ class BasicQot : public ::google::protobuf::Message /* @@protoc_insertion_point(
   void clear_has_amplitude();
   void set_has_darkstatus();
   void clear_has_darkstatus();
+  void set_has_optionexdata();
+  void clear_has_optionexdata();
   void set_has_recvtime();
   void clear_has_recvtime();
 
@@ -1079,6 +1358,7 @@ class BasicQot : public ::google::protobuf::Message /* @@protoc_insertion_point(
   ::google::protobuf::internal::ArenaStringPtr listtime_;
   ::google::protobuf::internal::ArenaStringPtr updatetime_;
   ::Qot_Common::Security* security_;
+  ::Qot_Common::OptionBasicQotExData* optionexdata_;
   double pricespread_;
   double highprice_;
   double openprice_;
@@ -1139,7 +1419,7 @@ class TimeShare : public ::google::protobuf::Message /* @@protoc_insertion_point
                &_TimeShare_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    3;
+    4;
 
   void Swap(TimeShare* other);
   friend void swap(TimeShare& a, TimeShare& b) {
@@ -1330,7 +1610,7 @@ class SecurityStaticBasic : public ::google::protobuf::Message /* @@protoc_inser
                &_SecurityStaticBasic_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    4;
+    5;
 
   void Swap(SecurityStaticBasic* other);
   friend void swap(SecurityStaticBasic& a, SecurityStaticBasic& b) {
@@ -1511,7 +1791,7 @@ class WarrantStaticExData : public ::google::protobuf::Message /* @@protoc_inser
                &_WarrantStaticExData_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    5;
+    6;
 
   void Swap(WarrantStaticExData* other);
   friend void swap(WarrantStaticExData& a, WarrantStaticExData& b) {
@@ -1594,6 +1874,187 @@ class WarrantStaticExData : public ::google::protobuf::Message /* @@protoc_inser
 };
 // -------------------------------------------------------------------
 
+class OptionStaticExData : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Qot_Common.OptionStaticExData) */ {
+ public:
+  OptionStaticExData();
+  virtual ~OptionStaticExData();
+
+  OptionStaticExData(const OptionStaticExData& from);
+
+  inline OptionStaticExData& operator=(const OptionStaticExData& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  OptionStaticExData(OptionStaticExData&& from) noexcept
+    : OptionStaticExData() {
+    *this = ::std::move(from);
+  }
+
+  inline OptionStaticExData& operator=(OptionStaticExData&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const OptionStaticExData& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const OptionStaticExData* internal_default_instance() {
+    return reinterpret_cast<const OptionStaticExData*>(
+               &_OptionStaticExData_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    7;
+
+  void Swap(OptionStaticExData* other);
+  friend void swap(OptionStaticExData& a, OptionStaticExData& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline OptionStaticExData* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  OptionStaticExData* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const OptionStaticExData& from);
+  void MergeFrom(const OptionStaticExData& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(OptionStaticExData* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string strikeTime = 3;
+  bool has_striketime() const;
+  void clear_striketime();
+  static const int kStrikeTimeFieldNumber = 3;
+  const ::std::string& striketime() const;
+  void set_striketime(const ::std::string& value);
+  #if LANG_CXX11
+  void set_striketime(::std::string&& value);
+  #endif
+  void set_striketime(const char* value);
+  void set_striketime(const char* value, size_t size);
+  ::std::string* mutable_striketime();
+  ::std::string* release_striketime();
+  void set_allocated_striketime(::std::string* striketime);
+
+  // required string market = 6;
+  bool has_market() const;
+  void clear_market();
+  static const int kMarketFieldNumber = 6;
+  const ::std::string& market() const;
+  void set_market(const ::std::string& value);
+  #if LANG_CXX11
+  void set_market(::std::string&& value);
+  #endif
+  void set_market(const char* value);
+  void set_market(const char* value, size_t size);
+  ::std::string* mutable_market();
+  ::std::string* release_market();
+  void set_allocated_market(::std::string* market);
+
+  // required .Qot_Common.Security owner = 2;
+  bool has_owner() const;
+  void clear_owner();
+  static const int kOwnerFieldNumber = 2;
+  const ::Qot_Common::Security& owner() const;
+  ::Qot_Common::Security* release_owner();
+  ::Qot_Common::Security* mutable_owner();
+  void set_allocated_owner(::Qot_Common::Security* owner);
+
+  // required int32 type = 1;
+  bool has_type() const;
+  void clear_type();
+  static const int kTypeFieldNumber = 1;
+  ::google::protobuf::int32 type() const;
+  void set_type(::google::protobuf::int32 value);
+
+  // required bool suspend = 5;
+  bool has_suspend() const;
+  void clear_suspend();
+  static const int kSuspendFieldNumber = 5;
+  bool suspend() const;
+  void set_suspend(bool value);
+
+  // required double strikePrice = 4;
+  bool has_strikeprice() const;
+  void clear_strikeprice();
+  static const int kStrikePriceFieldNumber = 4;
+  double strikeprice() const;
+  void set_strikeprice(double value);
+
+  // @@protoc_insertion_point(class_scope:Qot_Common.OptionStaticExData)
+ private:
+  void set_has_type();
+  void clear_has_type();
+  void set_has_owner();
+  void clear_has_owner();
+  void set_has_striketime();
+  void clear_has_striketime();
+  void set_has_strikeprice();
+  void clear_has_strikeprice();
+  void set_has_suspend();
+  void clear_has_suspend();
+  void set_has_market();
+  void clear_has_market();
+
+  // helper for ByteSizeLong()
+  size_t RequiredFieldsByteSizeFallback() const;
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable int _cached_size_;
+  ::google::protobuf::internal::ArenaStringPtr striketime_;
+  ::google::protobuf::internal::ArenaStringPtr market_;
+  ::Qot_Common::Security* owner_;
+  ::google::protobuf::int32 type_;
+  bool suspend_;
+  double strikeprice_;
+  friend struct ::protobuf_Qot_5fCommon_2eproto::TableStruct;
+  friend void ::protobuf_Qot_5fCommon_2eproto::InitDefaultsOptionStaticExDataImpl();
+};
+// -------------------------------------------------------------------
+
 class SecurityStaticInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Qot_Common.SecurityStaticInfo) */ {
  public:
   SecurityStaticInfo();
@@ -1636,7 +2097,7 @@ class SecurityStaticInfo : public ::google::protobuf::Message /* @@protoc_insert
                &_SecurityStaticInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    6;
+    8;
 
   void Swap(SecurityStaticInfo* other);
   friend void swap(SecurityStaticInfo& a, SecurityStaticInfo& b) {
@@ -1701,18 +2162,30 @@ class SecurityStaticInfo : public ::google::protobuf::Message /* @@protoc_insert
   ::Qot_Common::WarrantStaticExData* mutable_warrantexdata();
   void set_allocated_warrantexdata(::Qot_Common::WarrantStaticExData* warrantexdata);
 
+  // optional .Qot_Common.OptionStaticExData optionExData = 3;
+  bool has_optionexdata() const;
+  void clear_optionexdata();
+  static const int kOptionExDataFieldNumber = 3;
+  const ::Qot_Common::OptionStaticExData& optionexdata() const;
+  ::Qot_Common::OptionStaticExData* release_optionexdata();
+  ::Qot_Common::OptionStaticExData* mutable_optionexdata();
+  void set_allocated_optionexdata(::Qot_Common::OptionStaticExData* optionexdata);
+
   // @@protoc_insertion_point(class_scope:Qot_Common.SecurityStaticInfo)
  private:
   void set_has_basic();
   void clear_has_basic();
   void set_has_warrantexdata();
   void clear_has_warrantexdata();
+  void set_has_optionexdata();
+  void clear_has_optionexdata();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
   ::Qot_Common::SecurityStaticBasic* basic_;
   ::Qot_Common::WarrantStaticExData* warrantexdata_;
+  ::Qot_Common::OptionStaticExData* optionexdata_;
   friend struct ::protobuf_Qot_5fCommon_2eproto::TableStruct;
   friend void ::protobuf_Qot_5fCommon_2eproto::InitDefaultsSecurityStaticInfoImpl();
 };
@@ -1760,7 +2233,7 @@ class Broker : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
                &_Broker_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    7;
+    9;
 
   void Swap(Broker* other);
   friend void swap(Broker& a, Broker& b) {
@@ -1901,7 +2374,7 @@ class Ticker : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
                &_Ticker_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    8;
+    10;
 
   void Swap(Ticker* other);
   friend void swap(Ticker& a, Ticker& b) {
@@ -2102,7 +2575,7 @@ class OrderBook : public ::google::protobuf::Message /* @@protoc_insertion_point
                &_OrderBook_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    9;
+    11;
 
   void Swap(OrderBook* other);
   friend void swap(OrderBook& a, OrderBook& b) {
@@ -2203,6 +2676,185 @@ class OrderBook : public ::google::protobuf::Message /* @@protoc_insertion_point
 };
 // -------------------------------------------------------------------
 
+class ShareHoldingChange : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Qot_Common.ShareHoldingChange) */ {
+ public:
+  ShareHoldingChange();
+  virtual ~ShareHoldingChange();
+
+  ShareHoldingChange(const ShareHoldingChange& from);
+
+  inline ShareHoldingChange& operator=(const ShareHoldingChange& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  ShareHoldingChange(ShareHoldingChange&& from) noexcept
+    : ShareHoldingChange() {
+    *this = ::std::move(from);
+  }
+
+  inline ShareHoldingChange& operator=(ShareHoldingChange&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ShareHoldingChange& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const ShareHoldingChange* internal_default_instance() {
+    return reinterpret_cast<const ShareHoldingChange*>(
+               &_ShareHoldingChange_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    12;
+
+  void Swap(ShareHoldingChange* other);
+  friend void swap(ShareHoldingChange& a, ShareHoldingChange& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ShareHoldingChange* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  ShareHoldingChange* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const ShareHoldingChange& from);
+  void MergeFrom(const ShareHoldingChange& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(ShareHoldingChange* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string holderName = 1;
+  bool has_holdername() const;
+  void clear_holdername();
+  static const int kHolderNameFieldNumber = 1;
+  const ::std::string& holdername() const;
+  void set_holdername(const ::std::string& value);
+  #if LANG_CXX11
+  void set_holdername(::std::string&& value);
+  #endif
+  void set_holdername(const char* value);
+  void set_holdername(const char* value, size_t size);
+  ::std::string* mutable_holdername();
+  ::std::string* release_holdername();
+  void set_allocated_holdername(::std::string* holdername);
+
+  // required string time = 6;
+  bool has_time() const;
+  void clear_time();
+  static const int kTimeFieldNumber = 6;
+  const ::std::string& time() const;
+  void set_time(const ::std::string& value);
+  #if LANG_CXX11
+  void set_time(::std::string&& value);
+  #endif
+  void set_time(const char* value);
+  void set_time(const char* value, size_t size);
+  ::std::string* mutable_time();
+  ::std::string* release_time();
+  void set_allocated_time(::std::string* time);
+
+  // required double holdingQty = 2;
+  bool has_holdingqty() const;
+  void clear_holdingqty();
+  static const int kHoldingQtyFieldNumber = 2;
+  double holdingqty() const;
+  void set_holdingqty(double value);
+
+  // required double holdingRatio = 3;
+  bool has_holdingratio() const;
+  void clear_holdingratio();
+  static const int kHoldingRatioFieldNumber = 3;
+  double holdingratio() const;
+  void set_holdingratio(double value);
+
+  // required double changeQty = 4;
+  bool has_changeqty() const;
+  void clear_changeqty();
+  static const int kChangeQtyFieldNumber = 4;
+  double changeqty() const;
+  void set_changeqty(double value);
+
+  // required double changeRatio = 5;
+  bool has_changeratio() const;
+  void clear_changeratio();
+  static const int kChangeRatioFieldNumber = 5;
+  double changeratio() const;
+  void set_changeratio(double value);
+
+  // @@protoc_insertion_point(class_scope:Qot_Common.ShareHoldingChange)
+ private:
+  void set_has_holdername();
+  void clear_has_holdername();
+  void set_has_holdingqty();
+  void clear_has_holdingqty();
+  void set_has_holdingratio();
+  void clear_has_holdingratio();
+  void set_has_changeqty();
+  void clear_has_changeqty();
+  void set_has_changeratio();
+  void clear_has_changeratio();
+  void set_has_time();
+  void clear_has_time();
+
+  // helper for ByteSizeLong()
+  size_t RequiredFieldsByteSizeFallback() const;
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable int _cached_size_;
+  ::google::protobuf::internal::ArenaStringPtr holdername_;
+  ::google::protobuf::internal::ArenaStringPtr time_;
+  double holdingqty_;
+  double holdingratio_;
+  double changeqty_;
+  double changeratio_;
+  friend struct ::protobuf_Qot_5fCommon_2eproto::TableStruct;
+  friend void ::protobuf_Qot_5fCommon_2eproto::InitDefaultsShareHoldingChangeImpl();
+};
+// -------------------------------------------------------------------
+
 class SubInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Qot_Common.SubInfo) */ {
  public:
   SubInfo();
@@ -2245,7 +2897,7 @@ class SubInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(c
                &_SubInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    10;
+    13;
 
   void Swap(SubInfo* other);
   friend void swap(SubInfo& a, SubInfo& b) {
@@ -2368,7 +3020,7 @@ class ConnSubInfo : public ::google::protobuf::Message /* @@protoc_insertion_poi
                &_ConnSubInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    11;
+    14;
 
   void Swap(ConnSubInfo* other);
   friend void swap(ConnSubInfo& a, ConnSubInfo& b) {
@@ -2459,6 +3111,149 @@ class ConnSubInfo : public ::google::protobuf::Message /* @@protoc_insertion_poi
   bool isownconndata_;
   friend struct ::protobuf_Qot_5fCommon_2eproto::TableStruct;
   friend void ::protobuf_Qot_5fCommon_2eproto::InitDefaultsConnSubInfoImpl();
+};
+// -------------------------------------------------------------------
+
+class PlateInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Qot_Common.PlateInfo) */ {
+ public:
+  PlateInfo();
+  virtual ~PlateInfo();
+
+  PlateInfo(const PlateInfo& from);
+
+  inline PlateInfo& operator=(const PlateInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  PlateInfo(PlateInfo&& from) noexcept
+    : PlateInfo() {
+    *this = ::std::move(from);
+  }
+
+  inline PlateInfo& operator=(PlateInfo&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const PlateInfo& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const PlateInfo* internal_default_instance() {
+    return reinterpret_cast<const PlateInfo*>(
+               &_PlateInfo_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    15;
+
+  void Swap(PlateInfo* other);
+  friend void swap(PlateInfo& a, PlateInfo& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline PlateInfo* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  PlateInfo* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const PlateInfo& from);
+  void MergeFrom(const PlateInfo& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(PlateInfo* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string name = 2;
+  bool has_name() const;
+  void clear_name();
+  static const int kNameFieldNumber = 2;
+  const ::std::string& name() const;
+  void set_name(const ::std::string& value);
+  #if LANG_CXX11
+  void set_name(::std::string&& value);
+  #endif
+  void set_name(const char* value);
+  void set_name(const char* value, size_t size);
+  ::std::string* mutable_name();
+  ::std::string* release_name();
+  void set_allocated_name(::std::string* name);
+
+  // required .Qot_Common.Security plate = 1;
+  bool has_plate() const;
+  void clear_plate();
+  static const int kPlateFieldNumber = 1;
+  const ::Qot_Common::Security& plate() const;
+  ::Qot_Common::Security* release_plate();
+  ::Qot_Common::Security* mutable_plate();
+  void set_allocated_plate(::Qot_Common::Security* plate);
+
+  // optional int32 plateType = 3;
+  bool has_platetype() const;
+  void clear_platetype();
+  static const int kPlateTypeFieldNumber = 3;
+  ::google::protobuf::int32 platetype() const;
+  void set_platetype(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:Qot_Common.PlateInfo)
+ private:
+  void set_has_plate();
+  void clear_has_plate();
+  void set_has_name();
+  void clear_has_name();
+  void set_has_platetype();
+  void clear_has_platetype();
+
+  // helper for ByteSizeLong()
+  size_t RequiredFieldsByteSizeFallback() const;
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable int _cached_size_;
+  ::google::protobuf::internal::ArenaStringPtr name_;
+  ::Qot_Common::Security* plate_;
+  ::google::protobuf::int32 platetype_;
+  friend struct ::protobuf_Qot_5fCommon_2eproto::TableStruct;
+  friend void ::protobuf_Qot_5fCommon_2eproto::InitDefaultsPlateInfoImpl();
 };
 // ===================================================================
 
@@ -2891,6 +3686,250 @@ inline void KLine::set_changerate(double value) {
 
 // -------------------------------------------------------------------
 
+// OptionBasicQotExData
+
+// required double strikePrice = 1;
+inline bool OptionBasicQotExData::has_strikeprice() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void OptionBasicQotExData::set_has_strikeprice() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void OptionBasicQotExData::clear_has_strikeprice() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void OptionBasicQotExData::clear_strikeprice() {
+  strikeprice_ = 0;
+  clear_has_strikeprice();
+}
+inline double OptionBasicQotExData::strikeprice() const {
+  // @@protoc_insertion_point(field_get:Qot_Common.OptionBasicQotExData.strikePrice)
+  return strikeprice_;
+}
+inline void OptionBasicQotExData::set_strikeprice(double value) {
+  set_has_strikeprice();
+  strikeprice_ = value;
+  // @@protoc_insertion_point(field_set:Qot_Common.OptionBasicQotExData.strikePrice)
+}
+
+// required int32 contractSize = 2;
+inline bool OptionBasicQotExData::has_contractsize() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void OptionBasicQotExData::set_has_contractsize() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void OptionBasicQotExData::clear_has_contractsize() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void OptionBasicQotExData::clear_contractsize() {
+  contractsize_ = 0;
+  clear_has_contractsize();
+}
+inline ::google::protobuf::int32 OptionBasicQotExData::contractsize() const {
+  // @@protoc_insertion_point(field_get:Qot_Common.OptionBasicQotExData.contractSize)
+  return contractsize_;
+}
+inline void OptionBasicQotExData::set_contractsize(::google::protobuf::int32 value) {
+  set_has_contractsize();
+  contractsize_ = value;
+  // @@protoc_insertion_point(field_set:Qot_Common.OptionBasicQotExData.contractSize)
+}
+
+// required int32 openInterest = 3;
+inline bool OptionBasicQotExData::has_openinterest() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void OptionBasicQotExData::set_has_openinterest() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void OptionBasicQotExData::clear_has_openinterest() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void OptionBasicQotExData::clear_openinterest() {
+  openinterest_ = 0;
+  clear_has_openinterest();
+}
+inline ::google::protobuf::int32 OptionBasicQotExData::openinterest() const {
+  // @@protoc_insertion_point(field_get:Qot_Common.OptionBasicQotExData.openInterest)
+  return openinterest_;
+}
+inline void OptionBasicQotExData::set_openinterest(::google::protobuf::int32 value) {
+  set_has_openinterest();
+  openinterest_ = value;
+  // @@protoc_insertion_point(field_set:Qot_Common.OptionBasicQotExData.openInterest)
+}
+
+// required double impliedVolatility = 4;
+inline bool OptionBasicQotExData::has_impliedvolatility() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void OptionBasicQotExData::set_has_impliedvolatility() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void OptionBasicQotExData::clear_has_impliedvolatility() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void OptionBasicQotExData::clear_impliedvolatility() {
+  impliedvolatility_ = 0;
+  clear_has_impliedvolatility();
+}
+inline double OptionBasicQotExData::impliedvolatility() const {
+  // @@protoc_insertion_point(field_get:Qot_Common.OptionBasicQotExData.impliedVolatility)
+  return impliedvolatility_;
+}
+inline void OptionBasicQotExData::set_impliedvolatility(double value) {
+  set_has_impliedvolatility();
+  impliedvolatility_ = value;
+  // @@protoc_insertion_point(field_set:Qot_Common.OptionBasicQotExData.impliedVolatility)
+}
+
+// required double premium = 5;
+inline bool OptionBasicQotExData::has_premium() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void OptionBasicQotExData::set_has_premium() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void OptionBasicQotExData::clear_has_premium() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void OptionBasicQotExData::clear_premium() {
+  premium_ = 0;
+  clear_has_premium();
+}
+inline double OptionBasicQotExData::premium() const {
+  // @@protoc_insertion_point(field_get:Qot_Common.OptionBasicQotExData.premium)
+  return premium_;
+}
+inline void OptionBasicQotExData::set_premium(double value) {
+  set_has_premium();
+  premium_ = value;
+  // @@protoc_insertion_point(field_set:Qot_Common.OptionBasicQotExData.premium)
+}
+
+// required double delta = 6;
+inline bool OptionBasicQotExData::has_delta() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void OptionBasicQotExData::set_has_delta() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void OptionBasicQotExData::clear_has_delta() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void OptionBasicQotExData::clear_delta() {
+  delta_ = 0;
+  clear_has_delta();
+}
+inline double OptionBasicQotExData::delta() const {
+  // @@protoc_insertion_point(field_get:Qot_Common.OptionBasicQotExData.delta)
+  return delta_;
+}
+inline void OptionBasicQotExData::set_delta(double value) {
+  set_has_delta();
+  delta_ = value;
+  // @@protoc_insertion_point(field_set:Qot_Common.OptionBasicQotExData.delta)
+}
+
+// required double gamma = 7;
+inline bool OptionBasicQotExData::has_gamma() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void OptionBasicQotExData::set_has_gamma() {
+  _has_bits_[0] |= 0x00000040u;
+}
+inline void OptionBasicQotExData::clear_has_gamma() {
+  _has_bits_[0] &= ~0x00000040u;
+}
+inline void OptionBasicQotExData::clear_gamma() {
+  gamma_ = 0;
+  clear_has_gamma();
+}
+inline double OptionBasicQotExData::gamma() const {
+  // @@protoc_insertion_point(field_get:Qot_Common.OptionBasicQotExData.gamma)
+  return gamma_;
+}
+inline void OptionBasicQotExData::set_gamma(double value) {
+  set_has_gamma();
+  gamma_ = value;
+  // @@protoc_insertion_point(field_set:Qot_Common.OptionBasicQotExData.gamma)
+}
+
+// required double vega = 8;
+inline bool OptionBasicQotExData::has_vega() const {
+  return (_has_bits_[0] & 0x00000080u) != 0;
+}
+inline void OptionBasicQotExData::set_has_vega() {
+  _has_bits_[0] |= 0x00000080u;
+}
+inline void OptionBasicQotExData::clear_has_vega() {
+  _has_bits_[0] &= ~0x00000080u;
+}
+inline void OptionBasicQotExData::clear_vega() {
+  vega_ = 0;
+  clear_has_vega();
+}
+inline double OptionBasicQotExData::vega() const {
+  // @@protoc_insertion_point(field_get:Qot_Common.OptionBasicQotExData.vega)
+  return vega_;
+}
+inline void OptionBasicQotExData::set_vega(double value) {
+  set_has_vega();
+  vega_ = value;
+  // @@protoc_insertion_point(field_set:Qot_Common.OptionBasicQotExData.vega)
+}
+
+// required double theta = 9;
+inline bool OptionBasicQotExData::has_theta() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+inline void OptionBasicQotExData::set_has_theta() {
+  _has_bits_[0] |= 0x00000100u;
+}
+inline void OptionBasicQotExData::clear_has_theta() {
+  _has_bits_[0] &= ~0x00000100u;
+}
+inline void OptionBasicQotExData::clear_theta() {
+  theta_ = 0;
+  clear_has_theta();
+}
+inline double OptionBasicQotExData::theta() const {
+  // @@protoc_insertion_point(field_get:Qot_Common.OptionBasicQotExData.theta)
+  return theta_;
+}
+inline void OptionBasicQotExData::set_theta(double value) {
+  set_has_theta();
+  theta_ = value;
+  // @@protoc_insertion_point(field_set:Qot_Common.OptionBasicQotExData.theta)
+}
+
+// required double rho = 10;
+inline bool OptionBasicQotExData::has_rho() const {
+  return (_has_bits_[0] & 0x00000200u) != 0;
+}
+inline void OptionBasicQotExData::set_has_rho() {
+  _has_bits_[0] |= 0x00000200u;
+}
+inline void OptionBasicQotExData::clear_has_rho() {
+  _has_bits_[0] &= ~0x00000200u;
+}
+inline void OptionBasicQotExData::clear_rho() {
+  rho_ = 0;
+  clear_has_rho();
+}
+inline double OptionBasicQotExData::rho() const {
+  // @@protoc_insertion_point(field_get:Qot_Common.OptionBasicQotExData.rho)
+  return rho_;
+}
+inline void OptionBasicQotExData::set_rho(double value) {
+  set_has_rho();
+  rho_ = value;
+  // @@protoc_insertion_point(field_set:Qot_Common.OptionBasicQotExData.rho)
+}
+
+// -------------------------------------------------------------------
+
 // BasicQot
 
 // required .Qot_Common.Security security = 1;
@@ -2949,13 +3988,13 @@ inline void BasicQot::set_allocated_security(::Qot_Common::Security* security) {
 
 // required bool isSuspended = 2;
 inline bool BasicQot::has_issuspended() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
+  return (_has_bits_[0] & 0x00000100u) != 0;
 }
 inline void BasicQot::set_has_issuspended() {
-  _has_bits_[0] |= 0x00000080u;
+  _has_bits_[0] |= 0x00000100u;
 }
 inline void BasicQot::clear_has_issuspended() {
-  _has_bits_[0] &= ~0x00000080u;
+  _has_bits_[0] &= ~0x00000100u;
 }
 inline void BasicQot::clear_issuspended() {
   issuspended_ = false;
@@ -3036,13 +4075,13 @@ inline void BasicQot::set_allocated_listtime(::std::string* listtime) {
 
 // required double priceSpread = 4;
 inline bool BasicQot::has_pricespread() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
 inline void BasicQot::set_has_pricespread() {
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000010u;
 }
 inline void BasicQot::clear_has_pricespread() {
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000010u;
 }
 inline void BasicQot::clear_pricespread() {
   pricespread_ = 0;
@@ -3123,13 +4162,13 @@ inline void BasicQot::set_allocated_updatetime(::std::string* updatetime) {
 
 // required double highPrice = 6;
 inline bool BasicQot::has_highprice() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
+  return (_has_bits_[0] & 0x00000020u) != 0;
 }
 inline void BasicQot::set_has_highprice() {
-  _has_bits_[0] |= 0x00000010u;
+  _has_bits_[0] |= 0x00000020u;
 }
 inline void BasicQot::clear_has_highprice() {
-  _has_bits_[0] &= ~0x00000010u;
+  _has_bits_[0] &= ~0x00000020u;
 }
 inline void BasicQot::clear_highprice() {
   highprice_ = 0;
@@ -3147,13 +4186,13 @@ inline void BasicQot::set_highprice(double value) {
 
 // required double openPrice = 7;
 inline bool BasicQot::has_openprice() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
+  return (_has_bits_[0] & 0x00000040u) != 0;
 }
 inline void BasicQot::set_has_openprice() {
-  _has_bits_[0] |= 0x00000020u;
+  _has_bits_[0] |= 0x00000040u;
 }
 inline void BasicQot::clear_has_openprice() {
-  _has_bits_[0] &= ~0x00000020u;
+  _has_bits_[0] &= ~0x00000040u;
 }
 inline void BasicQot::clear_openprice() {
   openprice_ = 0;
@@ -3171,13 +4210,13 @@ inline void BasicQot::set_openprice(double value) {
 
 // required double lowPrice = 8;
 inline bool BasicQot::has_lowprice() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
+  return (_has_bits_[0] & 0x00000080u) != 0;
 }
 inline void BasicQot::set_has_lowprice() {
-  _has_bits_[0] |= 0x00000040u;
+  _has_bits_[0] |= 0x00000080u;
 }
 inline void BasicQot::clear_has_lowprice() {
-  _has_bits_[0] &= ~0x00000040u;
+  _has_bits_[0] &= ~0x00000080u;
 }
 inline void BasicQot::clear_lowprice() {
   lowprice_ = 0;
@@ -3195,13 +4234,13 @@ inline void BasicQot::set_lowprice(double value) {
 
 // required double curPrice = 9;
 inline bool BasicQot::has_curprice() const {
-  return (_has_bits_[0] & 0x00000200u) != 0;
+  return (_has_bits_[0] & 0x00000400u) != 0;
 }
 inline void BasicQot::set_has_curprice() {
-  _has_bits_[0] |= 0x00000200u;
+  _has_bits_[0] |= 0x00000400u;
 }
 inline void BasicQot::clear_has_curprice() {
-  _has_bits_[0] &= ~0x00000200u;
+  _has_bits_[0] &= ~0x00000400u;
 }
 inline void BasicQot::clear_curprice() {
   curprice_ = 0;
@@ -3219,13 +4258,13 @@ inline void BasicQot::set_curprice(double value) {
 
 // required double lastClosePrice = 10;
 inline bool BasicQot::has_lastcloseprice() const {
-  return (_has_bits_[0] & 0x00000400u) != 0;
+  return (_has_bits_[0] & 0x00000800u) != 0;
 }
 inline void BasicQot::set_has_lastcloseprice() {
-  _has_bits_[0] |= 0x00000400u;
+  _has_bits_[0] |= 0x00000800u;
 }
 inline void BasicQot::clear_has_lastcloseprice() {
-  _has_bits_[0] &= ~0x00000400u;
+  _has_bits_[0] &= ~0x00000800u;
 }
 inline void BasicQot::clear_lastcloseprice() {
   lastcloseprice_ = 0;
@@ -3243,13 +4282,13 @@ inline void BasicQot::set_lastcloseprice(double value) {
 
 // required int64 volume = 11;
 inline bool BasicQot::has_volume() const {
-  return (_has_bits_[0] & 0x00000800u) != 0;
+  return (_has_bits_[0] & 0x00001000u) != 0;
 }
 inline void BasicQot::set_has_volume() {
-  _has_bits_[0] |= 0x00000800u;
+  _has_bits_[0] |= 0x00001000u;
 }
 inline void BasicQot::clear_has_volume() {
-  _has_bits_[0] &= ~0x00000800u;
+  _has_bits_[0] &= ~0x00001000u;
 }
 inline void BasicQot::clear_volume() {
   volume_ = GOOGLE_LONGLONG(0);
@@ -3267,13 +4306,13 @@ inline void BasicQot::set_volume(::google::protobuf::int64 value) {
 
 // required double turnover = 12;
 inline bool BasicQot::has_turnover() const {
-  return (_has_bits_[0] & 0x00001000u) != 0;
+  return (_has_bits_[0] & 0x00002000u) != 0;
 }
 inline void BasicQot::set_has_turnover() {
-  _has_bits_[0] |= 0x00001000u;
+  _has_bits_[0] |= 0x00002000u;
 }
 inline void BasicQot::clear_has_turnover() {
-  _has_bits_[0] &= ~0x00001000u;
+  _has_bits_[0] &= ~0x00002000u;
 }
 inline void BasicQot::clear_turnover() {
   turnover_ = 0;
@@ -3291,13 +4330,13 @@ inline void BasicQot::set_turnover(double value) {
 
 // required double turnoverRate = 13;
 inline bool BasicQot::has_turnoverrate() const {
-  return (_has_bits_[0] & 0x00002000u) != 0;
+  return (_has_bits_[0] & 0x00004000u) != 0;
 }
 inline void BasicQot::set_has_turnoverrate() {
-  _has_bits_[0] |= 0x00002000u;
+  _has_bits_[0] |= 0x00004000u;
 }
 inline void BasicQot::clear_has_turnoverrate() {
-  _has_bits_[0] &= ~0x00002000u;
+  _has_bits_[0] &= ~0x00004000u;
 }
 inline void BasicQot::clear_turnoverrate() {
   turnoverrate_ = 0;
@@ -3315,13 +4354,13 @@ inline void BasicQot::set_turnoverrate(double value) {
 
 // required double amplitude = 14;
 inline bool BasicQot::has_amplitude() const {
-  return (_has_bits_[0] & 0x00004000u) != 0;
+  return (_has_bits_[0] & 0x00008000u) != 0;
 }
 inline void BasicQot::set_has_amplitude() {
-  _has_bits_[0] |= 0x00004000u;
+  _has_bits_[0] |= 0x00008000u;
 }
 inline void BasicQot::clear_has_amplitude() {
-  _has_bits_[0] &= ~0x00004000u;
+  _has_bits_[0] &= ~0x00008000u;
 }
 inline void BasicQot::clear_amplitude() {
   amplitude_ = 0;
@@ -3339,13 +4378,13 @@ inline void BasicQot::set_amplitude(double value) {
 
 // optional int32 darkStatus = 15;
 inline bool BasicQot::has_darkstatus() const {
-  return (_has_bits_[0] & 0x00000100u) != 0;
+  return (_has_bits_[0] & 0x00000200u) != 0;
 }
 inline void BasicQot::set_has_darkstatus() {
-  _has_bits_[0] |= 0x00000100u;
+  _has_bits_[0] |= 0x00000200u;
 }
 inline void BasicQot::clear_has_darkstatus() {
-  _has_bits_[0] &= ~0x00000100u;
+  _has_bits_[0] &= ~0x00000200u;
 }
 inline void BasicQot::clear_darkstatus() {
   darkstatus_ = 0;
@@ -3361,15 +4400,69 @@ inline void BasicQot::set_darkstatus(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:Qot_Common.BasicQot.darkStatus)
 }
 
-// optional double recvTime = 16;
+// optional .Qot_Common.OptionBasicQotExData optionExData = 16;
+inline bool BasicQot::has_optionexdata() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void BasicQot::set_has_optionexdata() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void BasicQot::clear_has_optionexdata() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void BasicQot::clear_optionexdata() {
+  if (optionexdata_ != NULL) optionexdata_->Clear();
+  clear_has_optionexdata();
+}
+inline const ::Qot_Common::OptionBasicQotExData& BasicQot::optionexdata() const {
+  const ::Qot_Common::OptionBasicQotExData* p = optionexdata_;
+  // @@protoc_insertion_point(field_get:Qot_Common.BasicQot.optionExData)
+  return p != NULL ? *p : *reinterpret_cast<const ::Qot_Common::OptionBasicQotExData*>(
+      &::Qot_Common::_OptionBasicQotExData_default_instance_);
+}
+inline ::Qot_Common::OptionBasicQotExData* BasicQot::release_optionexdata() {
+  // @@protoc_insertion_point(field_release:Qot_Common.BasicQot.optionExData)
+  clear_has_optionexdata();
+  ::Qot_Common::OptionBasicQotExData* temp = optionexdata_;
+  optionexdata_ = NULL;
+  return temp;
+}
+inline ::Qot_Common::OptionBasicQotExData* BasicQot::mutable_optionexdata() {
+  set_has_optionexdata();
+  if (optionexdata_ == NULL) {
+    optionexdata_ = new ::Qot_Common::OptionBasicQotExData;
+  }
+  // @@protoc_insertion_point(field_mutable:Qot_Common.BasicQot.optionExData)
+  return optionexdata_;
+}
+inline void BasicQot::set_allocated_optionexdata(::Qot_Common::OptionBasicQotExData* optionexdata) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete optionexdata_;
+  }
+  if (optionexdata) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      optionexdata = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, optionexdata, submessage_arena);
+    }
+    set_has_optionexdata();
+  } else {
+    clear_has_optionexdata();
+  }
+  optionexdata_ = optionexdata;
+  // @@protoc_insertion_point(field_set_allocated:Qot_Common.BasicQot.optionExData)
+}
+
+// optional double recvTime = 17;
 inline bool BasicQot::has_recvtime() const {
-  return (_has_bits_[0] & 0x00008000u) != 0;
+  return (_has_bits_[0] & 0x00010000u) != 0;
 }
 inline void BasicQot::set_has_recvtime() {
-  _has_bits_[0] |= 0x00008000u;
+  _has_bits_[0] |= 0x00010000u;
 }
 inline void BasicQot::clear_has_recvtime() {
-  _has_bits_[0] &= ~0x00008000u;
+  _has_bits_[0] &= ~0x00010000u;
 }
 inline void BasicQot::clear_recvtime() {
   recvtime_ = 0;
@@ -3960,6 +5053,262 @@ inline void WarrantStaticExData::set_allocated_owner(::Qot_Common::Security* own
 
 // -------------------------------------------------------------------
 
+// OptionStaticExData
+
+// required int32 type = 1;
+inline bool OptionStaticExData::has_type() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void OptionStaticExData::set_has_type() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void OptionStaticExData::clear_has_type() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void OptionStaticExData::clear_type() {
+  type_ = 0;
+  clear_has_type();
+}
+inline ::google::protobuf::int32 OptionStaticExData::type() const {
+  // @@protoc_insertion_point(field_get:Qot_Common.OptionStaticExData.type)
+  return type_;
+}
+inline void OptionStaticExData::set_type(::google::protobuf::int32 value) {
+  set_has_type();
+  type_ = value;
+  // @@protoc_insertion_point(field_set:Qot_Common.OptionStaticExData.type)
+}
+
+// required .Qot_Common.Security owner = 2;
+inline bool OptionStaticExData::has_owner() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void OptionStaticExData::set_has_owner() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void OptionStaticExData::clear_has_owner() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void OptionStaticExData::clear_owner() {
+  if (owner_ != NULL) owner_->Clear();
+  clear_has_owner();
+}
+inline const ::Qot_Common::Security& OptionStaticExData::owner() const {
+  const ::Qot_Common::Security* p = owner_;
+  // @@protoc_insertion_point(field_get:Qot_Common.OptionStaticExData.owner)
+  return p != NULL ? *p : *reinterpret_cast<const ::Qot_Common::Security*>(
+      &::Qot_Common::_Security_default_instance_);
+}
+inline ::Qot_Common::Security* OptionStaticExData::release_owner() {
+  // @@protoc_insertion_point(field_release:Qot_Common.OptionStaticExData.owner)
+  clear_has_owner();
+  ::Qot_Common::Security* temp = owner_;
+  owner_ = NULL;
+  return temp;
+}
+inline ::Qot_Common::Security* OptionStaticExData::mutable_owner() {
+  set_has_owner();
+  if (owner_ == NULL) {
+    owner_ = new ::Qot_Common::Security;
+  }
+  // @@protoc_insertion_point(field_mutable:Qot_Common.OptionStaticExData.owner)
+  return owner_;
+}
+inline void OptionStaticExData::set_allocated_owner(::Qot_Common::Security* owner) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete owner_;
+  }
+  if (owner) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      owner = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, owner, submessage_arena);
+    }
+    set_has_owner();
+  } else {
+    clear_has_owner();
+  }
+  owner_ = owner;
+  // @@protoc_insertion_point(field_set_allocated:Qot_Common.OptionStaticExData.owner)
+}
+
+// required string strikeTime = 3;
+inline bool OptionStaticExData::has_striketime() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void OptionStaticExData::set_has_striketime() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void OptionStaticExData::clear_has_striketime() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void OptionStaticExData::clear_striketime() {
+  striketime_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_striketime();
+}
+inline const ::std::string& OptionStaticExData::striketime() const {
+  // @@protoc_insertion_point(field_get:Qot_Common.OptionStaticExData.strikeTime)
+  return striketime_.GetNoArena();
+}
+inline void OptionStaticExData::set_striketime(const ::std::string& value) {
+  set_has_striketime();
+  striketime_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:Qot_Common.OptionStaticExData.strikeTime)
+}
+#if LANG_CXX11
+inline void OptionStaticExData::set_striketime(::std::string&& value) {
+  set_has_striketime();
+  striketime_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:Qot_Common.OptionStaticExData.strikeTime)
+}
+#endif
+inline void OptionStaticExData::set_striketime(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_striketime();
+  striketime_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:Qot_Common.OptionStaticExData.strikeTime)
+}
+inline void OptionStaticExData::set_striketime(const char* value, size_t size) {
+  set_has_striketime();
+  striketime_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:Qot_Common.OptionStaticExData.strikeTime)
+}
+inline ::std::string* OptionStaticExData::mutable_striketime() {
+  set_has_striketime();
+  // @@protoc_insertion_point(field_mutable:Qot_Common.OptionStaticExData.strikeTime)
+  return striketime_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* OptionStaticExData::release_striketime() {
+  // @@protoc_insertion_point(field_release:Qot_Common.OptionStaticExData.strikeTime)
+  clear_has_striketime();
+  return striketime_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void OptionStaticExData::set_allocated_striketime(::std::string* striketime) {
+  if (striketime != NULL) {
+    set_has_striketime();
+  } else {
+    clear_has_striketime();
+  }
+  striketime_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), striketime);
+  // @@protoc_insertion_point(field_set_allocated:Qot_Common.OptionStaticExData.strikeTime)
+}
+
+// required double strikePrice = 4;
+inline bool OptionStaticExData::has_strikeprice() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void OptionStaticExData::set_has_strikeprice() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void OptionStaticExData::clear_has_strikeprice() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void OptionStaticExData::clear_strikeprice() {
+  strikeprice_ = 0;
+  clear_has_strikeprice();
+}
+inline double OptionStaticExData::strikeprice() const {
+  // @@protoc_insertion_point(field_get:Qot_Common.OptionStaticExData.strikePrice)
+  return strikeprice_;
+}
+inline void OptionStaticExData::set_strikeprice(double value) {
+  set_has_strikeprice();
+  strikeprice_ = value;
+  // @@protoc_insertion_point(field_set:Qot_Common.OptionStaticExData.strikePrice)
+}
+
+// required bool suspend = 5;
+inline bool OptionStaticExData::has_suspend() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void OptionStaticExData::set_has_suspend() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void OptionStaticExData::clear_has_suspend() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void OptionStaticExData::clear_suspend() {
+  suspend_ = false;
+  clear_has_suspend();
+}
+inline bool OptionStaticExData::suspend() const {
+  // @@protoc_insertion_point(field_get:Qot_Common.OptionStaticExData.suspend)
+  return suspend_;
+}
+inline void OptionStaticExData::set_suspend(bool value) {
+  set_has_suspend();
+  suspend_ = value;
+  // @@protoc_insertion_point(field_set:Qot_Common.OptionStaticExData.suspend)
+}
+
+// required string market = 6;
+inline bool OptionStaticExData::has_market() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void OptionStaticExData::set_has_market() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void OptionStaticExData::clear_has_market() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void OptionStaticExData::clear_market() {
+  market_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_market();
+}
+inline const ::std::string& OptionStaticExData::market() const {
+  // @@protoc_insertion_point(field_get:Qot_Common.OptionStaticExData.market)
+  return market_.GetNoArena();
+}
+inline void OptionStaticExData::set_market(const ::std::string& value) {
+  set_has_market();
+  market_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:Qot_Common.OptionStaticExData.market)
+}
+#if LANG_CXX11
+inline void OptionStaticExData::set_market(::std::string&& value) {
+  set_has_market();
+  market_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:Qot_Common.OptionStaticExData.market)
+}
+#endif
+inline void OptionStaticExData::set_market(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_market();
+  market_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:Qot_Common.OptionStaticExData.market)
+}
+inline void OptionStaticExData::set_market(const char* value, size_t size) {
+  set_has_market();
+  market_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:Qot_Common.OptionStaticExData.market)
+}
+inline ::std::string* OptionStaticExData::mutable_market() {
+  set_has_market();
+  // @@protoc_insertion_point(field_mutable:Qot_Common.OptionStaticExData.market)
+  return market_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* OptionStaticExData::release_market() {
+  // @@protoc_insertion_point(field_release:Qot_Common.OptionStaticExData.market)
+  clear_has_market();
+  return market_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void OptionStaticExData::set_allocated_market(::std::string* market) {
+  if (market != NULL) {
+    set_has_market();
+  } else {
+    clear_has_market();
+  }
+  market_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), market);
+  // @@protoc_insertion_point(field_set_allocated:Qot_Common.OptionStaticExData.market)
+}
+
+// -------------------------------------------------------------------
+
 // SecurityStaticInfo
 
 // required .Qot_Common.SecurityStaticBasic basic = 1;
@@ -4068,6 +5417,60 @@ inline void SecurityStaticInfo::set_allocated_warrantexdata(::Qot_Common::Warran
   }
   warrantexdata_ = warrantexdata;
   // @@protoc_insertion_point(field_set_allocated:Qot_Common.SecurityStaticInfo.warrantExData)
+}
+
+// optional .Qot_Common.OptionStaticExData optionExData = 3;
+inline bool SecurityStaticInfo::has_optionexdata() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void SecurityStaticInfo::set_has_optionexdata() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void SecurityStaticInfo::clear_has_optionexdata() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void SecurityStaticInfo::clear_optionexdata() {
+  if (optionexdata_ != NULL) optionexdata_->Clear();
+  clear_has_optionexdata();
+}
+inline const ::Qot_Common::OptionStaticExData& SecurityStaticInfo::optionexdata() const {
+  const ::Qot_Common::OptionStaticExData* p = optionexdata_;
+  // @@protoc_insertion_point(field_get:Qot_Common.SecurityStaticInfo.optionExData)
+  return p != NULL ? *p : *reinterpret_cast<const ::Qot_Common::OptionStaticExData*>(
+      &::Qot_Common::_OptionStaticExData_default_instance_);
+}
+inline ::Qot_Common::OptionStaticExData* SecurityStaticInfo::release_optionexdata() {
+  // @@protoc_insertion_point(field_release:Qot_Common.SecurityStaticInfo.optionExData)
+  clear_has_optionexdata();
+  ::Qot_Common::OptionStaticExData* temp = optionexdata_;
+  optionexdata_ = NULL;
+  return temp;
+}
+inline ::Qot_Common::OptionStaticExData* SecurityStaticInfo::mutable_optionexdata() {
+  set_has_optionexdata();
+  if (optionexdata_ == NULL) {
+    optionexdata_ = new ::Qot_Common::OptionStaticExData;
+  }
+  // @@protoc_insertion_point(field_mutable:Qot_Common.SecurityStaticInfo.optionExData)
+  return optionexdata_;
+}
+inline void SecurityStaticInfo::set_allocated_optionexdata(::Qot_Common::OptionStaticExData* optionexdata) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete optionexdata_;
+  }
+  if (optionexdata) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      optionexdata = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, optionexdata, submessage_arena);
+    }
+    set_has_optionexdata();
+  } else {
+    clear_has_optionexdata();
+  }
+  optionexdata_ = optionexdata;
+  // @@protoc_insertion_point(field_set_allocated:Qot_Common.SecurityStaticInfo.optionExData)
 }
 
 // -------------------------------------------------------------------
@@ -4546,6 +5949,232 @@ inline void OrderBook::set_recvtime(double value) {
 
 // -------------------------------------------------------------------
 
+// ShareHoldingChange
+
+// required string holderName = 1;
+inline bool ShareHoldingChange::has_holdername() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ShareHoldingChange::set_has_holdername() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ShareHoldingChange::clear_has_holdername() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ShareHoldingChange::clear_holdername() {
+  holdername_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_holdername();
+}
+inline const ::std::string& ShareHoldingChange::holdername() const {
+  // @@protoc_insertion_point(field_get:Qot_Common.ShareHoldingChange.holderName)
+  return holdername_.GetNoArena();
+}
+inline void ShareHoldingChange::set_holdername(const ::std::string& value) {
+  set_has_holdername();
+  holdername_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:Qot_Common.ShareHoldingChange.holderName)
+}
+#if LANG_CXX11
+inline void ShareHoldingChange::set_holdername(::std::string&& value) {
+  set_has_holdername();
+  holdername_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:Qot_Common.ShareHoldingChange.holderName)
+}
+#endif
+inline void ShareHoldingChange::set_holdername(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_holdername();
+  holdername_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:Qot_Common.ShareHoldingChange.holderName)
+}
+inline void ShareHoldingChange::set_holdername(const char* value, size_t size) {
+  set_has_holdername();
+  holdername_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:Qot_Common.ShareHoldingChange.holderName)
+}
+inline ::std::string* ShareHoldingChange::mutable_holdername() {
+  set_has_holdername();
+  // @@protoc_insertion_point(field_mutable:Qot_Common.ShareHoldingChange.holderName)
+  return holdername_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ShareHoldingChange::release_holdername() {
+  // @@protoc_insertion_point(field_release:Qot_Common.ShareHoldingChange.holderName)
+  clear_has_holdername();
+  return holdername_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ShareHoldingChange::set_allocated_holdername(::std::string* holdername) {
+  if (holdername != NULL) {
+    set_has_holdername();
+  } else {
+    clear_has_holdername();
+  }
+  holdername_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), holdername);
+  // @@protoc_insertion_point(field_set_allocated:Qot_Common.ShareHoldingChange.holderName)
+}
+
+// required double holdingQty = 2;
+inline bool ShareHoldingChange::has_holdingqty() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ShareHoldingChange::set_has_holdingqty() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ShareHoldingChange::clear_has_holdingqty() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ShareHoldingChange::clear_holdingqty() {
+  holdingqty_ = 0;
+  clear_has_holdingqty();
+}
+inline double ShareHoldingChange::holdingqty() const {
+  // @@protoc_insertion_point(field_get:Qot_Common.ShareHoldingChange.holdingQty)
+  return holdingqty_;
+}
+inline void ShareHoldingChange::set_holdingqty(double value) {
+  set_has_holdingqty();
+  holdingqty_ = value;
+  // @@protoc_insertion_point(field_set:Qot_Common.ShareHoldingChange.holdingQty)
+}
+
+// required double holdingRatio = 3;
+inline bool ShareHoldingChange::has_holdingratio() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void ShareHoldingChange::set_has_holdingratio() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void ShareHoldingChange::clear_has_holdingratio() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void ShareHoldingChange::clear_holdingratio() {
+  holdingratio_ = 0;
+  clear_has_holdingratio();
+}
+inline double ShareHoldingChange::holdingratio() const {
+  // @@protoc_insertion_point(field_get:Qot_Common.ShareHoldingChange.holdingRatio)
+  return holdingratio_;
+}
+inline void ShareHoldingChange::set_holdingratio(double value) {
+  set_has_holdingratio();
+  holdingratio_ = value;
+  // @@protoc_insertion_point(field_set:Qot_Common.ShareHoldingChange.holdingRatio)
+}
+
+// required double changeQty = 4;
+inline bool ShareHoldingChange::has_changeqty() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void ShareHoldingChange::set_has_changeqty() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void ShareHoldingChange::clear_has_changeqty() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void ShareHoldingChange::clear_changeqty() {
+  changeqty_ = 0;
+  clear_has_changeqty();
+}
+inline double ShareHoldingChange::changeqty() const {
+  // @@protoc_insertion_point(field_get:Qot_Common.ShareHoldingChange.changeQty)
+  return changeqty_;
+}
+inline void ShareHoldingChange::set_changeqty(double value) {
+  set_has_changeqty();
+  changeqty_ = value;
+  // @@protoc_insertion_point(field_set:Qot_Common.ShareHoldingChange.changeQty)
+}
+
+// required double changeRatio = 5;
+inline bool ShareHoldingChange::has_changeratio() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void ShareHoldingChange::set_has_changeratio() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void ShareHoldingChange::clear_has_changeratio() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void ShareHoldingChange::clear_changeratio() {
+  changeratio_ = 0;
+  clear_has_changeratio();
+}
+inline double ShareHoldingChange::changeratio() const {
+  // @@protoc_insertion_point(field_get:Qot_Common.ShareHoldingChange.changeRatio)
+  return changeratio_;
+}
+inline void ShareHoldingChange::set_changeratio(double value) {
+  set_has_changeratio();
+  changeratio_ = value;
+  // @@protoc_insertion_point(field_set:Qot_Common.ShareHoldingChange.changeRatio)
+}
+
+// required string time = 6;
+inline bool ShareHoldingChange::has_time() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ShareHoldingChange::set_has_time() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ShareHoldingChange::clear_has_time() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ShareHoldingChange::clear_time() {
+  time_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_time();
+}
+inline const ::std::string& ShareHoldingChange::time() const {
+  // @@protoc_insertion_point(field_get:Qot_Common.ShareHoldingChange.time)
+  return time_.GetNoArena();
+}
+inline void ShareHoldingChange::set_time(const ::std::string& value) {
+  set_has_time();
+  time_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:Qot_Common.ShareHoldingChange.time)
+}
+#if LANG_CXX11
+inline void ShareHoldingChange::set_time(::std::string&& value) {
+  set_has_time();
+  time_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:Qot_Common.ShareHoldingChange.time)
+}
+#endif
+inline void ShareHoldingChange::set_time(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_time();
+  time_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:Qot_Common.ShareHoldingChange.time)
+}
+inline void ShareHoldingChange::set_time(const char* value, size_t size) {
+  set_has_time();
+  time_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:Qot_Common.ShareHoldingChange.time)
+}
+inline ::std::string* ShareHoldingChange::mutable_time() {
+  set_has_time();
+  // @@protoc_insertion_point(field_mutable:Qot_Common.ShareHoldingChange.time)
+  return time_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ShareHoldingChange::release_time() {
+  // @@protoc_insertion_point(field_release:Qot_Common.ShareHoldingChange.time)
+  clear_has_time();
+  return time_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ShareHoldingChange::set_allocated_time(::std::string* time) {
+  if (time != NULL) {
+    set_has_time();
+  } else {
+    clear_has_time();
+  }
+  time_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), time);
+  // @@protoc_insertion_point(field_set_allocated:Qot_Common.ShareHoldingChange.time)
+}
+
+// -------------------------------------------------------------------
+
 // SubInfo
 
 // required int32 subType = 1;
@@ -4684,9 +6313,162 @@ inline void ConnSubInfo::set_isownconndata(bool value) {
   // @@protoc_insertion_point(field_set:Qot_Common.ConnSubInfo.isOwnConnData)
 }
 
+// -------------------------------------------------------------------
+
+// PlateInfo
+
+// required .Qot_Common.Security plate = 1;
+inline bool PlateInfo::has_plate() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void PlateInfo::set_has_plate() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void PlateInfo::clear_has_plate() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void PlateInfo::clear_plate() {
+  if (plate_ != NULL) plate_->Clear();
+  clear_has_plate();
+}
+inline const ::Qot_Common::Security& PlateInfo::plate() const {
+  const ::Qot_Common::Security* p = plate_;
+  // @@protoc_insertion_point(field_get:Qot_Common.PlateInfo.plate)
+  return p != NULL ? *p : *reinterpret_cast<const ::Qot_Common::Security*>(
+      &::Qot_Common::_Security_default_instance_);
+}
+inline ::Qot_Common::Security* PlateInfo::release_plate() {
+  // @@protoc_insertion_point(field_release:Qot_Common.PlateInfo.plate)
+  clear_has_plate();
+  ::Qot_Common::Security* temp = plate_;
+  plate_ = NULL;
+  return temp;
+}
+inline ::Qot_Common::Security* PlateInfo::mutable_plate() {
+  set_has_plate();
+  if (plate_ == NULL) {
+    plate_ = new ::Qot_Common::Security;
+  }
+  // @@protoc_insertion_point(field_mutable:Qot_Common.PlateInfo.plate)
+  return plate_;
+}
+inline void PlateInfo::set_allocated_plate(::Qot_Common::Security* plate) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete plate_;
+  }
+  if (plate) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      plate = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, plate, submessage_arena);
+    }
+    set_has_plate();
+  } else {
+    clear_has_plate();
+  }
+  plate_ = plate;
+  // @@protoc_insertion_point(field_set_allocated:Qot_Common.PlateInfo.plate)
+}
+
+// required string name = 2;
+inline bool PlateInfo::has_name() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void PlateInfo::set_has_name() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void PlateInfo::clear_has_name() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void PlateInfo::clear_name() {
+  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_name();
+}
+inline const ::std::string& PlateInfo::name() const {
+  // @@protoc_insertion_point(field_get:Qot_Common.PlateInfo.name)
+  return name_.GetNoArena();
+}
+inline void PlateInfo::set_name(const ::std::string& value) {
+  set_has_name();
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:Qot_Common.PlateInfo.name)
+}
+#if LANG_CXX11
+inline void PlateInfo::set_name(::std::string&& value) {
+  set_has_name();
+  name_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:Qot_Common.PlateInfo.name)
+}
+#endif
+inline void PlateInfo::set_name(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_name();
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:Qot_Common.PlateInfo.name)
+}
+inline void PlateInfo::set_name(const char* value, size_t size) {
+  set_has_name();
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:Qot_Common.PlateInfo.name)
+}
+inline ::std::string* PlateInfo::mutable_name() {
+  set_has_name();
+  // @@protoc_insertion_point(field_mutable:Qot_Common.PlateInfo.name)
+  return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* PlateInfo::release_name() {
+  // @@protoc_insertion_point(field_release:Qot_Common.PlateInfo.name)
+  clear_has_name();
+  return name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void PlateInfo::set_allocated_name(::std::string* name) {
+  if (name != NULL) {
+    set_has_name();
+  } else {
+    clear_has_name();
+  }
+  name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
+  // @@protoc_insertion_point(field_set_allocated:Qot_Common.PlateInfo.name)
+}
+
+// optional int32 plateType = 3;
+inline bool PlateInfo::has_platetype() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void PlateInfo::set_has_platetype() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void PlateInfo::clear_has_platetype() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void PlateInfo::clear_platetype() {
+  platetype_ = 0;
+  clear_has_platetype();
+}
+inline ::google::protobuf::int32 PlateInfo::platetype() const {
+  // @@protoc_insertion_point(field_get:Qot_Common.PlateInfo.plateType)
+  return platetype_;
+}
+inline void PlateInfo::set_platetype(::google::protobuf::int32 value) {
+  set_has_platetype();
+  platetype_ = value;
+  // @@protoc_insertion_point(field_set:Qot_Common.PlateInfo.plateType)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
@@ -4737,6 +6519,11 @@ template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::Qot_Common::WarrantType>() {
   return ::Qot_Common::WarrantType_descriptor();
 }
+template <> struct is_proto_enum< ::Qot_Common::OptionType> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Qot_Common::OptionType>() {
+  return ::Qot_Common::OptionType_descriptor();
+}
 template <> struct is_proto_enum< ::Qot_Common::QotMarketState> : ::google::protobuf::internal::true_type {};
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::Qot_Common::QotMarketState>() {
@@ -4776,6 +6563,11 @@ template <> struct is_proto_enum< ::Qot_Common::DarkStatus> : ::google::protobuf
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::Qot_Common::DarkStatus>() {
   return ::Qot_Common::DarkStatus_descriptor();
+}
+template <> struct is_proto_enum< ::Qot_Common::HolderCategory> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Qot_Common::HolderCategory>() {
+  return ::Qot_Common::HolderCategory_descriptor();
 }
 
 }  // namespace protobuf

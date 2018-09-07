@@ -20,18 +20,15 @@ using namespace std;
 
 namespace ftq
 {
-	/*
-	ofstream TickerOut("D:\\00700\\TickerCount.log");
-	ofstream BasicQotOut("D:\\00700\\BasicQotCount.log");
-	ofstream OrderBookOut("D:\\00700\\OrderBookCount.log");
-	*/
-	
-	ofstream TickerOut("/home/golden/TickerCount.log");
-	ofstream BasicQotOut("/home/golden/BasicQotCount.log");
-	ofstream OrderBookOut("/home/golden/OrderBookCount.log");
-	
+	ofstream TickerOut("D:\\TickerCount.log");
+	ofstream BasicQotOut("D:\\BasicQotCount.log");
+	ofstream OrderBookOut("D:\\OrderBookCount.log");
+
 	double adjust_c_d = 0;
 	double adjust_d_t = 0;
+
+	bool bIsUsTime = false;
+	i32_t nSubNum = 100;
 
 	bool ParsePb(google::protobuf::Message *pPbObj, u32_t nProtoID, const i8_t *pData, i32_t nLen)
 	{
@@ -65,40 +62,38 @@ namespace ftq
 		NetCenter::Default()->StartKeepAliveTimer(m_nKeepAliveInterval * 4 / 5);
 		//获取市场全局状态
 		NetCenter::Default()->Req_GetGlobalState(m_nUserID);
-
+		
 		//subscribe stock
 		vector<Qot_Common::Security> stocks;
-		
-		
-		Qot_Common::Security stock;
-		stock.set_market(Qot_Common::QotMarket_HK_Security);
-		stock.set_code("00700");
-		stocks.push_back(stock);
-		
 		/*
 		Qot_Common::Security stock;
-		stock.set_market(Qot_Common::QotMarket_HK_Security);
-		stock.set_code("800000");
+		stock.set_market(Qot_Common::QotMarket_CNSZ_Security);
+		stock.set_code("300104");
 		stocks.push_back(stock);
 		*/
-		/*
-		//myCode
-		ifstream fin("../usStock.txt");
-		string code = "";
 		
-		for (int i = 0; i < 1; ++i){
+		string code = "";
+		string strStockList = (bIsUsTime) ? "../usStock.txt" : "../hkStock.txt";
+
+		ifstream fin(strStockList);
+
+		for (int i = 0; i < nSubNum; ++i){
 			fin >> code;
 			Qot_Common::Security stock;
-			stock.set_market(Qot_Common::QotMarket_US_Security);
+			if (bIsUsTime)
+			{
+				stock.set_market(Qot_Common::QotMarket_US_Security);
+			}
+			else
+			{
+				stock.set_market(Qot_Common::QotMarket_HK_Security);
+			}
 			stock.set_code(code);
 			stocks.push_back(stock);
 		}
-		*/
+		
 		vector<Qot_Common::SubType> subTypes;
 		
-		//subTypes.push_back(Qot_Common::SubType_Broker);
-
-		//myCode
 		subTypes.push_back(Qot_Common::SubType_OrderBook);
 		subTypes.push_back(Qot_Common::SubType_Ticker);
 		subTypes.push_back(Qot_Common::SubType_Basic);
@@ -133,8 +128,8 @@ namespace ftq
 		
 		//myCode
 		adjust_c_d = 0;//GetFloatTimeStamp() - rsp.s2c().localtime();
-		adjust_d_t = 0;//rsp.s2c().lastlocalsvrtimediff();
-
+		adjust_d_t = rsp.s2c().lastlocalsvrtimediff();
+		
 		TickerOut << TimeStampToTimeStrA(GetTimeStamp(), OMTimeFmtType_Full) << " adjust_c_d:" << adjust_c_d << 
 			" adjust_d_t:" << adjust_d_t << endl;
 		BasicQotOut << TimeStampToTimeStrA(GetTimeStamp(), OMTimeFmtType_Full) << " adjust_c_d:" << adjust_c_d <<
@@ -145,6 +140,7 @@ namespace ftq
 		TickerOut << TimeStampToTimeStrA(GetTimeStamp(), OMTimeFmtType_Full) << " Client-OpenD\tOpenD-Svr\tClient-Svr" << endl;
 		BasicQotOut << TimeStampToTimeStrA(GetTimeStamp(), OMTimeFmtType_Full) << " Client-OpenD\tOpenD-Svr\tClient-Svr" << endl;
 		OrderBookOut << TimeStampToTimeStrA(GetTimeStamp(), OMTimeFmtType_Full) << " Client-OpenD\tOpenD-Svr\tClient-Svr" << endl;
+		
 	}
 
 	void QuoteHandler::OnRsp_Qot_Sub(const APIProtoHeader &header, const i8_t *pData, i32_t nLen)
@@ -205,7 +201,12 @@ namespace ftq
 			// myCode
 			auto delay_c_d = GetFloatTimeStamp() - data.recvtime(); //- adjust_c_d;
 			auto delay_c_t = GetFloatTimeStamp() - FullTimeStrToTimeStamp(data.time().c_str()) - adjust_d_t;// -adjust_c_d;
-			auto delay_d_t = data.recvtime() - FullTimeStrToTimeStamp(data.time().c_str()) -adjust_d_t;
+			auto delay_d_t = data.recvtime() - FullTimeStrToTimeStamp(data.time().c_str()) - adjust_d_t;
+
+			if (bIsUsTime){
+				delay_c_t -= 43200;
+				delay_d_t -= 43200;
+			}
 
 			TickerOut << TimeStampToTimeStrA(GetTimeStamp(), OMTimeFmtType_Full) << " " <<
 				fixed << setprecision(6) << delay_c_d << "\t\t" <<
@@ -239,7 +240,7 @@ namespace ftq
 
 	void QuoteHandler::OnRsp_Qot_UpdateOrderBook(const APIProtoHeader &header, const i8_t *pData, i32_t nLen)
 	{
-		//cout << "OnRsp_Qot_UpdateOrderBook:" << endl;
+//		cout << "OnRsp_Qot_UpdateOrderBook:" << endl;
 
 		Qot_UpdateOrderBook::Response rsp;
 
@@ -248,7 +249,7 @@ namespace ftq
 			return;
 		}
 
-		//cout << "Ret=" << rsp.rettype() << "; Msg=" << rsp.retmsg() << endl;
+//		cout << "Ret=" << rsp.rettype() << "; Msg=" << rsp.retmsg() << endl;
 		if (rsp.rettype() != 0)
 		{
 			return;
@@ -257,13 +258,13 @@ namespace ftq
 		for (int i = 0; i < rsp.s2c().orderbookasklist_size(); ++i)
 		{
 			const Qot_Common::OrderBook &data = rsp.s2c().orderbookasklist(i);
-			//cout << "Price: " << data.price() << endl;
+//			cout << "Price: " << data.price() << endl;
 
 			// myCode
-			auto delay_c_d = GetFloatTimeStamp() * 1000000 - data.recvtime(); //- adjust_c_d;
+			auto delay_c_d = GetFloatTimeStamp() - data.recvtime(); 
 
 			OrderBookOut << TimeStampToTimeStrA(GetTimeStamp(), OMTimeFmtType_Full) << " " <<
-				fixed << setprecision(6) << delay_c_d/1000000 << '\n';
+				fixed << setprecision(6) << delay_c_d << '\n';
 		}
 	}
 
@@ -289,10 +290,16 @@ namespace ftq
 			auto delay_c_d = GetFloatTimeStamp() - data.recvtime(); //- adjust_c_d;
 			auto delay_c_t = GetFloatTimeStamp() - FullTimeStrToTimeStamp(data.updatetime().c_str()) - adjust_d_t;// -adjust_c_d;
 			auto delay_d_t = data.recvtime() - FullTimeStrToTimeStamp(data.updatetime().c_str()) - adjust_d_t;
+			auto updataTime = data.updatetime();
+			
+			if (bIsUsTime){
+				delay_c_t -= 43200;
+				delay_d_t -= 43200;
+			}
 
 			BasicQotOut << TimeStampToTimeStrA(GetTimeStamp(), OMTimeFmtType_Full) << " " <<
 				fixed << setprecision(6) << delay_c_d << "\t\t" <<
-				fixed << setprecision(6) << delay_d_t << '\t' << delay_c_t << '\n';
+				fixed << setprecision(6) << delay_d_t << '\t' << delay_c_t << '\t' << updataTime << '\n';
 		}
 	}
 }

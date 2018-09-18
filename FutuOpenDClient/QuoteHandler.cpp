@@ -15,19 +15,20 @@
 #include "pb/Qot_UpdateBroker.pb.h"
 #include "pb/Qot_UpdateOrderBook.pb.h"
 #include "pb/Qot_UpdateBasicQot.pb.h"
+#include "pb/Qot_GetBasicQot.pb.h"
 
 using namespace std;
 
 namespace ftq
 {
-	ofstream TickerOut("D:\\TickerCount.log");
-	ofstream BasicQotOut("D:\\BasicQotCount.log");
-	ofstream OrderBookOut("D:\\OrderBookCount.log");
+	ofstream TickerOut("..\\..\\TickerCount.log");
+	ofstream BasicQotOut("..\\..\\BasicQotCount.log");
+	ofstream OrderBookOut("..\\..\\OrderBookCount.log");
 
 	double adjust_c_d = 0;
 	double adjust_d_t = 0;
 
-	bool bIsUsTime = false;
+	bool bIsUsTime = true;
 	i32_t nSubNum = 100;
 
 	bool ParsePb(google::protobuf::Message *pPbObj, u32_t nProtoID, const i8_t *pData, i32_t nLen)
@@ -67,8 +68,8 @@ namespace ftq
 		vector<Qot_Common::Security> stocks;
 		/*
 		Qot_Common::Security stock;
-		stock.set_market(Qot_Common::QotMarket_CNSZ_Security);
-		stock.set_code("300104");
+		stock.set_market(Qot_Common::QotMarket_HK_Future);
+		stock.set_code("999010");
 		stocks.push_back(stock);
 		*/
 		
@@ -106,6 +107,9 @@ namespace ftq
 
 		//注册接收逐笔推送
 		NetCenter::Default()->Req_RegPush(stocks, subTypes, rehabTypes, true, true);
+
+		//查询股票是否停牌
+		//NetCenter::Default()->Req_GetBasicQot(stocks);
 	}
 
 	void QuoteHandler::OnRsp_KeepAlive(const APIProtoHeader &header, const i8_t *pData, i32_t nLen)
@@ -255,13 +259,25 @@ namespace ftq
 			return;
 		}
 
+		f64_t fRecvTime = 0;
+
+		if (rsp.s2c().orderbookasklist_size() > 0)
+		{
+			fRecvTime = max(fRecvTime, rsp.s2c().orderbookasklist(0).recvtime());
+		}
+
+		if (rsp.s2c().orderbookbidlist_size() > 0)
+		{ 
+			fRecvTime = max(fRecvTime, rsp.s2c().orderbookbidlist(0).recvtime());
+		}
+
 		for (int i = 0; i < rsp.s2c().orderbookasklist_size(); ++i)
 		{
 			const Qot_Common::OrderBook &data = rsp.s2c().orderbookasklist(i);
 //			cout << "Price: " << data.price() << endl;
 
 			// myCode
-			auto delay_c_d = GetFloatTimeStamp() - data.recvtime(); 
+			auto delay_c_d = GetFloatTimeStamp() - fRecvTime; 
 
 			OrderBookOut << TimeStampToTimeStrA(GetTimeStamp(), OMTimeFmtType_Full) << " " <<
 				fixed << setprecision(6) << delay_c_d << '\n';
@@ -300,6 +316,28 @@ namespace ftq
 			BasicQotOut << TimeStampToTimeStrA(GetTimeStamp(), OMTimeFmtType_Full) << " " <<
 				fixed << setprecision(6) << delay_c_d << "\t\t" <<
 				fixed << setprecision(6) << delay_d_t << '\t' << delay_c_t << '\t' << updataTime << '\n';
+		}
+	}
+
+	void QuoteHandler::OnRsp_Qot_GetBasicQot(const APIProtoHeader &header, const i8_t *pData, i32_t nLen)
+	{
+		Qot_GetBasicQot::Response rsp;
+
+		if (!ParsePb(&rsp, header.nProtoID, pData, nLen))
+		{
+			return;
+		}
+
+		if (rsp.rettype() != 0)
+		{
+			return;
+		}
+		
+		for (int i = 0; i < rsp.s2c().basicqotlist_size(); ++i)
+		{
+			const Qot_Common::BasicQot& data = rsp.s2c().basicqotlist(i);
+			if (data.issuspended() == true)
+				cout << data.security().code() << endl;
 		}
 	}
 }

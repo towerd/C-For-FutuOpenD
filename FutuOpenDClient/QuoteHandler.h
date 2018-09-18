@@ -17,6 +17,7 @@ namespace ftq
 		virtual void OnRsp_Qot_UpdateBroker(const APIProtoHeader &header, const i8_t *pData, i32_t nLen) override;
 		virtual void OnRsp_Qot_UpdateOrderBook(const APIProtoHeader &header, const i8_t *pData, i32_t nLen) override;
 		virtual void OnRsp_Qot_UpdateStockBasic(const APIProtoHeader &header, const i8_t *pData, i32_t nLen) override;
+		virtual void OnRsp_Qot_GetBasicQot(const APIProtoHeader &header, const i8_t *pData, i32_t nLen) override;
 	private:
 		i32_t m_nKeepAliveInterval{ 5 };
 		u64_t m_nUserID{ 0 };

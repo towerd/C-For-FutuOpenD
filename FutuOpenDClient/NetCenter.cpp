@@ -6,6 +6,7 @@
 #include "pb/KeepAlive.pb.h"
 #include "pb/Qot_RegQotPush.pb.h"
 #include "pb/GetGlobalState.pb.h"
+#include "pb/Qot_GetBasicQot.pb.h"
 
 using namespace std;
 
@@ -230,6 +231,21 @@ namespace ftq
 		return Send(API_ProtoID_Qot_RegQotPush, req);
 	}
 
+	u32_t NetCenter::Req_GetBasicQot(const std::vector<Qot_Common::Security> &stocks)
+	{
+		Qot_GetBasicQot::C2S *pC2S = new Qot_GetBasicQot::C2S();
+
+		for (const auto& stock : stocks)
+		{
+			Qot_Common::Security *pStock = pC2S->add_securitylist();
+			*pStock = stock;
+		}
+
+		Qot_GetBasicQot::Request req;
+		req.set_allocated_c2s(pC2S);
+		return Send(API_ProtoID_Qot_GetBasicQot, req);
+	}
+
 	u32_t NetCenter::Send(u32_t nProtoID, const google::protobuf::Message &pbObj)
 	{
 		u32_t nPacketNo = 0;
@@ -293,6 +309,8 @@ namespace ftq
 		case API_ProtoID_Qot_UpdateStockBasic:
 			m_pProtoHandler->OnRsp_Qot_UpdateStockBasic(header, pData, nLen);
 			break;
+		case API_ProtoID_Qot_GetBasicQot:
+			m_pProtoHandler->OnRsp_Qot_GetBasicQot(header, pData, nLen);
 		default:
 			break;
 		}

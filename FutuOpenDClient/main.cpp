@@ -23,8 +23,8 @@ vector<int> vObook(2001, 0);
 
 mutex mtx;
 
-ifstream CfgIn("..\\config.txt");
-ofstream fout("..\\CntDly.log");
+ifstream CfgIn("./config.txt");
+ofstream fout("../CntDly.log");
 
 void DlyCount()
 {

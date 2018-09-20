@@ -2,7 +2,6 @@
 #include <thread>
 #include <mutex>
 #include <iomanip>
-#include <Windows.h>
 #include "NetCenter.h"
 #include "QuoteHandler.h"
 #include "Common.h"

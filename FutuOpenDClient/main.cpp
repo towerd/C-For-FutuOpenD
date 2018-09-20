@@ -2,9 +2,18 @@
 #include <thread>
 #include <mutex>
 #include <iomanip>
+#include <Windows.h>
 #include "NetCenter.h"
 #include "QuoteHandler.h"
 #include "Common.h"
+
+#ifdef OM_Win32
+#	include <sys/timeb.h>
+#else
+#	include <sys/time.h>
+#	include <sys/select.h>
+#   include <unistd.h>
+#endif
 
 using namespace ftq;
 using namespace std;
@@ -23,8 +32,11 @@ void DlyCount()
 	while (true)
 	{
 		// 单位ms
-		//Sleep(13 * 1800 * 1000);
-		Sleep(30 * 1000);
+		#ifdef OM_Win32
+			Sleep(13 * 1800 * 1000);
+		#else
+			sleep(13 * 1800 * 1000);
+		#endif
 		lock_guard<mutex> lck(mtx);
 
 		fout << "Ticker Delay : " << endl;

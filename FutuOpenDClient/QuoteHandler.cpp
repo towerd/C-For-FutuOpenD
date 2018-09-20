@@ -1,8 +1,8 @@
 ﻿#include "QuoteHandler.h"
 #include <iostream>
 #include <vector>
-#include <fstream>
 #include <string>
+#include <mutex>
 #include <iomanip>
 #include "google/protobuf/message.h"
 #include "NetCenter.h"
@@ -21,15 +21,14 @@ using namespace std;
 
 namespace ftq
 {
+	/*
 	ofstream TickerOut("..\\..\\TickerCount.log");
 	ofstream BasicQotOut("..\\..\\BasicQotCount.log");
 	ofstream OrderBookOut("..\\..\\OrderBookCount.log");
 
 	double adjust_c_d = 0;
 	double adjust_d_t = 0;
-
-	bool bIsUsTime = true;
-	i32_t nSubNum = 100;
+	*/
 
 	bool ParsePb(google::protobuf::Message *pPbObj, u32_t nProtoID, const i8_t *pData, i32_t nLen)
 	{
@@ -74,14 +73,14 @@ namespace ftq
 		*/
 		
 		string code = "";
-		string strStockList = (bIsUsTime) ? "../usStock.txt" : "../hkStock.txt";
+		string strStockList = (m_bIsUsTime) ? "../usStock.txt" : "../hkStock.txt";
 
 		ifstream fin(strStockList);
 
-		for (int i = 0; i < nSubNum; ++i){
+		for (int i = 0; i < m_nSubNum; ++i){
 			fin >> code;
 			Qot_Common::Security stock;
-			if (bIsUsTime)
+			if (m_nSubNum)
 			{
 				stock.set_market(Qot_Common::QotMarket_US_Security);
 			}
@@ -130,7 +129,7 @@ namespace ftq
 				"; ServerVer=" << rsp.s2c().serverver() <<
 				"; " << endl;
 		
-		//myCode
+		/*
 		adjust_c_d = 0;//GetFloatTimeStamp() - rsp.s2c().localtime();
 		adjust_d_t = rsp.s2c().lastlocalsvrtimediff();
 		
@@ -144,6 +143,7 @@ namespace ftq
 		TickerOut << TimeStampToTimeStrA(GetTimeStamp(), OMTimeFmtType_Full) << " Client-OpenD\tOpenD-Svr\tClient-Svr" << endl;
 		BasicQotOut << TimeStampToTimeStrA(GetTimeStamp(), OMTimeFmtType_Full) << " Client-OpenD\tOpenD-Svr\tClient-Svr" << endl;
 		OrderBookOut << TimeStampToTimeStrA(GetTimeStamp(), OMTimeFmtType_Full) << " Client-OpenD\tOpenD-Svr\tClient-Svr" << endl;
+		*/
 		
 	}
 
@@ -190,20 +190,28 @@ namespace ftq
 			return;
 		}
 
+		lock_guard<mutex> lck(m_mtx);
 		for (int i = 0; i < rsp.s2c().tickerlist_size(); ++i)
 		{
 			const Qot_Common::Ticker &data = rsp.s2c().tickerlist(i);
-
-			//测试暂时注释
 			/*
 			cout << "Ticker: Code=" << rsp.s2c().security().code() <<
 				"; Time=" << data.time() <<
 				"; Price=" << data.price() <<
 				";" << endl;
 			*/
-
 			// myCode
 			auto delay_c_d = GetFloatTimeStamp() - data.recvtime(); //- adjust_c_d;
+
+			if (delay_c_d < 0.020000){
+				++m_vTicker[delay_c_d / 0.000010];
+			}
+			else
+			{
+				++m_vTicker.back();
+			}
+
+			/*
 			auto delay_c_t = GetFloatTimeStamp() - FullTimeStrToTimeStamp(data.time().c_str()) - adjust_d_t;// -adjust_c_d;
 			auto delay_d_t = data.recvtime() - FullTimeStrToTimeStamp(data.time().c_str()) - adjust_d_t;
 
@@ -214,7 +222,8 @@ namespace ftq
 
 			TickerOut << TimeStampToTimeStrA(GetTimeStamp(), OMTimeFmtType_Full) << " " <<
 				fixed << setprecision(6) << delay_c_d << "\t\t" <<
-				fixed << setprecision(6) << delay_d_t << '\t' << delay_c_t << '\n';
+				fixed << setprecision(6) << delay_d_t << '\t' << delay_c_t << endl;
+			*/
 		}
 	}
 	
@@ -271,6 +280,7 @@ namespace ftq
 			fRecvTime = max(fRecvTime, rsp.s2c().orderbookbidlist(0).recvtime());
 		}
 
+		lock_guard<mutex> lck(m_mtx);
 		for (int i = 0; i < rsp.s2c().orderbookasklist_size(); ++i)
 		{
 			const Qot_Common::OrderBook &data = rsp.s2c().orderbookasklist(i);
@@ -279,8 +289,18 @@ namespace ftq
 			// myCode
 			auto delay_c_d = GetFloatTimeStamp() - fRecvTime; 
 
+			if (delay_c_d < 0.020000){
+				++m_vObook[delay_c_d / 0.000010];
+			}
+			else
+			{
+				++m_vObook.back();
+			}
+
+			/*
 			OrderBookOut << TimeStampToTimeStrA(GetTimeStamp(), OMTimeFmtType_Full) << " " <<
-				fixed << setprecision(6) << delay_c_d << '\n';
+				fixed << setprecision(6) << delay_c_d << endl;
+			*/
 		}
 	}
 
@@ -299,11 +319,23 @@ namespace ftq
 		{
 			return;
 		}
+
+		lock_guard<mutex> lck(m_mtx);
 		for (int i = 0; i < rsp.s2c().basicqotlist_size(); ++i){
 			const Qot_Common::BasicQot &data = rsp.s2c().basicqotlist(i);
 			
 			// myCode
 			auto delay_c_d = GetFloatTimeStamp() - data.recvtime(); //- adjust_c_d;
+
+			if (delay_c_d < 0.020000){
+				++m_vBasic[delay_c_d / 0.000010];
+			}
+			else
+			{
+				++m_vBasic.back();
+			}
+
+			/*
 			auto delay_c_t = GetFloatTimeStamp() - FullTimeStrToTimeStamp(data.updatetime().c_str()) - adjust_d_t;// -adjust_c_d;
 			auto delay_d_t = data.recvtime() - FullTimeStrToTimeStamp(data.updatetime().c_str()) - adjust_d_t;
 			auto updataTime = data.updatetime();
@@ -315,7 +347,8 @@ namespace ftq
 
 			BasicQotOut << TimeStampToTimeStrA(GetTimeStamp(), OMTimeFmtType_Full) << " " <<
 				fixed << setprecision(6) << delay_c_d << "\t\t" <<
-				fixed << setprecision(6) << delay_d_t << '\t' << delay_c_t << '\t' << updataTime << '\n';
+				fixed << setprecision(6) << delay_d_t << '\t' << delay_c_t << '\t' << updataTime << endl;
+			*/
 		}
 	}
 

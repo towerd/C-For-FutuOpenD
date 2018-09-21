@@ -80,7 +80,7 @@ namespace ftq
 		for (int i = 0; i < m_nSubNum; ++i){
 			fin >> code;
 			Qot_Common::Security stock;
-			if (m_nSubNum)
+			if (m_bIsUsTime)
 			{
 				stock.set_market(Qot_Common::QotMarket_US_Security);
 			}

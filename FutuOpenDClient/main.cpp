@@ -23,18 +23,17 @@ vector<int> vObook(2001, 0);
 
 mutex mtx;
 
-ifstream CfgIn("./config.txt");
 ofstream fout("../CntDly.log");
 
-void DlyCount(u64_t nTime)
+void DlyCount(i32_t nTime)
 {
 	while (true)
 	{
 		// Sleep单位是ms，sleep的单位是s
 		#ifdef OM_Win32
-			Sleep(nTime * 1800 * 1000);
+			Sleep(nTime * 60 * 1000);
 		#else
-			sleep(nTime * 1800);
+			sleep(nTime * 60);
 		#endif
 		lock_guard<mutex> lck(mtx);
 
@@ -61,18 +60,21 @@ void DlyCount(u64_t nTime)
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-	std::cout << GetMicroTimeStamp() << endl;
+	
+	if (argc != 4)
+	{
+		cout << "input error!" << endl;
+		return 0;
+	}
 
-	string str = "";
-	CfgIn >> str;	bool bIsUsTime = (str == "true") ? true : false;
-	CfgIn >> str;	i32_t nSubNum = stoi(str);
-	CfgIn >> str;	i32_t nPort = stoi(str);
-	CfgIn >> str;	u64_t nTime = stoull(str);
+	bool bIsUsTime = (string(argv[1]) == "US") ? true : false;	cout << "Area:\t" << (bIsUsTime ? "US" : "HK") << endl;
+	i32_t nSubNum = atoi(argv[2]);								cout << "SubNum:\t" << nSubNum << endl;
+	i32_t nPort = 8000 + nSubNum;								cout << "Port:\t" << nPort << endl;
+	i32_t nTime = atoi(argv[3]);								cout << "Sleep:\t" << nTime << endl;
 
 	QuoteHandler *pQuoteHandler = new QuoteHandler(vTicker, vBasic, vObook, mtx, bIsUsTime, nSubNum);
 	NetCenter::Default()->Init(uv_default_loop());
 	NetCenter::Default()->SetProtoHandler(pQuoteHandler);
-	
 	NetCenter::Default()->Connect("127.0.0.1", nPort);
 
 	thread t(DlyCount, nTime);

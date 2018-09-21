@@ -26,15 +26,15 @@ mutex mtx;
 ifstream CfgIn("./config.txt");
 ofstream fout("../CntDly.log");
 
-void DlyCount()
+void DlyCount(u64_t nTime)
 {
 	while (true)
 	{
-		// 单位ms
+		// Sleep单位是ms，sleep的单位是s
 		#ifdef OM_Win32
-			Sleep(13 * 1800 * 1000);
+			Sleep(nTime * 1800 * 1000);
 		#else
-			sleep(13 * 1800 * 1000);
+			sleep(nTime * 1800);
 		#endif
 		lock_guard<mutex> lck(mtx);
 
@@ -67,6 +67,7 @@ int main(int argc, const char * argv[]) {
 	CfgIn >> str;	bool bIsUsTime = (str == "true") ? true : false;
 	CfgIn >> str;	i32_t nSubNum = stoi(str);
 	CfgIn >> str;	i32_t nPort = stoi(str);
+	CfgIn >> str;	u64_t nTime = stoull(str);
 
 	QuoteHandler *pQuoteHandler = new QuoteHandler(vTicker, vBasic, vObook, mtx, bIsUsTime, nSubNum);
 	NetCenter::Default()->Init(uv_default_loop());
@@ -74,7 +75,7 @@ int main(int argc, const char * argv[]) {
 	
 	NetCenter::Default()->Connect("127.0.0.1", nPort);
 
-	thread t(DlyCount);
+	thread t(DlyCount, nTime);
 
     uv_run(uv_default_loop(), UV_RUN_DEFAULT);
 

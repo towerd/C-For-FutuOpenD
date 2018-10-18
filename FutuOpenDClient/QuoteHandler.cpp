@@ -190,7 +190,7 @@ namespace ftq
 			return;
 		}
 
-		lock_guard<mutex> lck(m_mtx);
+		//M_CriticalSection_AutoEL_Real(m_safe);
 		for (int i = 0; i < rsp.s2c().tickerlist_size(); ++i)
 		{
 			const Qot_Common::Ticker &data = rsp.s2c().tickerlist(i);
@@ -280,7 +280,7 @@ namespace ftq
 			fRecvTime = max(fRecvTime, rsp.s2c().orderbookbidlist(0).recvtime());
 		}
 
-		lock_guard<mutex> lck(m_mtx);
+		//M_CriticalSection_AutoEL_Real(m_safe);
 		for (int i = 0; i < rsp.s2c().orderbookasklist_size(); ++i)
 		{
 			const Qot_Common::OrderBook &data = rsp.s2c().orderbookasklist(i);
@@ -320,7 +320,7 @@ namespace ftq
 			return;
 		}
 
-		lock_guard<mutex> lck(m_mtx);
+		//M_CriticalSection_AutoEL_Real(m_safe);
 		for (int i = 0; i < rsp.s2c().basicqotlist_size(); ++i){
 			const Qot_Common::BasicQot &data = rsp.s2c().basicqotlist(i);
 			

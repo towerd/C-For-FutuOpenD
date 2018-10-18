@@ -8,8 +8,8 @@ namespace ftq
 	class QuoteHandler : public IProtoHandler
 	{
 	public:
-		QuoteHandler(vector<int>& vTicker, vector<int>& vBasic, vector<int>& vObook, mutex& mtx, bool bIsUsTime, i32_t nSubNum)
-			:m_vTicker(vTicker), m_vBasic(vBasic), m_vObook(vObook), m_mtx(mtx)
+		QuoteHandler(vector<int>& vTicker, vector<int>& vBasic, vector<int>& vObook, OMCriticalSection& safe, bool bIsUsTime, i32_t nSubNum)
+			:m_vTicker(vTicker), m_vBasic(vBasic), m_vObook(vObook), m_safe(safe)
 		{
 			m_bIsUsTime = bIsUsTime;
 			m_nSubNum = nSubNum;
@@ -37,6 +37,6 @@ namespace ftq
 		vector<int>& m_vBasic;
 		vector<int>& m_vObook;
 
-		mutex& m_mtx;
+		OMCriticalSection& m_safe;
 	};
 }
